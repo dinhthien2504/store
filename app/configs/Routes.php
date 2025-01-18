@@ -9,8 +9,11 @@ use app\controllers\User;
 use app\controllers\Cart;
 class Routes {
     public static function setupRoutes(Router $router): void {
+        //Home
         $router->create(path: '/', params: [Page::class, 'index']);
-        $router->create(path: '/.+-{/+d}', params: [Product::class, 'detail']);
+        //Product
+        $router->create(path: '/.+-cat{/+d}', params: [Product::class, 'list']);
+        $router->create(path: '/.+-i{/+d}', params: [Product::class, 'detail']);
         
         //Auth 
         $router->create(path: '/handle_login', params: [User::class, 'handle_login']);

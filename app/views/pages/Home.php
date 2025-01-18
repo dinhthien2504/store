@@ -64,7 +64,8 @@
             <?php if (!empty($cates_parent)): ?>
                 <?php foreach ($cates_parent as $cate): ?>
                     <div class="custom-col-lg-1-2 col-sm-2 col-3">
-                        <a href="#" class="custom-pro__item m-0 p-3 ">
+                        <a  onclick="handle__url_link(this, '<?= _WEB_ROOT_ ?>','<?= $cate['name'] ?>', 'cat', '<?= $cate['id'] ?>')"
+                            class="custom-pro__item m-0 p-3 ">
                             <div class="custom-pro__item__img p-5 justify-content-center d-flex align-items-center"
                                 style="background-image: url(<?= _WEB_ROOT_ ?>/assets/img/cate/<?= $cate['url_image'] ?>);">
                             </div>
@@ -88,7 +89,7 @@
             <?php if (!empty($pros_new)): ?>
                 <?php foreach ($pros_new as $__pro): ?>
                     <div class="custom-col-lg-2-5 col-md-3 col-sm-4 col-6">
-                        <a onclick="handle__url_pro(this, '<?= _WEB_ROOT_ ?>','<?= $__pro['name'] ?>', '<?= $__pro['id'] ?>')"
+                        <a onclick="handle__url_link(this, '<?= _WEB_ROOT_ ?>','<?= $__pro['name'] ?>', 'i', '<?= $__pro['id'] ?>')"
                             class="custom-pro__item">
                             <div class="custom-pro__item__img"
                                 style="background-image: url(<?= _WEB_ROOT_ ?>/assets/img/pro/<?= $__pro['url_image'] ?>);">
@@ -107,7 +108,7 @@
                                     <i class="custom-pro__item__star--gold fas fa-star"></i>
                                     <i class="fas fa-star"></i>
                                 </div>
-                                <div class="custom-pro__item__sold"><?= $__pro['sales'] ?> Đã bán</div>
+                                <div class="custom-pro__item__sold"><?= $__pro['sell'] ?> Đã bán</div>
                             </div>
                             <div class="custom-pro__item__origin">
                                 <span class="custom-pro__item__origin-name">Việt Nam</span>
@@ -141,7 +142,7 @@
             <?php if (!empty($pros_best_sellers)): ?>
                 <?php foreach ($pros_best_sellers as $__pro): ?>
                     <div class="custom-col-lg-2-5 col-md-3 col-sm-4 col-6">
-                        <a onclick="handle__url_pro(this, '<?= _WEB_ROOT_ ?>','<?= $__pro['name'] ?>', '<?= $__pro['id'] ?>')"
+                        <a onclick="handle__url_link(this, '<?= _WEB_ROOT_ ?>','<?= $__pro['name'] ?>', 'i', '<?= $__pro['id'] ?>')"
                             class="custom-pro__item">
                             <div class="custom-pro__item__img"
                                 style="background-image: url(<?= _WEB_ROOT_ ?>/assets/img/pro/<?= $__pro['url_image'] ?>);">
@@ -160,7 +161,7 @@
                                     <i class="custom-pro__item__star--gold fas fa-star"></i>
                                     <i class="fas fa-star"></i>
                                 </div>
-                                <div class="custom-pro__item__sold"><?= $__pro['sales'] ?> Đã bán</div>
+                                <div class="custom-pro__item__sold"><?= $__pro['sell'] ?> Đã bán</div>
                             </div>
                             <div class="custom-pro__item__origin">
                                 <span class="custom-pro__item__origin-name">Việt Nam</span>

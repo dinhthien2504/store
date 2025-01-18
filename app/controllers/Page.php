@@ -10,7 +10,7 @@ class Page extends Base{
     }
     public function index() {
         //Danh mục cha
-        $data_cates_parent = $this->category_model->get_all_perent();
+        $data_cates_parent = $this->category_model->get_all_parent();
         $this->data['sub_content']['cates_parent'] = $data_cates_parent;
 
         //Sản phẩm mới
@@ -18,7 +18,7 @@ class Page extends Base{
         $this->data['sub_content']['pros_new'] = $data_pros_new;
 
         //Sản phẩm bán chạy
-        $data_pros_best_sellers = $this->product_model->get_all_home('sales');
+        $data_pros_best_sellers = $this->product_model->get_all_home('sell');
         $this->data['sub_content']['pros_best_sellers'] = $data_pros_best_sellers;
         
         $this->data['title_page'] = 'Trang Chủ';
