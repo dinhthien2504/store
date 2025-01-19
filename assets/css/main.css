@@ -761,6 +761,7 @@
 
 .category-item {
   position: relative;
+  cursor: pointer;
 }
 
 .category-filter__price {
@@ -836,17 +837,24 @@
 
 .category-filter__btn {
   width: 100%;
-  outline: none;
   border: 1px solid var(--white-color);
   border-radius: 2px;
   font-size: 17.5px;
   color: inherit;
-  padding: 0 10px;
-  height: 40px;
+  padding: 6px 10px;
+  display: block;
+  text-align: center;
+  /* height: 40px; */
+  text-decoration: none;
   background-color: var(--white-color);
   font-weight: 500;
+  transition: all 0.5s ease;
 }
-
+.category-filter__btn:hover, 
+.category-filter__active  {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+}
 /* Selection input */
 .select-input {
   min-width: 200px;
@@ -903,7 +911,8 @@
   padding: 8px 0;
 }
 
-.select-input__link:hover {
+.select-input__link:hover, 
+.select-input__link--active {
   color: var(--primary-color);
 }
 
@@ -933,13 +942,12 @@
 
 .category-filter__page-btn {
   flex: 1;
-  background-color: var(--white-color);
   display: flex;
   text-decoration: none;
 }
 
 .category-filter__page-btn--disabled {
-  background-color: #f9f9f9;
+  /* background-color: #f9f9f9; */
   cursor: not-allowed;
 }
 

@@ -28,7 +28,7 @@ class ProductModel extends Database{
         return $this->getOne($sql, [$this->__get('id')]);
     }
 
-    public function get_pro_by_cate_id() {
+    public function get_pro_relate_by_cate_id() {
         $sql = "SELECT pro.id, pro.name, pro.cate_id, ";
         $sql .= "pro.price, pro.discount_percent, pro.sell, ";
         $sql .= "(SELECT pro_img.url_image FROM pro_images pro_img WHERE pro_img.pro_id = pro.id LIMIT 1) AS url_image ";
@@ -40,17 +40,50 @@ class ProductModel extends Database{
         $sql .= "LIMIT 6";
         return $this->getAll($sql, [$this->__get('cate_id'), $this->__get('id')]);
     }
+    public function count_all_pro_by_cate_id() {
+        $cate_id = $this->__get('cate_id');
+        $query = [$this->__get('parent_id')];
+        
+        $sql = "SELECT count(pro.id) as total_pro ";
+        $sql .= "FROM products pro "; 
+        $sql .= "LEFT JOIN categories cate ON pro.cate_id = cate.id ";
+        $sql .= "WHERE cate.parent = ? ";
+        if(!empty($cate_id)){
+            $sql .= "AND pro.cate_id = ? ";
+            $query[] = $cate_id;
+        }
+        $sql .= "AND pro.status = 0 ";
+        if(!empty($this->__get('filter'))) {
+            $sql .=  implode(' ', $this->__get('filter'), );
+        }
+        return $this->getOne($sql, $query);
+    }
+    public function get_all_pro_by_cate_id() {
+        $item_page = $this->__get('item_page');
+        $offset = ($this->__get('current_page') - 1) * $item_page;
+        $cate_id = $this->__get('cate_id');
+        $query = [$this->__get('parent_id')];
 
-    public function get_all_pro_by_parent() {
         $sql = "SELECT pro.id, pro.name, pro.cate_id, ";
         $sql .= "pro.price, pro.discount_percent, pro.sell, ";
         $sql .= "(SELECT pro_img.url_image FROM pro_images pro_img WHERE pro_img.pro_id = pro.id LIMIT 1) AS url_image ";
-        $sql .= "FROM products pro ";
+        $sql .= "FROM products pro "; 
         $sql .= "LEFT JOIN categories cate ON pro.cate_id = cate.id ";
         $sql .= "WHERE cate.parent = ? ";
+        if(!empty($cate_id)){
+            $sql .= "AND pro.cate_id = ? ";
+            $query[] = $cate_id;
+        }
         $sql .= "AND pro.status = 0 ";
-        $sql .= "ORDER BY pro.id DESC ";
-        // $sql .= "LIMIT 10 ";
-        return $this->getAll($sql, [$this->__get('parent_id')]);
+        if(!empty($this->__get('filter'))) {
+            $sql .=  implode(' ', $this->__get('filter'), );
+        }
+        if($this->__get('total_page') > 1) {
+            $sql .= "LIMIT ".$item_page." ";
+            if($offset >= 0) {
+                $sql .= " OFFSET ". $offset ;
+            }
+        }
+        return $this->getAll($sql, $query);
     }
 }

@@ -2,13 +2,15 @@
     <div class="p-2">
         <!-- Main Detail -->
         <div class="d-flex align-items-center justify-content-start pb-4 gap-2 flex-nowrap">
-            <a class="text-decoration-none text-secondary fs-14">Trang chủ</a>
+            <a href="<?=_WEB_ROOT_?>" class="text-decoration-none text-secondary fs-14 no-wrap cursor-pointer">Trang chủ</a>
             <i class="fas fa-chevron-right"></i>
-            <a class="text-decoration-none text-secondary fs-14">Nam</a>
+            <a onclick="handle__url_link(this, '<?= _WEB_ROOT_ ?>','<?= $data_cate['parent_name'] ?>', 'cat<?= $data_cate['parent_id'] ?>-cidnull')"
+            class="text-decoration-none text-secondary fs-14 no-wrap cursor-pointer"><?=$data_cate['parent_name']?></a>
             <i class="fas fa-chevron-right"></i>
-            <a class="text-decoration-none text-secondary fs-14">Áo nam</a>
+            <a onclick="handle__url_link(this, '<?= _WEB_ROOT_ ?>','<?= $data_cate['chirld_name'] ?>', 'cat<?= $data_cate['parent_id'] ?>-cid<?=$data_cate['cate_id']?>')"
+            class="text-decoration-none text-secondary fs-14 no-wrap cursor-pointer"><?=$data_cate['chirld_name']?></a>
             <i class="fas fa-chevron-right"></i>
-            <span class="fs-14 fw-normal "><?= $pro_id['name'] ?></span>
+            <span class="fs-14 fw-normal ellipsis"><?= $pro_id['name'] ?></span>
         </div>
         <div class="bg-white p-3">
             <div class="row g-4">
@@ -298,7 +300,7 @@
                         <?php if (!empty($pro_cate_id)): ?>
                             <?php foreach ($pro_cate_id as $pro_cate): ?>
                                 <div class="col-md-12 col-sm-3 col-4">
-                                    <a onclick="handle__url_pro(this, '<?= _WEB_ROOT_ ?>','<?= $pro_cate['name'] ?>', '<?= $pro_cate['id'] ?>')"
+                                    <a onclick="handle__url_link(this, '<?= _WEB_ROOT_ ?>','<?= $pro_cate['name'] ?>', 'i<?= $pro_cate['id'] ?>')"
                                         class="custom-pro__item">
                                         <div class="custom-pro__item__img"
                                             style="background-image: url(<?= _WEB_ROOT_ ?>/assets/img/pro/<?= $pro_cate['url_image'] ?>);">

@@ -115,3 +115,23 @@ const valid_handle_cart = () => {
     return true;
 }
 
+//Viết hàm check filter
+const valid_filter = () => {
+    //check dữ liệu đầu vào min price
+    const el_min_price = $('#min_price');
+    if(el_min_price.val() && el_min_price.val() < 0) {
+        messager({title: 'Cảnh báo!', mess: 'Giá trị nhỏ nhất phải lớn hơn hoặc bằng 1000!', type: 'error'});
+        return false;
+    }
+    const el_max_price = $('#max_price');
+    if(el_max_price.val() && el_max_price.val() < 10000) {
+        messager({title: 'Cảnh báo!', mess: 'Giá trị lớn nhất phải lớn hơn 10000!', type: 'error'});
+        return false;
+    }
+    if(el_max_price.val() && el_max_price.val() <= el_min_price.val()) {
+        messager({title: 'Cảnh báo!', mess: 'Giá trị lớn nhất phải lớn hơn giá trị nhỏ nhất!', type: 'error'});
+        return false;
+    }
+    return true;
+    
+}

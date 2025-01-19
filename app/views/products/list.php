@@ -7,8 +7,9 @@
                 <ul class="category-list">
                     <?php if (!empty($cate_by_parent_id)): ?>
                         <?php foreach ($cate_by_parent_id as $cate): ?>
-                            <li class="category-item ">
-                                <a href="#" class="category-item__link"><?= $cate['name'] ?></a>
+                            <li class="category-item <?= $cate_id == $cate['id'] ? 'category-item--active' : '' ?>">
+                                <a onclick="handle__url_link(this, '<?= _WEB_ROOT_ ?>','<?= $cate['name'] ?>', 'cat<?= $cate['parent'] ?>-cid<?= $cate['id'] ?>')"
+                                    class="category-item__link"><?= $cate['name'] ?></a>
                             </li>
                         <?php endforeach ?>
                     <?php endif ?>
@@ -18,18 +19,24 @@
                 <h3 class="category__heading"><i class="fas fa-filter me-2"></i>Bộ Lọc Tìm Kiếm</h3>
                 <div class="p-4">
                     <h5 class="mb-4">Khoảng Giá</h5>
-                    <form>
+                    <form method="GET" onsubmit="return valid_filter()">
                         <div class="row g-2 align-items-center mb-3">
                             <div class="col category-filter__price">
-                                <input type="number" placeholder="Từ">
+                                <input type="number" id="min_price" name="minPrice"
+                                    value="<?= htmlspecialchars($_GET['minPrice'] ?? '') ?>" placeholder="Từ">
                             </div>
                             <div class="col-auto category-filter__price">
                                 <span>-</span>
                             </div>
                             <div class="col category-filter__price">
-                                <input type="number" placeholder="Đến">
+                                <input type="number" id="max_price" name="maxPrice"
+                                    value="<?= htmlspecialchars($_GET['maxPrice'] ?? '') ?>" placeholder="Đến">
                             </div>
                         </div>
+                        <!-- Hidden input giữ tham số khác -->
+                        <input type="hidden" name="order" value="<?= htmlspecialchars($_GET['order'] ?? 'asc') ?>">
+                        <input type="hidden" name="page" value="1">
+                        <input type="hidden" name="sortBy" value="<?= htmlspecialchars($_GET['sortBy'] ?? 'id') ?>">
                         <!-- Nút áp dụng -->
                         <button type="submit" class="custom-btn__primary w-100">ÁP DỤNG</button>
                     </form>
@@ -40,6 +47,10 @@
         <div class="col-xxl-10 col-md-9 col-sm-8 col-12">
             <div class="category-filter ">
                 <div class="row g-2 align-items-center">
+                    <?php
+                    $minPrice = isset($_GET["minPrice"]) && $_GET['minPrice'] > 0 ? 'minPrice=' . $_GET['minPrice'] . '&' : '';
+                    $maxPrice = isset($_GET["maxPrice"]) && $_GET["maxPrice"] > 0 ? 'maxPrice=' . $_GET['maxPrice'] . '&' : '';
+                    ?>
                     <div class="col-lg-2 col-4">
                         <span class="category-filter__lable">
                             <i class="fas fa-filter"></i>
@@ -47,25 +58,35 @@
                         </span>
                     </div>
                     <div class="col-lg-2 col-4">
-                        <button class="category-filter__btn">
+                        <a href="?<?= $minPrice ?><?= $maxPrice ?>page=1&sortBy=id"
+                            class="category-filter__btn <?= isset($_GET['sortBy']) && $_GET['sortBy'] == 'id' ? 'category-filter__active' : '' ?>">
                             Mới nhất
-                        </button>
+                        </a>
                     </div>
                     <div class="col-lg-2 col-4">
-                        <button class="category-filter__btn">
+                        <a href="?<?= $minPrice ?><?= $maxPrice ?>page=1&sortBy=sell"
+                            class="category-filter__btn <?= isset($_GET['sortBy']) && $_GET['sortBy'] == 'sell' ? 'category-filter__active' : '' ?>">
                             Bán chạy
-                        </button>
+                        </a>
                     </div>
                     <div class="col-lg-4 col-8">
                         <div class="select-input">
-                            <span class="select-input__lable">Giá</span>
+                            <span
+                                class="select-input__lable <?= isset($_GET['sortBy']) && $_GET['sortBy'] == 'price' ? 'select-input__link--active' : ''; ?>">Giá:
+                                <?= isset($_GET['order']) && $_GET['order'] == 'asc' ? 'Thấp đến cao' : ''; ?>
+                                <?= isset($_GET['order']) && $_GET['order'] == 'desc' ? 'Cao đến thấp' : ''; ?>
+                            </span>
                             <i class="select-input__icon fa-solid fa-angle-down"></i>
                             <ul class="select-input__list">
                                 <li class="select-input__item">
-                                    <a href="#" class="select-input__link">Giá: Thấp đến cao</a>
+                                    <a href="?<?= $minPrice ?><?= $maxPrice ?>order=asc&page=1&sortBy=price"
+                                        class="select-input__link <?= isset($_GET['order']) && $_GET['order'] == 'asc' ? 'select-input__link--active' : ''; ?>">Giá:
+                                        Thấp đến cao</a>
                                 </li>
                                 <li class="select-input__item">
-                                    <a href="#" class="select-input__link">Giá: Cao đến thấp</a>
+                                    <a href="?<?= $minPrice ?><?= $maxPrice ?>order=desc&page=1&sortBy=price"
+                                        class="select-input__link <?= isset($_GET['order']) && $_GET['order'] == 'desc' ? 'select-input__link--active' : ''; ?>">Giá:
+                                        Cao đến thấp</a>
                                 </li>
                             </ul>
                         </div>
@@ -73,239 +94,66 @@
                     <div class="col-lg-2 col-4">
                         <div class="category-filter__page">
                             <span class="category-filter__page-num">
-                                <span class="category-filter__page-current">1</span>/14
+                                <span
+                                    class="category-filter__page-current"><?= $_GET['page'] ?? 1; ?></span>/<?= $total_page ?>
                             </span>
+
                             <div class="category-filter__page-control">
-                                <a href="#" class="category-filter__page-btn category-filter__page-btn--disable"><i
-                                        class="category-filter__page-icon fa-solid fa-chevron-left"></i></a>
-                                <a href="#" class="category-filter__page-btn"><i
-                                        class="category-filter__page-icon fa-solid fa-chevron-right"></i></a>
+                                <?= $prev ?><?= $next ?>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="my-3">
-                <div class="row g-2">
-                    <div class="custom-col-lg-2-5 col-md-3 col-sm-4 col-6">
-                        <a class="custom-pro__item">
-                            <div class="custom-pro__item__img"
-                                style="background-image: url(<?= _WEB_ROOT_ ?>/assets/img/pro/ao-khoac-be-mau-sac-tuong-phan-thoi-xuan-den.jpg);">
-                            </div>
-                            <h4 class="custom-pro__item__name">Aokong Đồng phục bóng chày Mỹ nam dáng rộng côn đồ đẹp trai đường phố cao cấp thường ngày áo khoác đại học gió chữ hàng đầu</h4>
-                            <div class="custom-pro__item__price">
-                                <span class="custom-pro__item__price-old">100.000 đ</span>
-                                <span class="custom-pro__item__price-current">200.0000đ</span>
-                            </div>
-                            <div class="custom-pro__item__action">
-                                <div class="custom-pro__item__rating">
-                                    <i class="custom-pro__item__star--gold fas fa-star"></i>
-                                    <i class="custom-pro__item__star--gold fas fa-star"></i>
-                                    <i class="custom-pro__item__star--gold fas fa-star"></i>
-                                    <i class="custom-pro__item__star--gold fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
+                <div class="my-3">
+                    <div class="row g-2">
+                        <?php if (!empty($pro_cate_id)): ?>
+                            <?php foreach ($pro_cate_id as $pro_cate): ?>
+                                <div class="custom-col-lg-2-5 col-md-3 col-sm-4 col-6">
+                                    <a onclick="handle__url_link(this, '<?= _WEB_ROOT_ ?>','<?= $pro_cate['name'] ?>', 'i<?= $pro_cate['id'] ?>')"
+                                        class="custom-pro__item">
+                                        <div class="custom-pro__item__img"
+                                            style="background-image: url(<?= _WEB_ROOT_ ?>/assets/img/pro/<?= $pro_cate['url_image'] ?>);">
+                                        </div>
+                                        <h4 class="custom-pro__item__name"><?= $pro_cate['name'] ?></h4>
+                                        <div class="custom-pro__item__price">
+                                            <span class="custom-pro__item__price-old"><?= number_format($pro_cate['price']) ?> đ</span>
+                                            <span
+                                                class="custom-pro__item__price-current"><?= number_format($pro_cate['price'] - ($pro_cate['price'] * ($pro_cate['discount_percent'] / 100))) ?>đ</span>
+                                        </div>
+                                        <div class="custom-pro__item__action">
+                                            <div class="custom-pro__item__rating">
+                                                <i class="custom-pro__item__star--gold fas fa-star"></i>
+                                                <i class="custom-pro__item__star--gold fas fa-star"></i>
+                                                <i class="custom-pro__item__star--gold fas fa-star"></i>
+                                                <i class="custom-pro__item__star--gold fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                            <div class="custom-pro__item__sold"><?= $pro_cate['sell'] ?> Đã bán</div>
+                                        </div>
+                                        <div class="custom-pro__item__origin">
+                                            <span class="custom-pro__item__origin-name">Việt Nam</span>
+                                        </div>
+                                        <?php if ($pro_cate['discount_percent'] > 0): ?>
+                                            <div class="custom-pro__item__sale-off">
+                                                <span
+                                                    class="custom-pro__item__sale-off-percent"><?= $pro_cate['discount_percent'] ?>%</span>
+                                                <span class="custom-pro__item__sale-off-label">GIẢM</span>
+                                            </div>
+                                        <?php endif ?>
+                                    </a>
                                 </div>
-                                <div class="custom-pro__item__sold">1 Đã bán</div>
-                            </div>
-                            <div class="custom-pro__item__origin">
-                                <span class="custom-pro__item__origin-name">Việt Nam</span>
-                            </div>
-
-                            <div class="custom-pro__item__sale-off">
-                                <span class="custom-pro__item__sale-off-percent">5%</span>
-                                <span class="custom-pro__item__sale-off-label">GIẢM</span>
-                            </div>
-
-                        </a>
-                    </div>
-                    <div class="custom-col-lg-2-5 col-md-3 col-sm-4 col-6">
-                        <a class="custom-pro__item">
-                            <div class="custom-pro__item__img"
-                                style="background-image: url(<?= _WEB_ROOT_ ?>/assets/img/pro/ao-khoac-be-mau-sac-tuong-phan-thoi-xuan-den.jpg);">
-                            </div>
-                            <h4 class="custom-pro__item__name">Aokong Đồng phục bóng chày Mỹ nam dáng rộng côn đồ đẹp trai đường phố cao cấp thường ngày áo khoác đại học gió chữ hàng đầu</h4>
-                            <div class="custom-pro__item__price">
-                                <span class="custom-pro__item__price-old">100.000 đ</span>
-                                <span class="custom-pro__item__price-current">200.0000đ</span>
-                            </div>
-                            <div class="custom-pro__item__action">
-                                <div class="custom-pro__item__rating">
-                                    <i class="custom-pro__item__star--gold fas fa-star"></i>
-                                    <i class="custom-pro__item__star--gold fas fa-star"></i>
-                                    <i class="custom-pro__item__star--gold fas fa-star"></i>
-                                    <i class="custom-pro__item__star--gold fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <div class="custom-pro__item__sold">1 Đã bán</div>
-                            </div>
-                            <div class="custom-pro__item__origin">
-                                <span class="custom-pro__item__origin-name">Việt Nam</span>
-                            </div>
-
-                            <div class="custom-pro__item__sale-off">
-                                <span class="custom-pro__item__sale-off-percent">5%</span>
-                                <span class="custom-pro__item__sale-off-label">GIẢM</span>
-                            </div>
-
-                        </a>
-                    </div>
-                    <div class="custom-col-lg-2-5 col-md-3 col-sm-4 col-6">
-                        <a class="custom-pro__item">
-                            <div class="custom-pro__item__img"
-                                style="background-image: url(<?= _WEB_ROOT_ ?>/assets/img/pro/ao-khoac-be-mau-sac-tuong-phan-thoi-xuan-den.jpg);">
-                            </div>
-                            <h4 class="custom-pro__item__name">Aokong Đồng phục bóng chày Mỹ nam dáng rộng côn đồ đẹp trai đường phố cao cấp thường ngày áo khoác đại học gió chữ hàng đầu</h4>
-                            <div class="custom-pro__item__price">
-                                <span class="custom-pro__item__price-old">100.000 đ</span>
-                                <span class="custom-pro__item__price-current">200.0000đ</span>
-                            </div>
-                            <div class="custom-pro__item__action">
-                                <div class="custom-pro__item__rating">
-                                    <i class="custom-pro__item__star--gold fas fa-star"></i>
-                                    <i class="custom-pro__item__star--gold fas fa-star"></i>
-                                    <i class="custom-pro__item__star--gold fas fa-star"></i>
-                                    <i class="custom-pro__item__star--gold fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <div class="custom-pro__item__sold">1 Đã bán</div>
-                            </div>
-                            <div class="custom-pro__item__origin">
-                                <span class="custom-pro__item__origin-name">Việt Nam</span>
-                            </div>
-
-                            <div class="custom-pro__item__sale-off">
-                                <span class="custom-pro__item__sale-off-percent">5%</span>
-                                <span class="custom-pro__item__sale-off-label">GIẢM</span>
-                            </div>
-
-                        </a>
-                    </div>
-                    <div class="custom-col-lg-2-5 col-md-3 col-sm-4 col-6">
-                        <a class="custom-pro__item">
-                            <div class="custom-pro__item__img"
-                                style="background-image: url(<?= _WEB_ROOT_ ?>/assets/img/pro/ao-khoac-be-mau-sac-tuong-phan-thoi-xuan-den.jpg);">
-                            </div>
-                            <h4 class="custom-pro__item__name">Aokong Đồng phục bóng chày Mỹ nam dáng rộng côn đồ đẹp trai đường phố cao cấp thường ngày áo khoác đại học gió chữ hàng đầu</h4>
-                            <div class="custom-pro__item__price">
-                                <span class="custom-pro__item__price-old">100.000 đ</span>
-                                <span class="custom-pro__item__price-current">200.0000đ</span>
-                            </div>
-                            <div class="custom-pro__item__action">
-                                <div class="custom-pro__item__rating">
-                                    <i class="custom-pro__item__star--gold fas fa-star"></i>
-                                    <i class="custom-pro__item__star--gold fas fa-star"></i>
-                                    <i class="custom-pro__item__star--gold fas fa-star"></i>
-                                    <i class="custom-pro__item__star--gold fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <div class="custom-pro__item__sold">1 Đã bán</div>
-                            </div>
-                            <div class="custom-pro__item__origin">
-                                <span class="custom-pro__item__origin-name">Việt Nam</span>
-                            </div>
-
-                            <div class="custom-pro__item__sale-off">
-                                <span class="custom-pro__item__sale-off-percent">5%</span>
-                                <span class="custom-pro__item__sale-off-label">GIẢM</span>
-                            </div>
-
-                        </a>
-                    </div>
-                    <div class="custom-col-lg-2-5 col-md-3 col-sm-4 col-6">
-                        <a class="custom-pro__item">
-                            <div class="custom-pro__item__img"
-                                style="background-image: url(<?= _WEB_ROOT_ ?>/assets/img/pro/ao-khoac-be-mau-sac-tuong-phan-thoi-xuan-den.jpg);">
-                            </div>
-                            <h4 class="custom-pro__item__name">Aokong Đồng phục bóng chày Mỹ nam dáng rộng côn đồ đẹp trai đường phố cao cấp thường ngày áo khoác đại học gió chữ hàng đầu</h4>
-                            <div class="custom-pro__item__price">
-                                <span class="custom-pro__item__price-old">100.000 đ</span>
-                                <span class="custom-pro__item__price-current">200.0000đ</span>
-                            </div>
-                            <div class="custom-pro__item__action">
-                                <div class="custom-pro__item__rating">
-                                    <i class="custom-pro__item__star--gold fas fa-star"></i>
-                                    <i class="custom-pro__item__star--gold fas fa-star"></i>
-                                    <i class="custom-pro__item__star--gold fas fa-star"></i>
-                                    <i class="custom-pro__item__star--gold fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <div class="custom-pro__item__sold">1 Đã bán</div>
-                            </div>
-                            <div class="custom-pro__item__origin">
-                                <span class="custom-pro__item__origin-name">Việt Nam</span>
-                            </div>
-
-                            <div class="custom-pro__item__sale-off">
-                                <span class="custom-pro__item__sale-off-percent">5%</span>
-                                <span class="custom-pro__item__sale-off-label">GIẢM</span>
-                            </div>
-
-                        </a>
-                    </div>
-                    <div class="custom-col-lg-2-5 col-md-3 col-sm-4 col-6">
-                        <a class="custom-pro__item">
-                            <div class="custom-pro__item__img"
-                                style="background-image: url(<?= _WEB_ROOT_ ?>/assets/img/pro/ao-khoac-be-mau-sac-tuong-phan-thoi-xuan-den.jpg);">
-                            </div>
-                            <h4 class="custom-pro__item__name">Aokong Đồng phục bóng chày Mỹ nam dáng rộng côn đồ đẹp trai đường phố cao cấp thường ngày áo khoác đại học gió chữ hàng đầu</h4>
-                            <div class="custom-pro__item__price">
-                                <span class="custom-pro__item__price-old">100.000 đ</span>
-                                <span class="custom-pro__item__price-current">200.0000đ</span>
-                            </div>
-                            <div class="custom-pro__item__action">
-                                <div class="custom-pro__item__rating">
-                                    <i class="custom-pro__item__star--gold fas fa-star"></i>
-                                    <i class="custom-pro__item__star--gold fas fa-star"></i>
-                                    <i class="custom-pro__item__star--gold fas fa-star"></i>
-                                    <i class="custom-pro__item__star--gold fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <div class="custom-pro__item__sold">1 Đã bán</div>
-                            </div>
-                            <div class="custom-pro__item__origin">
-                                <span class="custom-pro__item__origin-name">Việt Nam</span>
-                            </div>
-
-                            <div class="custom-pro__item__sale-off">
-                                <span class="custom-pro__item__sale-off-percent">5%</span>
-                                <span class="custom-pro__item__sale-off-label">GIẢM</span>
-                            </div>
-
-                        </a>
+                            <?php endforeach ?>
+                        <?php else: ?>
+                            <h3 class="alert alert-warning text-center p-5">Không Tìm Thấy Sản Phẩm Nào!</h3>
+                        <?php endif ?>
                     </div>
                 </div>
+                <!-- page -->
+                <ul class="pagination">
+                    <?php if (isset($links))
+                        echo $links; ?>
+                </ul>
             </div>
-            <ul class="pagination home-product-pagination">
-                <li class="pagination-item">
-                    <a href="#" class="pagination-item__link"><i
-                            class="pagination-item__link-icon fa-solid fa-chevron-left"></i></a>
-                </li>
-                <li class="pagination-item pagination-item--active">
-                    <a href="#" class="pagination-item__link">1</a>
-                </li>
-                <li class="pagination-item">
-                    <a href="#" class="pagination-item__link">2</a>
-                </li>
-                <li class="pagination-item">
-                    <a href="#" class="pagination-item__link">3</a>
-                </li>
-                <li class="pagination-item">
-                    <a href="#" class="pagination-item__link">4</a>
-                </li>
-                <li class="pagination-item">
-                    <a href="#" class="pagination-item__link">5</a>
-                </li>
-                <li class="pagination-item">
-                    <a href="#" class="pagination-item__link">...</a>
-                </li>
-                <li class="pagination-item">
-                    <a href="#" class="pagination-item__link">14</a>
-                </li>
-                <li class="pagination-item">
-                    <a href="#" class="pagination-item__link"><i
-                            class="pagination-item__link-icon fa-solid fa-chevron-right"></i></a>
-                </li>
-            </ul>
         </div>
     </div>
 </div>

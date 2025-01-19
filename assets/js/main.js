@@ -6,9 +6,9 @@ const handle_text = (text) => {
         .replace(/-+/g, '-');
 }
 //Hàm link tới trang sản phẩm
-const handle__url_link = (el, web_root, text, name, pro_id) => {
+const handle__url_link = (el, web_root, text, id) => {
     let new_text = handle_text(text);
-    el.setAttribute('href', `${web_root}/${new_text}-${name}${pro_id}`);
+    el.setAttribute('href', `${web_root}/${new_text}-${id}`);
 }
 const validate_email = (email) => {
     // Biểu thức regex kiểm tra email

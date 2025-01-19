@@ -36,7 +36,7 @@
     <script src="<?=_WEB_ROOT_?>/assets/jquery/jquery-3.7.1.min.js"></script>
    
     <script src="<?=_WEB_ROOT_?>/assets/js/main.js"></script> 
-    <script src="<?=_WEB_ROOT_?>/assets/js/detail.js"></script>
+    <script src="<?=_WEB_ROOT_?>/assets/js/pro.js"></script>
     <script src="<?=_WEB_ROOT_?>/assets/js/cart.js"></script>
     <script src="<?=_WEB_ROOT_?>/assets/js/user.js"></script> 
 </body>

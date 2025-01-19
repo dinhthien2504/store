@@ -12,7 +12,7 @@ class Routes {
         //Home
         $router->create(path: '/', params: [Page::class, 'index']);
         //Product
-        $router->create(path: '/.+-cat{/+d}', params: [Product::class, 'list']);
+        $router->create(path: '/.+-cat{/+d}-cid{/+d}', params: [Product::class, 'list']);
         $router->create(path: '/.+-i{/+d}', params: [Product::class, 'detail']);
         
         //Auth 
