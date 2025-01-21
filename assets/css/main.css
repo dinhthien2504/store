@@ -965,6 +965,21 @@
   color: #555;
 }
 
+/* Search filter*/
+.filter-keyword_pro {
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--text-color);
+  margin: 20px 0;
+}
+.filter-keyword_pro i {
+  margin-right: 5px;
+}
+.filter-keyword_pro span {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
 .custom-pro__item {
   display: block;
   position: relative;

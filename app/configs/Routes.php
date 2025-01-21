@@ -13,12 +13,14 @@ class Routes {
         $router->create(path: '/', params: [Page::class, 'index']);
         //Product
         $router->create(path: '/.+-cat{/+d}-cid{/+d}', params: [Product::class, 'list']);
+        $router->create(path: '/search', params: [Product::class, 'search']);
         $router->create(path: '/.+-i{/+d}', params: [Product::class, 'detail']);
         
         //Auth 
         $router->create(path: '/handle_login', params: [User::class, 'handle_login']);
         $router->create(path: '/handle_register', params: [User::class, 'handle_register']);
         $router->create(path: '/logout', params: [User::class, 'logout']);
+        
         //Cart
         $router->create(path: '/cart', params: [Cart::class, 'cart']);
         $router->create(path: '/save_cart', params: [Cart::class, 'save_cart']);

@@ -5,15 +5,16 @@ use app\models\ModelSetup;
 class ProVariantModel extends Database{
     use ModelSetup;
     public function get_cor_size_by_pro_id() {
-        $sql = 'SELECT p_v.url_image,  a_v.name , p_v.cor_id, p_v.pro_id ';
+        $sql = 'SELECT p_v.url_image, a_v.name, p_v.cor_id, p_v.pro_id ';
         $sql .= 'FROM pro_variants p_v ';
         $sql .= 'JOIN attri_values a_v ON p_v.cor_id = a_v.id ';
         $sql .= 'WHERE p_v.cor_id IS NOT NULL AND p_v.size_id IS NOT NULL ';
-        $sql .= 'AND p_v.pro_id = ?';
-        $sql .= 'GROUP BY a_v.name ';
+        $sql .= 'AND p_v.pro_id = ? ';
+        $sql .= 'GROUP BY p_v.url_image, a_v.name, p_v.cor_id, p_v.pro_id ';
         $sql .= 'ORDER BY a_v.name DESC';
         return $this->getAll($sql, [$this->__get('pro_id')]);
     }
+    
 
     public function get_size_by_cor_id() {
         $sql = 'SELECT a_v.name, p_v.pro_id, p_v.cor_id, p_v.size_id FROM pro_variants p_v ';
@@ -28,7 +29,7 @@ class ProVariantModel extends Database{
         $sql .= 'JOIN attri_values a_v ON p_v.cor_id = a_v.id ';
         $sql .= 'WHERE p_v.cor_id IS NOT NULL AND p_v.size_id IS NULL ';
         $sql .= 'AND p_v.pro_id = ?';
-        $sql .= 'GROUP BY a_v.name ';
+        $sql .= 'GROUP BY p_v.url_image, a_v.name, p_v.cor_id, p_v.pro_id ';
         $sql .= 'ORDER BY a_v.name DESC';
         return $this->getAll($sql, [$this->__get('pro_id')]);
     }
@@ -38,7 +39,7 @@ class ProVariantModel extends Database{
         $sql .= 'JOIN attri_values a_v ON p_v.size_id = a_v.id ';
         $sql .= 'WHERE p_v.cor_id IS NULL AND p_v.size_id IS NOT NULL ';
         $sql .= 'AND p_v.pro_id = ?';
-        $sql .= 'GROUP BY a_v.name ';
+        $sql .= 'GROUP BY p_v.url_image, a_v.name, p_v.cor_id, p_v.pro_id, p_v.size_id ';
         $sql .= 'ORDER BY a_v.name ASC';
         return $this->getAll($sql, [$this->__get('pro_id')]);
     }

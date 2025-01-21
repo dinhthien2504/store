@@ -121,14 +121,15 @@
             </div>
             <input type="checkbox" hidden id="mobile-search-checkbox" class="header__search-checkbox" />
             <!-- Header Search -->
-            <div class="header__search ">
+            <form action="<?=_WEB_ROOT_?>/search" method="GET"
+            class="header__search ">
                 <div class="header__search-input-wrap">
-                    <input type="text" class="header__search-input" placeholder="Nhập để tìm kiếm sản phẩm" />
+                    <input type="text" class="header__search-input" name="keyword" value="<?=isset($_GET['keyword']) ? trim($_GET['keyword']) : '';?>" placeholder="Nhập để tìm kiếm sản phẩm" />
                 </div>
-                <button class="header__search-btn">
+                <button type="submit" class="header__search-btn">
                     <i class="header__search-btn-icon fas fa-search"></i>
                 </button>
-            </div>
+            </form>
 
             <!-- Cart layout -->
             <div class="header__cart--user">

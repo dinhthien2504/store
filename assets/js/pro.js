@@ -117,21 +117,37 @@ const valid_handle_cart = () => {
 
 //Viết hàm check filter
 const valid_filter = () => {
-    //check dữ liệu đầu vào min price
     const el_min_price = $('#min_price');
-    if(el_min_price.val() && el_min_price.val() < 0) {
+    const el_max_price = $('#max_price');
+
+    const minPrice = el_min_price.val() ? parseFloat(el_min_price.val()) : null;
+    const maxPrice = el_max_price.val() ? parseFloat(el_max_price.val()) : null;
+    
+    // Không cho phép submit nếu cả hai giá trị đều rỗng
+    if (minPrice === null && maxPrice === null) {
+        messager({title: 'Cảnh báo!', mess: 'Vui lòng nhập ít nhất một giá trị!', type: 'error'});
+        return false;
+    }
+
+    // Kiểm tra nếu giá trị nhỏ nhất không hợp lệ
+    if (minPrice !== null && minPrice < 1000) {
         messager({title: 'Cảnh báo!', mess: 'Giá trị nhỏ nhất phải lớn hơn hoặc bằng 1000!', type: 'error'});
         return false;
     }
-    const el_max_price = $('#max_price');
-    if(el_max_price.val() && el_max_price.val() < 10000) {
-        messager({title: 'Cảnh báo!', mess: 'Giá trị lớn nhất phải lớn hơn 10000!', type: 'error'});
+
+    // Kiểm tra nếu giá trị lớn nhất không hợp lệ
+    if (maxPrice !== null && maxPrice < 10000) {
+        messager({title: 'Cảnh báo!', mess: 'Giá trị lớn nhất phải lớn hơn hoặc bằng 10000!', type: 'error'});
         return false;
     }
-    if(el_max_price.val() && el_max_price.val() <= el_min_price.val()) {
+
+    // Kiểm tra mối quan hệ giữa hai giá trị nếu cả hai đều tồn tại
+    if (minPrice !== null && maxPrice !== null && maxPrice <= minPrice) {
         messager({title: 'Cảnh báo!', mess: 'Giá trị lớn nhất phải lớn hơn giá trị nhỏ nhất!', type: 'error'});
         return false;
     }
+
     return true;
-    
-}
+};
+
+

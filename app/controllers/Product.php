@@ -8,6 +8,8 @@ class Product extends Base
     private $product_model;
     private $pro_image_model;
     private $pro_variant_model;
+
+    private static $item_page = 2;
     public function __construct()
     {
         $this->category_model = $this->model('CategoryModel');
@@ -17,8 +19,7 @@ class Product extends Base
     }
     public function list($parent_id, $cate_id = null)
     {
-        $item_page = 12;
-        $this->product_model->__set('item_page', $item_page);
+        $this->product_model->__set('item_page', self::$item_page);
         //Set điều kiện để lọc
         if (!empty($_GET)) {
             $filters = $this->handle_filter($_GET);
@@ -36,7 +37,7 @@ class Product extends Base
         //Lấy page hiện tại để tính vị trí lấy sản phẩm
         $page = $_GET['page'] ?? 1;
         $this->product_model->__set('current_page', $page);
-        $total_page = ceil($count_pro_cate_id['total_pro'] / $item_page);
+        $total_page = ceil($count_pro_cate_id['total_pro'] / self::$item_page);
 
         //Xử lý đường dẫn cho phân trang
         if ($total_page > 1) {
@@ -94,7 +95,7 @@ class Product extends Base
         $data_imgs_pro = $this->pro_image_model->get_all_img_by_pro_id();
         $this->data['sub_content']['pros_image'] = $data_imgs_pro;
 
-        //Dữ liệu có cả màu và size
+        // Dữ liệu có cả màu và size
         $this->pro_variant_model->__set('pro_id', $id);
         $data_cor_size_pro_id = $this->pro_variant_model->get_cor_size_by_pro_id();
         if (!empty($data_cor_size_pro_id)) {
@@ -108,7 +109,7 @@ class Product extends Base
         if (!empty($data_color_pro_id)) {
             $this->data['sub_content']['color_pro_id'] = $data_color_pro_id;
         }
-        //Dữ liệu khi chỉ có size
+        // Dữ liệu khi chỉ có size
         $data_size_pro_id = $this->pro_variant_model->get_size_by_pro_id();
         if (!empty($data_size_pro_id)) {
             $this->data['sub_content']['size_pro_id'] = $data_size_pro_id;
@@ -123,6 +124,60 @@ class Product extends Base
         $this->render('layouts/main', $this->data);
     }
 
+    public function search()
+    {
+        //Số lượng sản phẩm mỗi trang
+        $this->product_model->__set('item_page', self::$item_page);
+        //Từ khóa tìm kiếm
+        $this->product_model->__set('keyword', $_GET['keyword']);
+        //Set điều kiện để lọc
+        if (!empty($_GET)) {
+            $filters = $this->handle_filter($_GET);
+            $this->product_model->__set('filter', $filters);
+        }
+
+        //Đếm tất cả sản phẩm lấy được để tính số lượng trang
+        $count_pro_keyword = $this->product_model->count_all_pro_by_keyword();
+        
+        //Lấy page hiện tại để tính vị trí lấy sản phẩm
+        $page = $_GET['page'] ?? 1;
+        $this->product_model->__set('current_page', $page);
+        $total_page = ceil($count_pro_keyword['total_pro'] / self::$item_page);
+        
+        //Gán giá trị tổng số page vào model để xử lý
+        $this->product_model->__set('total_page', $total_page);
+        
+        //Xử lý đường dẫn cho phân trang
+        if ($total_page > 1) {
+            $links = $this->handle_url_page($total_page, $page);
+            $this->data['sub_content']['links'] = $links;
+        }
+
+        //Xử lý đường dẫn cho next với prev
+        $link_prev = $this->handle_prev_page($page);
+        $this->data['sub_content']['prev'] = $link_prev;
+
+        $link_next = $this->handle_next_page($page, $total_page);
+        $this->data['sub_content']['next'] = $link_next;
+
+        //Truyền total_page vào view
+        $this->data['sub_content']['total_page'] = $total_page;
+        
+        //Lấy dữ liệu cuối cùng nếu có filter
+        $data_pro_filter = $this->product_model->get_all_pro_by_keyword();
+        $this->data['sub_content']['pro_filter'] = $data_pro_filter;
+
+        //Dữ liệu danh mục 
+        // $this->category_model->__set('parent_id', $parent_id);
+        // $data_cate_parent_id = $this->category_model->get_all_cate_by_parent_id();
+        // $this->data['sub_content']['cate_id'] = $cate_id;
+        // $this->data['sub_content']['cate_by_parent_id'] = $data_cate_parent_id;=
+
+        $this->data['title_page'] = 'Danh Sách Sản Phẩm';
+        
+        $this->data['content'] = 'products/search';
+        $this->render('layouts/main', $this->data);
+    }
     private function handle_filter($data)
     {
         $filters = [];
