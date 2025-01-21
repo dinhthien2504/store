@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th1 20, 2025 lúc 03:23 PM
+-- Thời gian đã tạo: Th1 21, 2025 lúc 05:46 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `store`
+-- Cơ sở dữ liệu: `da`
 --
 
 -- --------------------------------------------------------
@@ -188,8 +188,8 @@ INSERT INTO `categories` (`id`, `parent`, `name`, `url_image`, `status`) VALUES
 (22, 2, 'Quần', NULL, 0),
 (23, 2, 'Quần đùi', NULL, 0),
 (24, 2, 'Chân váy', NULL, 0),
-(25, 2, 'Quần jeans\r\n', NULL, 0),
-(26, 2, 'Váy cưới\r\n', NULL, 0),
+(25, 2, 'Váy cưới ', NULL, 0),
+(26, 2, 'Quần jeans', NULL, 0),
 (27, 2, 'Đồ ngủ', NULL, 0),
 (28, 2, 'Áo len', NULL, 0),
 (29, 2, 'Hoodie', NULL, 0),
@@ -221,7 +221,8 @@ INSERT INTO `categories` (`id`, `parent`, `name`, `url_image`, `status`) VALUES
 (55, 9, 'Trang Điểm', NULL, 0),
 (56, 9, 'Chăm Sóc Tóc', NULL, 0),
 (57, 9, 'Nước Hoa', NULL, 0),
-(58, 10, 'Vật Tư Y Tế', NULL, 0);
+(58, 10, 'Vật Tư Y Tế', NULL, 0),
+(59, 2, 'Áo Khoác & Áo Choàng', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -1023,7 +1024,22 @@ INSERT INTO `products` (`id`, `cate_id`, `name`, `price`, `discount_percent`, `d
 (66, 11, 'Áo khoác gió thu đông phối màu Bảo Đăng', 185000, 12, '<p>SƠ LƯỢC VỀ ĐẶC ĐIỂM NỔI BẬT CỦA SẢN PHẨM :</p><p>&nbsp;</p><p>* Chất liệu vải dù nhật 2 lớp Lót Dù dày dặn, chống nắng cho ngày nắng gắt &amp; chống gió lạnh cho ngày mưa.</p><p>&nbsp;</p><p>* Áo được sản xuất từ vải dù dù loại 1, không xù, không phai màu, không gây kích ứng da.</p><p>&nbsp;</p><p>* Bên trong áo có lót dù màu đen thoáng khí mát mẻ, tạo cảm giác vận động thoải mái khi mặc.</p><p>&nbsp;</p><p>* Thiết kế tay dài bo có bo thun,Fom rộng thoải mái.</p><p>&nbsp;</p><p>* Bên trong có túi trong chống mất đồ ,Túi rộng để vừa tất cả các dòng DT.</p><p>&nbsp;</p><p>* Đường chỉ may sắc sảo, cực kì chắc chắn &amp; 2 lớp dày dặn.Có Túi Bên Trong Ngực Và 2 Túi 2 Bên.</p><p>&nbsp;</p><p>* Chuẩn form, thoải mái, màu sắc trung, tôn dáng, phù hợp với mọi lứa tuổi.</p><p>&nbsp;</p><p>* Dễ dàng Mix cùng nhiều kiểu trang phục yêu thích hằng ngày &amp; tự tin đi đến mọi nơi mọi lúc với phong cách chất lừ của riêng bạn,</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>🔰 HƯỚNG DẪN CÁCH ĐẶT HÀNG:</p><p>&nbsp;</p><p>*KHÔNG GỬI THEO GHI CHÚ**</p><p>&nbsp;</p><p>&nbsp;</p><p>✔ Cách chọn size: Shop có bảng size mẫu. Bạn NÊN INBOX, cung cấp chiều cao, cân nặng để SHOP TƯ VẤN SIZE</p><p>&nbsp;</p><p>✔ Mã sản phẩm đã có trong ảnh</p><p>&nbsp;</p><p>✔ Cách đặt hàng: Nếu bạn muốn mua 2 sản phẩm khác nhau hoặc 2 size khác nhau, để được freeship</p><p>&nbsp;</p><p>- Bạn chọn từng sản phẩm rồi thêm vào giỏ hàng</p><p>&nbsp;</p><p>- Khi giỏ hàng đã có đầy đủ các sản phẩm cần mua, bạn mới tiến hành ấn nút “</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>BẢNG SIZE THAM KHẢO :</p><p>&nbsp;</p><p>&nbsp;</p><p>Size M: phù hợp với bạn dưới 51kg dưới &lt; 1m6</p><p>&nbsp;</p><p>Size L: phù hợp với bạn từ 52 đến 64kg &lt; 1m 67</p><p>......</p><p>&nbsp;</p><p>**CAM KẾT VỀ ĐỔI TRẢ VÀ BẢO HÀNH</p><p>&nbsp;</p><p>Sản phẩm cam kết đúng như mô tả, shop cam kết mang đến cho khách hàng sản phẩm chất lượng và giá cả hợp lý</p><p>&nbsp;</p><p>- Áo được kiểm tra trước khi gói hàng tránh giao nhầm lẫn cho khách</p><p>&nbsp;</p><p>- Hoàn lại tiền cho khách nếu sản phẩm không đúng như mô tả</p><p>&nbsp;</p><p>- Giao hàng nhanh nhất sau khi có đơn. Giao hàng trên toàn quốc, thanh toán khi nhận hàng</p><p>&nbsp;</p><p>- Đổi trả đúng theo quy định của shopee</p><p>&nbsp;</p><p>--------------------------------------------------------------------------------------------------------------------------------</p><p>&nbsp;</p><p>Quy định bảo hành, đổi trả đối với sản phẩm</p><p>&nbsp;</p><p>- Đổi trả theo đúng quy định của shopee</p><p>&nbsp;</p><p>- Điều kiện áp dụng (trong vòng 07 ngày kể từ khi nhận sản phẩm)</p><p>&nbsp;</p><p>- Hàng hoá vẫn còn mới, không bị hỏng hóc và giặt tẩy</p><p>&nbsp;</p><p>- Hàng hóa hư hỏng do lỗi vận chuyển hoặc do nhà sản xuất.</p><p>&nbsp;</p><p>- Hàng không đúng kiểu dáng mà khách hàng đã đặt</p><p>&nbsp;</p><p>- Không đủ bộ, số lượng mà khách hàng đã đặt</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>HƯỚNG DẪN SỬ DỤNG VÀ BẢO QUẢN ', 0, 0),
 (67, 11, 'C.M.P 2024 Áo khoác nam Mỹ Retro áo khoác bóng chày Rộng rãi áo khoác da Thời trang Áo khoác dài tay Cho Nam Và Nữ', 857000, 12, '<p>❤ Vì hiệu ứng hiển thị và ánh sáng khác nhau, màu sắc thực tế của sản phẩm có thể hơi khác so với màu sắc trong hình. Cảm ơn bạn.&nbsp;</p><p>❤ Nếu sản phẩm của chúng tôi không có kích thước hay màu sắc yêu thích của bạn, hoặc bạn muốn tìm hiểu thêm thông tin, vui lòng liên hệ với chúng tôi. Cảm ơn bạn.&nbsp;</p><p>❤ Nếu có vấn đề gì khi nhận gói hàng, xin hãy liên hệ với chúng tôi để được hỗ trợ xử lý, chúng tôi sẽ giải đáp thỏa đáng cho bạn.</p>', 0, 0),
 (68, 11, 'Áo Khoác, Áo Cadigan GC Ong Thêu Cao Cấp Chất Len Tăm Dày Dặn Sang Chảnh - Hàng mới về', 830000, 1, '<p>Liên hệ mua hàng : o84.2o9.1989 ( call - sms - rano )&nbsp;</p><p>Những chiếc áo khoác bên ngoài len sẽ luôn luôn là chọn mua thông thái của các cô bé bánh bèo bởi sự tiện nghi trong phối đồ. chính vì thế hãy luôn để phía trong gầm tủ áo quần tối thiểu một em áo khoác bên ngoài mỏng này nhé SHOP cam đoan mang tới cho những người sử dụng sự tự tin, vui vẻ và dễ chịu và tin cậy khi xử dụng sản phẩm.&nbsp;</p><p>Thông tin sản phẩm&nbsp;</p><p>- Nguồn gốc: Việt Nam&nbsp;</p><p>- Chất liệu: Chất len mịn vô cùng luôn M: 40 - 48kg L: 48 - 56kg XL: 57 - 62kg&nbsp;</p><p>Đặc điểm nổi bật:&nbsp;</p><p>- Len dày dăhn phù hợp mặc cho mua thu đông trong thời hạn với khung áo thoáng rộng thoải mái, vật liệu dày ấm.&nbsp;</p><p>- Sợi cực mịn mang lại hiệu ứng thoải mái và dễ chịu khi sử dụng.&nbsp;</p><p>- thiết kế tươi trẻ thời trang và năng động dễ phối đồ kết hợp cho toàn bộ các cô bé bánh bèo hay cá tính.&nbsp;</p><p>- Len ít dão nên người luyện tập rất có thể giặt máy, tuy vậy nên vắt kỹ nước trước lúc phơi.&nbsp;</p><p>* SHOP CAM KẾT:</p><p>&nbsp;- SHOP bán sản phẩm đảm bảo chất lượng là số một để shop hoàn toàn có thể tiên tiến nhãn hiệu và vươn xa. - item 100% giống mô tả</p><p>&nbsp;- tham vấn nhiệt tình, tỉ mỉ luôn thấu hiểu quý khách hàng để đáp ứng tốt.&nbsp;</p><p>- Giao hàng nhanh đúng tiến trình không phải đặt khách hàng mong chờ lâu để nhận hàng.&nbsp;</p><p>-------------------------------&nbsp;</p><p>* Bao test đổi trả tuân thủ theo đúng quyết định của Shopee 1.&nbsp;</p><p>ĐK vận dụng (trong vòng 07 ngày kể từ lúc nhận sản phẩm):&nbsp;</p><p>- Hàng hoá vẫn còn đấy mới, chưa qua xử dụng</p><p>&nbsp;- product hư hại do tải hoặc bởi vì nhà sản xuất. 2. tình huống được chấp nhận:&nbsp;</p><p>- Hàng bất ổn size, thiết kế như quý vị đặt mua&nbsp;</p><p>- thiếu số lượng, thiếu bộ như trong đơn hàng 3. tình huống thiếu ĐK vận dụng chính sách:&nbsp;</p><p>- Quá 07 ngày kể từ lúc quý vị nhận hàng&nbsp;</p><p>- Gửi lại hàng không ổn mẫu mã, không cần hàng của SHOP&nbsp;</p><p>- Đặt nhầm sản phẩm, chủng loại, không thích, không hợp,... Ấn theo dấu để cỗ vũ shop và xem thêm các vật phẩm mới của shop,SHOP rất vinh dự được đáp ứng quý khách.</p>', 0, 0),
-(69, 11, 'Aokong Đồng phục bóng chày Mỹ nam dáng rộng côn đồ đẹp trai đường phố cao cấp thường ngày áo khoác đại học gió chữ hàng đầu', 306000, 2, '<p>🎶 Chào mừng đến với AOKANG🎶</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>🔖 Kích thước và mô hình của sản phẩm được thể hiện trong hình. Vui lòng đọc kỹ.</p><p>&nbsp;</p><p>🔖 Do đo lường thủ công, lỗi có thể là 1-2 cm</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>Lợi ích, xin vui lòng lưu ý. 📣📣📣</p><p>&nbsp;</p><p>✨ Theo dõi cửa hàng của chúng tôi để nhận phiếu giảm giá cửa hàng. Vui lòng nhấp vào \"\" Theo dõi \"\" để thử. ✨</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>📫 Nếu bạn có bất kỳ câu hỏi nào về việc mua sắm, xin vui lòng liên hệ với chúng tôi. Chúng tôi sẽ cung cấp cho bạn những câu trả lời thỏa đáng nhất.</p><p>&nbsp;</p><p>✔ Chúng tôi có nhiều kinh nghiệm và sản phẩm chất lượng cao. Chúng tôi sẽ cung cấp cho bạn trải nghiệm tốt nhất.</p><p>&nbsp;</p><p>✔ Sản phẩm của chúng tôi là 100% mới.</p><p>&nbsp;</p><p>✔ Chúng tôi theo đuổi chất lượng cao và giá cả thấp.</p><p>&nbsp;</p><p>✔ Chúng tôi luôn có sản phẩm mới. Vui lòng tiếp tục theo dõi tin tức mới nhất trong cửa hàng của chúng tôi. Chúng tôi sẽ gửi cho bạn phiếu giảm giá và giảm giá.</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>🛒 Nếu bạn thích sản phẩm của chúng tôi, vui lòng cho chúng vào giỏ hàng và mang đi.</p><p>&nbsp;</p><p>⭐ Chúng tôi mong đợi đánh giá năm sao của bạn.</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>❗ Do thiết bị hiển thị và ánh sáng khác nhau, hình ảnh có thể không phản ánh màu sắc trung thực của tất cả các sản phẩm. Cảm ơn bạn cho sự hiểu biết của bạn.</p><p>&nbsp;</p><p>❕ Nếu bạn có bất kỳ câu hỏi nào, xin vui lòng liên hệ với chúng tôi. Chúng tôi sẽ trả lời câu hỏi của bạn càng sớm càng tốt và cố gắng hết sức để giải quyết vấn đề của bạn.</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>🤠 Chúng tôi mong bạn chú ý và mua sắm. 🤠\"</p>', 0, 0);
+(69, 11, 'Aokong Đồng phục bóng chày Mỹ nam dáng rộng côn đồ đẹp trai đường phố cao cấp thường ngày áo khoác đại học gió chữ hàng đầu', 306000, 2, '<p>🎶 Chào mừng đến với AOKANG🎶</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>🔖 Kích thước và mô hình của sản phẩm được thể hiện trong hình. Vui lòng đọc kỹ.</p><p>&nbsp;</p><p>🔖 Do đo lường thủ công, lỗi có thể là 1-2 cm</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>Lợi ích, xin vui lòng lưu ý. 📣📣📣</p><p>&nbsp;</p><p>✨ Theo dõi cửa hàng của chúng tôi để nhận phiếu giảm giá cửa hàng. Vui lòng nhấp vào \"\" Theo dõi \"\" để thử. ✨</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>📫 Nếu bạn có bất kỳ câu hỏi nào về việc mua sắm, xin vui lòng liên hệ với chúng tôi. Chúng tôi sẽ cung cấp cho bạn những câu trả lời thỏa đáng nhất.</p><p>&nbsp;</p><p>✔ Chúng tôi có nhiều kinh nghiệm và sản phẩm chất lượng cao. Chúng tôi sẽ cung cấp cho bạn trải nghiệm tốt nhất.</p><p>&nbsp;</p><p>✔ Sản phẩm của chúng tôi là 100% mới.</p><p>&nbsp;</p><p>✔ Chúng tôi theo đuổi chất lượng cao và giá cả thấp.</p><p>&nbsp;</p><p>✔ Chúng tôi luôn có sản phẩm mới. Vui lòng tiếp tục theo dõi tin tức mới nhất trong cửa hàng của chúng tôi. Chúng tôi sẽ gửi cho bạn phiếu giảm giá và giảm giá.</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>🛒 Nếu bạn thích sản phẩm của chúng tôi, vui lòng cho chúng vào giỏ hàng và mang đi.</p><p>&nbsp;</p><p>⭐ Chúng tôi mong đợi đánh giá năm sao của bạn.</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>❗ Do thiết bị hiển thị và ánh sáng khác nhau, hình ảnh có thể không phản ánh màu sắc trung thực của tất cả các sản phẩm. Cảm ơn bạn cho sự hiểu biết của bạn.</p><p>&nbsp;</p><p>❕ Nếu bạn có bất kỳ câu hỏi nào, xin vui lòng liên hệ với chúng tôi. Chúng tôi sẽ trả lời câu hỏi của bạn càng sớm càng tốt và cố gắng hết sức để giải quyết vấn đề của bạn.</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>🤠 Chúng tôi mong bạn chú ý và mua sắm. 🤠\"</p>', 0, 0),
+(70, 59, 'Áo khoác Denim hoa giản dị và thư giãn dành cho nữ có cổ áo có ve', 487000, 10, '<p>Xin chào, chào mừng đến với cửa hàng của chúng tôi</p><p>&nbsp;</p><p>= = = Thông tin sản phẩm = = =</p><p>Phong cách: Hàn Quốc</p><p>Chiều dài: Thường xuyên</p><p>Mô hình: Màu hình ảnh</p><p>Phong cách: Đi lại</p><p>Đi lại: Ngọt và cay</p><p>Loại eo: eo cao</p><p>&nbsp;</p><p>Kích thước đề xuất:</p><p>&nbsp;</p><p>Chiều dài M 66, chiều rộng vai 54, ngực 114, chiều dài tay áo 56</p><p>L dài 68, rộng vai 56, ngực 118, chiều dài tay áo 57</p><p>Xl dài 70, rộng vai 58, ngực 122, chiều dài tay áo 58</p><p>Chiều dài 2XL 72, chiều rộng vai 60, ngực 126, chiều dài tay áo 59</p><p>&nbsp;</p><p>Lưu ý: Đơn vị đo thủ công: cm. Do các phương pháp đo lường khác nhau, sai số 1-3CM được phép và phạm vi lỗi không phải là vấn đề chất lượng. Nó có thể thay đổi theo màu sắc do các lý do ánh sáng và màn hình khác nhau. Hãy hiểu và tử tế!</p><p>&nbsp;</p><p>✈️Vấn đề hậu cần</p><p>Vì chúng tôi không thể hủy sau khi giao hàng</p><p>Do đó, sẽ không có màn hình hậu cần ngay sau khi giao hàng</p><p>Xin đừng lo lắng người mua</p><p>Chúng tôi sẽ giao hàng trong thời gian sớm nhất ~</p><p>&nbsp;</p><p>❤️Dịch vụ khách hàng</p><p>Nếu bạn có bất kỳ câu hỏi nào, vui lòng liên hệ với bộ phận chăm sóc khách hàng.</p><p>Đôi khi, dịch vụ khách hàng có thể bị chậm do số lượng cố vấn lớn.</p><p>Hãy đợi. Chúng tôi sẽ tích cực giải quyết các mối quan tâm của bạn.</p><p>Nếu có bất kỳ vấn đề với hàng hóa nhận được</p><p>Bạn có thể liên hệ với dịch vụ khách hàng. Chúng tôi rất vui khi giải quyết vấn đề của bạn.</p><p>Xin đừng vội đăng một đánh giá tiêu cực.</p><p>Chúng tôi sẽ cung cấp cho bạn dịch vụ sau bán hàng.</p>', 0, 0),
+(71, 59, 'Lovito Áo khoác họa tiết trơn thông thường cho nữ LNA73411', 246000, 25, '<p>✅ĐIỂM NỔI BẬT</p><p>&nbsp;-❤️Mô hình&nbsp;</p><p>-❤️Thân thiện với làn da và thoải mái&nbsp;</p><p>✅Mô TẢ Mô hình: trơn Phong cách: Giản dị Cộng với kích thước: Không Chất liệu: Polyester Thành phần: 100% Polyester Loại phù hợp: Phù hợp thường xuyên Trong suốt: Không Căng: Không giãn Xuất xứ: Trung Quốc đại lục&nbsp;</p><p>✅GÓI BAO GỒM 1x áo khoác&nbsp;</p><p>✅GIỚI THIỆU LOVITO Lovito là một thương hiệu mới nổi tin tưởng vào sức mạnh của các cô gái, cam kết cung cấp các lựa chọn quần áo thời trang và giá cả phải chăng cho các kiểu dáng, nhu cầu và bản sắc khác nhau. Chúng tôi tin rằng thời trang phải vui vẻ, giải phóng và khiến bạn cảm thấy tuyệt vời. Rốt cuộc, phụ kiện tốt nhất cho mọi diện mạo là sự tự tin.&nbsp;</p><p>✅GHI CHÚ MUA HÀNG Xin vui lòng tham khảo chiều cao của bạn và biểu đồ kích thước trước khi mua. Có 2-3% sự khác biệt theo phép đo thủ công. Tất cả các hình ảnh sản phẩm trong cửa hàng này là 100% chụp thật. Do ánh sáng và màn hình khác nhau, sự khác biệt màu sắc tinh tế và lỗi thực là bình thường.&nbsp;</p><p>Theo dõi cửa hàng của chúng tôi và khám phá các mặt hàng mới và ưu đãi tốt nhất cho bạn!! Nếu bạn có bất kỳ câu hỏi nào, hãy trò chuyện với chúng tôi và chúng tôi sẽ trả lời trong thời gian sớm nhất.😊</p>', 0, 0),
+(72, 59, 'Áo khoác da Forgirl áo da nữ phối khóa kiểu dáng croptop cá tính phong cách Hàn Quốc T012', 249000, 22, '<p>Áo khoác da Forgirl áo da phối khóa kiểu dáng croptop cá tính phong cách Hàn Quốc T012</p><p>&nbsp;</p><p>1. THÔNG TIN SẢN PHẨM</p><p>- Tên sản phẩm: Áo khoác da Forgirl áo da phối khóa kiểu dáng croptop cá tính phong cách Hàn Quốc T012</p><p>- Màu sắc : Nâu, đen, kem, trắng</p><p>- Chất liệu : da PU</p><p>- Size : S, M, L</p><p>- Do màn hình và điều kiện ánh sáng khác nhau, màu sắc thực tế của sản phẩm có thể chênh lệch khoảng 3-5%</p><p>&nbsp;</p><p>2. ĐẶC ĐIỂM SẢN PHẨM</p><p>- Chất da PU mềm mại, đứng form và ít nhăn tạo sự năng động và cá tính cho các nàng. Khóa kéo và nắp khóa được hoàn thiện chỉn chu . Sản phẩm thích hợp sử dụng để phối đồ hằng ngày, đồ mặc đi làm trẻ trung phong cách Hàn Quốc, áo khoác đi tiệc...</p><p>- Thiết kế áo khoác 2 lớp giúp nàng giữ ấm mà vẫn thời trang.</p><p>&nbsp;</p><p>3. BẢNG SIZE CHI TIẾT (cm) ( Dài x rộng ) ( đang update )</p><p>Size S : vai 43,5 - rộng 45,5 - dài 39,5 - tay áo 59</p><p>Size M : vai 44,5 - rộng 46 - dài 41,8 - tay áo 61</p><p>Size L : vai 45,5 - rộng 51 - dài 44 - tay áo 61</p><p>&nbsp;</p><p>4. CAM KẾT CỦA FORGIRL</p><p>- Sản phẩm chất lượng, giống hình và mô tả</p><p>- Sản phẩm được kiểm tra kĩ càng, đóng gói cẩn thận trước khi gửi đến khách hàng</p><p>- Xử lý nhanh chóng vấn đề về hàng lỗi, giao thiếu hàng, nhầm size, nhầm màu</p><p>- Hỗ trợ đổi trả đối với đơn hàng lỗi từ phía FORGIRL trong vòng 3 ngày theo quy định của Shopee</p><p>- Vui lòng quay lại video toàn bộ quá trình mở gói hàng để được đảm bảo quyền lợi đổi trả của khách hàng</p><p>&nbsp;</p><p>&nbsp;</p><p>- SHOP KHÔNG NHẬN ĐẶT HÀNG QUA TIN NHẮN và GHI CHÚ. Sản phẩm của shop đã được phân loại hàng rất rõ ràng. Phân loại hàng nào không chọn được có nghĩa là hết hàng. Sản phẩm nào không có phân loại thì sẽ giao ngẫu nhiên như thông báo trong mô tả. Quý khách hãy đọc mô tả sản phẩm trước khi mua, trong mô tả có đầy đủ thông tin cần thiết.</p><p>&nbsp;</p><p>- HƯỚNG DẪN Đặt Mua Nhiều SP, Màu, Mẫu, Kích Thước trong 1 đơn hàng: Bạn phải chọn từng màu, mẫu hoặc kích thước bạn muốn rồi cho vào giỏ hàng. Sau khi chọn đủ thì vào giỏ hàng để tiến hành mua hàng. Có thể điều chỉnh số lượng mua trong giỏ hàng nếu muốn.</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>Cảm ơn bạn đã tin tưởng và mua sắm tại FORGIRL!!</p>', 0, 0),
+(73, 59, 'Áo khoác nữ BIGSIZE áo khoác nỉ cổ tròn dáng croptop cúc cài bo viền siêu xinh phong cách Hàn Quốc 3941', 269000, 11, '<p>THÔNG TIN SẢN PHẨM : Áo khoác nỉ cổ tròn dáng croptop cúc cài bo viền</p><p>✔️ Chất liệu: Nỉ.</p><p>✔️ Màu sắc: Xám - Xanh than - Be -Đen.</p><p>✔️ Kiểu dáng: Dáng croptop basic đơn giản, đường may tỉ mỉ.</p><p>✔️ Công dụng: Đi chơi, dạo phố, đi hẹn hò, đi du lịch,...</p><p>✔️ Thiết kế hiện đại, trẻ trung, năng động.</p><p>✔️ Style thanh lịch, nữ tính, thời thượng.</p><p>✔️ Đem lại sự thoải mái tiện lợi nhất cho người mặc.</p><p>✔️ Nếu bạn là một cô nàng GENZ thời thượng, nhất định bạn không thể bỏ qua mẫu áo khoác nỉ thần thánh này nhé.</p><p>&nbsp;</p><p>--------------------------------------------</p><p>&nbsp;</p><p>❤️ HƯỚNG DẪN CHỌN SIZE : Áo khoác nỉ cổ tròn dáng croptop cúc cài bo viền</p><p>✔️ Size 1: 40 - 53kg</p><p>✔️ Size 2: 54 - 65kg</p><p>✔️ Size 3: 66 - 80kg</p><p>&nbsp;</p><p>- Bảng size chỉ mang tính chất tham khảo, thông số có thể lệch 1-2cm tuỳ theo kiểu dáng và chất liệu vải.</p><p>- Để chọn size chuẩn nhất, bạn vui lòng nhắn tin cho shop để tư vấn kĩ hơn.</p><p>- Màu sắc vải/ sản phẩm có thể sẽ chênh lệch thực tế một phần nhỏ, do ảnh hưởng về độ lệch màu của ánh sáng.</p><p>&nbsp;</p><p>--------------------------------------------</p><p>&nbsp;</p><p>❤️ HƯỚNG DẪN BẢO QUẢN :</p><p>✔️ Thấm ướt sản phẩm trong 10 phút trước khi giặt.</p><p>✔️ Không giặt máy. Không sử dụng chất giặt tẩy mạnh. Không giặt chung với những sản phẩm khác hoặc sản phẩm dễ lem màu.</p><p>✔️ Ủi dưới nhiệt độ 120 độ.</p><p>✔️ Khi phơi lộn trái, không phơi chung hay phơi sát với những sản phẩm có màu khác.</p><p>&nbsp;</p><p>--------------------------------------------</p><p>&nbsp;</p><p>❤️ CHÍNH SÁCH ĐỔI HÀNG :</p><p>✔️ Điều kiện áp dụng (trong vòng 07 ngày kể từ khi nhận sản phẩm).</p><p>- Hàng hoá vẫn còn mới, chưa qua sử dụng. (Có video và hình ảnh khi khui kiện hàng).</p><p>✔️ Trường hợp được chấp nhận:</p><p>- Hàng không đúng size, mẫu mã như quý khách đặt hàng. Hàng bị lỗi, giao sai nhầm hàng.</p><p>- Không đủ số lượng, không đủ bộ như trong đơn hàng.</p><p>✔️ Trường hợp không đủ điều kiện áp dụng chính sách:</p><p>- Quá 07 ngày kể từ khi Quý khách nhận hàng hoặc hàng đã qua sử dụng.</p><p>- Gửi lại hàng không đúng mẫu mã, không phải sản phẩm của Mèo Ú Bigsize</p><p>- Không thích, không hợp, đặt nhầm mã, nhầm màu,...</p><p>&nbsp;</p><p>💋 Cám ơn bạn đã lựa chọn Mèo Ú Bigsize 💋</p>', 0, 0),
+(74, 24, 'Váy da PU màu đỏ tía Jiashucheng Chân váy ôm mông tôn dáng cạp cao mẫu mới thu đông cho nữ váy ngắn chữ a dễ phối', 370000, 11, '<p>◆◆Chào mừng◆◆◆</p><p>&nbsp;</p><p>Sự kiện 1: Theo dõi cửa hàng (Nhận phiếu giảm giá 3k miễn phí)</p><p>&nbsp;</p><p>Sự kiện 2: Sự kiện giảm giá đầy đủ (Trang chủ cửa hàng giảm giá để được chiết khấu đầy đủ.)</p><p>&nbsp;</p><p>Sự kiện 3: Hoạt động Giao hàng Miễn phí (Mua ba miếng để được Giao hàng Miễn phí Toàn bộ.)</p><p>&nbsp;</p><p>Hoạt động 4: Hoạt động đăng hình ảnh (Khen ngợi hình ảnh đăng, Nhận phiếu giảm giá 5k miễn phí.)</p><p>&nbsp;</p><p>Thông BÁO NGƯỜI MUA:</p><p>&nbsp;</p><p>1.Nó sẽ được vận chuyển trong vòng 48 giờ sau khi đặt hàng, và thời gian giao hàng hậu cần thông thường sẽ được giao trong khoảng 3-5 ngày. Nếu Sẽ Có Sự Chậm Trong Thời Tiết khắc nghiệt, Vui Lòng Hiểu.</p><p>&nbsp;</p><p>2 Cảm thấy hài lòng sau khi nhận hàng, đăng hình ảnh và đánh giá lời khen ngợi năm sao, nhận phiếu giảm giá 5k.</p><p>&nbsp;</p><p>3.Nếu Có Các Vấn Đề Khác Như: Giao Hàng Ít Hơn, Hàng Bị Lỗi, v.v., Vui Lòng Liên Hệ Với Chúng Tôi Và Chúng Tôi Sẽ Giải Quyết Cho Bạn.</p>', 0, 0);
+INSERT INTO `products` (`id`, `cate_id`, `name`, `price`, `discount_percent`, `description`, `sell`, `status`) VALUES
+(75, 24, 'Chân váy ngắn 3 tầng cạp chun có bảo hộ xinh sang chảnh ozenka , đầm ngắn bồng xòe nữ đính nơ đen trắng gợi cảm đẹp', 238000, 22, '<p>Chân váy ngắn 3 tầng cạp chun có bảo hộ xinh sang chảnh ozenka , đầm ngắn bồng xòe nữ đính nơ đen trắng gợi cảm đẹp</p><p>&nbsp;</p><p>Thông tin chi tiết Chân váy ngắn 3 tầng cạp chun có bảo hộ xinh sang chảnh ozenka :</p><p>- Chất liệu : Tafta Blur loại 1</p><p>- Màu sắc : đen.Trắng</p><p>- Size: S(39-47kg) M(45-52kg) L(52-57kg)</p><p>- Sản xuất bởi Ozenka</p><p>- Phong cách: chân váy ngắn, 3 tầng, sang chảnh, bồng xòe</p><p>&nbsp;</p><p>Giới thiệu chung:</p><p>- Thiết kế dáng ngắn 3 tầng may bồng xòe tạo cảm giác tăng kích thước vòng 3.Cạp cao may chun phía sau ôm body vừa khít cơ thể tạo cảm giác eo thon chân dài.Bên trong có lớp bảo hộ kín đáo giúp thoải mái vận động như mặc quần.Thân váy đính nơ xinh sang chảnh chắc chắn.</p><p>- Chất liệu vải Tafta Blur co giãn nhẹ, mặt vải mềm mịn bóng mờ sang trọng không nhăn giữ cho form váy sang trọng quý phái.</p><p>&nbsp;</p><p>Cam kết của Ozenka:</p><p>- Cam kết bán hàng chuẩn hình ảnh chuẩn mô tả.</p><p>- Bảo hành mọi sản phẩm bán ra.</p><p>- Hàng được sản xuất và bán ra trực tiếp bởi OZENKA -&gt; giá gốc chất lượng thật</p>', 0, 0),
+(76, 24, 'Chân váy ngắn kẻ caro phối cúc hai bên phong cách y2k có quần lót trong', 159000, 11, '<p>Màu sắc: xám&nbsp;</p><p>Chất liệu: dạ kẻ mềm&nbsp;</p><p>Kiểu dáng: chữ A ngắn, xếp li, cạp thấp&nbsp;</p><p>Kích thước: XS S M L&nbsp;</p><p>XS: dài 27cm eo 62cm mông 90cm&nbsp;</p><p>S: dài 28cm eo 66cm mông 94cm&nbsp;</p><p>M: dài 29cm eo 70cm mông 98cm&nbsp;</p><p>L: dài 30cm eo 73 mông 102cm</p><p>&nbsp;---------------------------&nbsp;</p><p>1. Tất cả ảnh/video sản phẩm đều là DoA sản xuất, ảnh thật sản phẩm có thể chênh lệnh do điều kiện ánh sáng và do góc chụp mong quý khách thông cảm.&nbsp;</p><p>2. Quý khách vui lòng đặt đúng mẫu, size, màu, DoA không gửi hàng theo chú ý của đơn hàng. Mọi khiếu nại sẽ được giải quyết nếu có video bóc hàng, quý khách lưu ý. 𝐂𝐚𝐦 𝐤𝐞̂́𝐭: 1. Sản phẩm giống mô tả, hình ảnh và video được shop đăng bán; 2. Mọi thắc mắc và khiếu nại sản phẩm DoA sẽ giải đáp nhanh nhất có thể; Đổi trả sản phẩm theo thời gian quy định 3 ngày kể từ ngày nhận hàng;&nbsp;</p><p>3. DoA luôn sẵn sàng hỗ trợ quý khách để mang tới trải nghiệm hài lòng nhất cho quý khách hàng khi mua các sản phẩm từ DoA&nbsp;</p><p>QUY ĐỊNH ĐỔI TRẢ HÀNG&nbsp;</p><p>DoA nhận các đơn đổi trả trong trường hợp: hàng lỗi hỏng, giao sai mẫu, size, màu như khách đã đặt và sản phẩm vẫn còn tag, chưa giặt tẩy hay bất kỳ tác động vật lý ảnh hưởng đến chất lượng sản phẩm so với ban đầu. Trường hợp từ chối nhận đổi trả: Không nhận đổi size (trừ trường hợp shop tư vấn sai); không nhận đổi màu hay đổi các kiểu mẫu khác so với sản phẩm đã đặt.&nbsp;</p><p>-----------------------------</p>', 0, 0),
+(77, 24, 'Chân Váy Ngắn Cạp Trễ Basic, Mini Skirt (CÓ QUẦN TRONG) Form Sang Slay 119.items', 260000, 11, '<p>Chân váy ngắn cạp trễ, mini skirt, form bồng 2 bên hông để che đi khuyết. điểm h.ỏ.m h.ông cho mí bà, siu tôn dáng, sang mà slay, basic dễ mặc lắm ạa&nbsp;</p><p>Chất liệu: Tafta pha kaki có lót quần trong&nbsp;&nbsp;</p><p>Màu: trắng, đen Size: S, M ( ĐO EO DƯỚI RỐN VÀ V3 NHA Ạ)&nbsp;&nbsp;</p><p>S: hông dưới 72, v3 dưới 90, chiều dài mặt trước 26cm, mặt sau 28cm&nbsp;</p><p>M: hông dưới 80, v3 dưới 95, chiều dài mặt trước 27cm, mặt sau 29cm&nbsp;</p><p>Váy dành cho những bạn từ 1m7 đổ xuống nha ạ Liên hệ Shop để được hỗ trợ chính xác hơn ạ, bảng size chỉ để tham khảo ạ</p>', 0, 0),
+(78, 25, 'Váy cưới, lễ đường, chụp ảnh cưới tùng bồng che bắp tay cao cấp bling bling', 4200000, 5, '<p>- Váy cưới là váy dây rút, dây đan, thời gian đặt may váy từ 9-15 ngày.&nbsp;</p><p>💎 NHẬN MAY ĐO THEO YÊU CẦU&nbsp;</p><p>💎 MÔ TẢ SẢN PHẨM - Váy cưới cao cấp, thoáng mát, có lớp lót mềm mịn.&nbsp;</p><p>- Váy thiết kế tạo cảm giác dịu dàng nhẹ nhàng, thanh thoát cho các bạn nữ.&nbsp;</p><p>- Váy dáng sang chảnh, hiện đại, dễ đi lại, di chuyển cho cô dâu chụp ngoại cảnh cũng như di chuyển trong buổi tiệc&nbsp;</p><p>💎 HƯỚNG DẪN SỬ DỤNG VÀ BẢO QUẢN&nbsp;</p><p>- Giặt máy nhẹ nhàng, ở nhiệt độ thường&nbsp;</p><p>- Không nên chà xát mạnh bằng bàn chải, tránh phơi dưới ánh nắng gắt trực tiếp.&nbsp;</p><p>- Không sử dụng hóa chất tẩy&nbsp;</p><p>- Khi ủi sản phẩm, nên ủi bằng bàn là sử dụng chế độ hơi nước sẽ làm cho sản phẩm dễ ủi phẳng, mặt vải không bị cháy, bóng lỳ do sức nóng của nhiệt và giữ vải cũng như mầu vải của sản phẩm được đẹp và bền lâu hơn. Để nhiệt độ bàn là tùy theo từng chất liệu vải.&nbsp;</p><p>💎 CAM KẾT VÀ BẢO HÀNH - Đảm bảo hàng chính hãng, cam kết sản phẩm đúng với mô tả và hình ảnh của shop - Đổi trả sản phẩm trong vòng 3 ngày nếu do lỗi sản xuất. - Nếu có bất kì khiếu nại cần Shop hỗ trợ về sản phẩm, khi nhận được sản phẩm Quý Khách hàng vui lòng quay lại video quá trình mở sản phẩm để được đảm bảo 100% đổi lại sản phẩm mới nếu Shop giao bị lỗi.&nbsp;</p><p>💎 CAM KẾT VÀ BẢO HÀNH:&nbsp;</p><p>✔️ Hàng may đo kỹ, đúng với mô tả và hình ảnh của shop.&nbsp;</p><p>✔️ Đổi trả sản phẩm trong vòng 3 ngày nếu có lỗi sản xuất.&nbsp;</p><p>✔️ Đóng gói sản phẩm cẩn thận&nbsp;</p><p>👉 Nếu có bất kì khiếu nại cần Shop hỗ trợ về sản phẩm, khi nhận được sản phẩm Quý Khách hàng vui lòng quay lại video quá trình mở sản phẩm để được đảm bảo 100% đổi lại sản phẩm mới nếu Shop giao bị lỗi.&nbsp;</p><p>🌸🌿🌸 VÁY CƯỚI LUXURY 🌸🌿🌸&nbsp;</p><p>“Bán Hàng Có Tâm - Khách hàng khi nhận hàng phải ưng ý nhất.&nbsp;</p><p>❤ Thiết kế những sản phẩm đẹp nhất, lung linh nhất.&nbsp;</p><p>❤ Cập nhật xu hướng Phong cách &amp; Thời thượng cùng chất liệu cao cấp.&nbsp;</p><p>❤ Váy Cưới Thiết Kế được may tỉ mỉ thủ công hoàn toàn từ những người thợ lành nghề nhất.&nbsp;</p>', 0, 0),
+(79, 25, 'Đầm cưới hoa tiên tử', 14500000, 2, '<p>⛅️ ⛅️ HÀNG ORDER 15-20 NGÀY, VUI LÒNG VĂN MINH ĐẶT HÀNG KHÔNG HUỶ&nbsp;</p><p>🌸 Đầm cưới hoa tiên tử&nbsp;</p><p>𝐂𝐇𝐈 𝐓𝐈𝐄̂́𝐓 𝐒𝐀̉𝐍 𝐏𝐇𝐀̂̉𝐌&nbsp;</p><p>🛍️ Trọn bộ gồm: như tiêu đề&nbsp;</p><p>🌸 🌸&nbsp;</p><p>🌸 Đơn vị đo lường: cm;kg (cho phép sai số 1-3cm): Size: ngực áo/eo/hông S M L: số đo tiêu chuẩn, bình thường khách mặc size nào thì bây giờ chọn size đó nha</p><p>🌻 Cam kết chất lượng như ảnh, có ảnh thật để các nàng tham khảo. Shop tâm niệm mua bán từ tâm, luôn đặc niềm vui, sự hài lòng của khách hàng, và uy tín của shop lên hàng đầu.&nbsp;</p><p>🌿Chính sách đổi trả sản phẩm: đổi trả trong vòng 2 ngày trong trường hợp shop gửi sai mẫu, sai kích thước, sai màu sắc, còn tag sản phẩm, sản phẩm đổi trả phải còn nguyên vẹn, không hư hại, rách rưới; còn lại không giải quyết.&nbsp;<br>&nbsp;</p>', 0, 0),
+(80, 25, 'ĐẦM DẠ HỘI, VÁY CƯỚI, ĐI BÀN CÔ DÂU KẾT FULL PHA LÊ FOMR ĐUÔI CÁ VAI VOAN DÀI ', 7500000, 12, '<p>‼️ MÀU SẮC THỰC TẾ CÓ THỂ CHÊNH LỆCH VÌ ĐIỀU KIỆN ÁNH SÁNG ‼️&nbsp;</p><p>👰‍♀️ Khuyến khích khách yêu đến tận nơi để thử ạ : TIỆM MAY ÁO CƯỚI PANDA : 290B/61 Dương Bá Trạc, Phường 1, Quận 8&nbsp;</p><p>👰‍♀️ Chuyên cung cấp áo dài, váy cưới, vest, bê quả, khăn đóng đủ mẫu theo mùa, khách yêu tha hồ chọn lựa, giá cực ưu đãi (Nhận may theo số đo, cover theo mẫu sẵn)</p>', 0, 0),
+(81, 22, 'Quần tây suông ống rộng lưng cao tôn eo cạp phối viền trắng xinh lạ mẫu mới hot trend', 148000, 12, '<p>Quần tây ông rộng dáng suông lưng cao tôn eo và tôn dáng lắm ạ.cạp quần có phối viền trắng lạ mắt.</p><p>THÔNG TIN SP:</p><p>*chiều dài quần:97-100</p><p>*ống quần gấu rộng từ:25-27cm</p><p>*quần có khóa trước lưng cao</p><p>*cạp quần phối viền trắng lạ mắt</p><p>*chất liệu vải ruby mềm mại không nhắn</p><p>&nbsp;</p><p>quần có đủ 4 tông màu cho các bạn lựa:đen,nâu,ghi,trắng</p><p>full size:s,m,ml,xl</p><p>quần may theo fom chung nên các chị mặc quần size gì thì đặt size đó là ok nha</p><p>hoặc cần tv thì các bạn chat shop ạ</p>', 0, 0),
+(82, 22, 'Quần Dạ Ống Suông Cao Cấp Phối Ly Tôn Dáng Cao Cấp, Quần Ống Suông Chất Dạ Dày Dặn Xếp Ly Siêu Sang -Sassy', 189000, 12, '<p>[ Mở bán]Quần Dạ Ống Suông Cao Cấp Phối Ly Tôn Dáng Cao Cấp, Quần Ống Suông Chất Dạ Dày Dặn Xếp Ly Siêu Sang -Sassy&nbsp;</p><p>[ Mở bán]Quần Dạ Ống Suông Cao Cấp Phối Ly Tôn Dáng Cao Cấp, Quần Ống Suông Chất Dạ Dày Dặn Xếp Ly Siêu Sang -Sassy Chất liệu : dạ cao cấp Bảng màu : đen / xám / be Bảng size S : 40-49kg M: 50-54kg L : 55-60kg Xl : - 65kg Chiều dài quần : 97-100cm Mẫu mới nhất cho bộ sưu tập mới ạ&nbsp;</p><p>Tôn dáng lắm luôn với thiết kế dáng suông điểm cộng thêm phần xếp ly tôn che khuyết điểm ạ 😍&nbsp;</p><p>( Mở bán ) Quần Dạ Ống Suông Cao Cấp Phối Ly Tôn Dáng Hack Chân, Quần Ống Suông Chất Dạ Dày Dặn Xếp Ly Eo Tôn Dáng</p>', 0, 0),
+(83, 26, 'Quần jean nữ ống suông cạp cao đính full đá chất dày mịn washi xanh khói retro QC2688 Hottrend', 290000, 11, '<p>Quần jean nữ ống suông cạp cao đính full đá chất dày mịn washi xanh khói retro QC2688 Hottrend là item không thể thiếu trong tủ đồ của bạn.</p><p>Chất liệu: Jean dày mịn, thoải mái khi mặc.</p><p>Hướng dẫn giặt: Máy có thể giặt được, tiết kiệm thời gian cho bạn.</p><p>Mẫu: Đơn giản nhưng không kém phần sang trọng và thanh lịch.</p><p>Với thiết kế ống suông cạp cao, quần jean này tôn lên vóc dáng và làm nổi bật phong cách retro của bạn. Màu xanh khói truyền thống với chi tiết đính full đá mang lại sự cuốn hút và cá tính cho trang phục của bạn.</p><p>Vừa vặn: Đảm bảo vừa vặn thoải mái khi di chuyển hay ngồi xuống.</p><p>Mùa sử dụng:Bốn mùa, phối được trong nhiều hoàn cảnh khác nhau từ hàng ngày tới các buổi tiệc hay du lịch weekend</p><p>.</p><p>Hãy tự tin diện item này đi làm, đi chơi hay hẹnn hò cuối tuần để luôn tỏa sáng và thu hút ánh nhì cá tí ong xung quanh!</p>', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1216,7 +1232,70 @@ INSERT INTO `pro_images` (`id`, `pro_id`, `url_image`) VALUES
 (179, 69, 'aokong-dong-phuc-bong-chay-nam-dang-rong-con-do-size.jpg'),
 (180, 69, 'aokong-dong-phuc-bong-chay-nam-dang-rong-con-do-den.jpg'),
 (181, 69, 'aokong-dong-phuc-bong-chay-nam-dang-rong-con-do-trang1.jpg'),
-(182, 69, 'aokong-dong-phuc-bong-chay-nam-dang-rong-con-do-den1.jpg');
+(182, 69, 'aokong-dong-phuc-bong-chay-nam-dang-rong-con-do-den1.jpg'),
+(183, 70, 'ao-khoac-denim-hoa-gian-di-thu-gian-co-co-ve-ao-be1.jpg'),
+(184, 70, 'ao-khoac-denim-hoa-gian-di-thu-gian-co-co-ve-ao-be2.jpg'),
+(185, 70, 'ao-khoac-denim-hoa-gian-di-thu-gian-co-co-ve-ao-hong1.jpg'),
+(186, 70, 'ao-khoac-denim-hoa-gian-di-thu-gian-co-co-ve-ao-be3.jpg'),
+(187, 71, 'ao-khoac-hoa-tiet-tron-thong-thong-cho-nu2.jpg'),
+(188, 71, 'ao-khoac-hoa-tiet-tron-thong-thong-cho-nu2.jpg'),
+(189, 71, 'ao-khoac-hoa-tiet-tron-thong-thong-cho-nu3.jpg'),
+(190, 71, 'ao-khoac-hoa-tiet-tron-thong-thong-cho-nu4.jpg'),
+(191, 71, 'ao-khoac-hoa-tiet-tron-thong-thong-cho-nu-size.jpg'),
+(192, 72, 'ao-khoac-da-forgirl-ao-da-phoi-khoa-kieu-dang-crop-phong-cach-han-quoc-main1.jpg'),
+(193, 72, 'ao-khoac-da-forgirl-ao-da-phoi-khoa-kieu-dang-crop-phong-cach-han-quoc-man2.jpg'),
+(194, 72, 'ao-khoac-da-forgirl-ao-da-phoi-khoa-kieu-dang-crop-phong-cach-han-quoc-main3.jpg'),
+(195, 72, 'ao-khoac-da-forgirl-ao-da-phoi-khoa-kieu-dang-crop-phong-cach-han-quoc-main4.jpg'),
+(196, 72, 'ao-khoac-da-forgirl-ao-da-phoi-khoa-kieu-dang-crop-phong-cach-han-quoc-main5.jpg'),
+(197, 73, 'ao-khoac-nu-biggsize-ao-khoac-ni-co-tron-dang-crop-main1.jpg'),
+(198, 73, 'ao-khoac-nu-biggsize-ao-khoac-ni-co-tron-dang-crop-main2.jpg'),
+(199, 73, 'ao-khoac-nu-biggsize-ao-khoac-ni-co-tron-dang-crop-main3.jpg'),
+(200, 73, 'ao-khoac-nu-biggsize-ao-khoac-ni-co-tron-dang-crop-main4.jpg'),
+(201, 73, 'ao-khoac-nu-biggsize-ao-khoac-ni-co-tron-dang-crop-main5.jpg'),
+(202, 74, 'vay-da-pu-chan-vay-om-mong-ton-dang-cap-cao-mau-thu-dong-main1.jpg'),
+(203, 74, 'vay-da-pu-chan-vay-om-mong-ton-dang-cap-cao-mau-thu-dong-main2.jpg'),
+(204, 74, 'vay-da-pu-chan-vay-om-mong-ton-dang-cap-cao-mau-thu-dong-main3.jpg'),
+(205, 74, 'vay-da-pu-chan-vay-om-mong-ton-dang-cap-cao-mau-thu-dong-main4.jpg'),
+(206, 75, 'chan-vay-ngan-3-tang-cap-chun-co-bao-ho-ozenka-trang.jpg'),
+(207, 75, 'chan-vay-ngan-3-tang-cap-chun-co-bao-ho-ozenka-trang1.jpg'),
+(208, 75, 'chan-vay-ngan-3-tang-cap-chun-co-bao-ho-ozenka-trang2.jpg'),
+(209, 75, 'chan-vay-ngan-3-tang-cap-chun-co-bao-ho-ozenka-den.jpg'),
+(210, 75, 'chan-vay-ngan-3-tang-cap-chun-co-bao-ho-ozenka-den1.jpg'),
+(211, 76, 'chan-vay-ngan-ke-caro-phoi-cuc-hai-ben-den.jpg'),
+(212, 76, 'chan-vay-ngan-ke-caro-phoi-cuc-hai-ben-size.jpg'),
+(213, 76, 'chan-vay-ngan-ke-caro-phoi-cuc-hai-ben-nau.jpg'),
+(214, 76, 'chan-vay-ngan-ke-caro-phoi-cuc-hai-ben-do.jpg'),
+(215, 76, 'chan-vay-ngan-ke-caro-phoi-cuc-hai-ben-nau-main.jpg'),
+(216, 77, 'chan-vay-ngan-cap-tre-form-slay-trang.jpg'),
+(217, 77, 'chan-vay-ngan-cap-tre-form-slay-den.jpg'),
+(218, 77, 'chan-vay-ngan-cap-tre-form-slay-main.jpg'),
+(219, 77, 'chan-vay-ngan-cap-tre-form-slay-trang1.jpg'),
+(220, 77, 'chan-vay-ngan-cap-tre-form-slay-den1.jpg'),
+(221, 78, 'vay-cuoi-tung-bong-che-bap-tay-cao-cap1.jpg'),
+(222, 78, 'vay-cuoi-tung-bong-che-bap-tay-cao-cap2.jpg'),
+(223, 78, 'vay-cuoi-tung-bong-che-bap-tay-cao-cap3.jpg'),
+(224, 78, 'vay-cuoi-tung-bong-che-bap-tay-cao-cap4.jpg'),
+(225, 78, 'vay-cuoi-tung-bong-che-bap-tay-cao-capsize.jpg'),
+(226, 79, 'vay-cuoi-hoa-tien-tu1.jpg'),
+(227, 79, 'vay-cuoi-hoa-tien-tu2.jpg'),
+(228, 79, 'vay-cuoi-hoa-tien-tu3.jpg'),
+(229, 79, 'vay-cuoi-hoa-tien-tu4.jpg'),
+(230, 80, 'dam-da-hoi-vay-cuoi-ban-co-dau1.jpg'),
+(231, 80, 'dam-da-hoi-vay-cuoi-ban-co-dau2.jpg'),
+(232, 80, 'dam-da-hoi-vay-cuoi-ban-co-dau3.jpg'),
+(233, 80, 'dam-da-hoi-vay-cuoi-ban-co-dau4.jpg'),
+(234, 80, 'dam-da-hoi-vay-cuoi-ban-co-dau5.jpg'),
+(235, 81, 'quan-tay-suong-ong-rong-lung-cao-ton-eo-cap-phoi-vien-trang-main.jpg'),
+(236, 81, 'quan-tay-suong-ong-rong-lung-cao-ton-eo-cap-phoi-vien-trang-den.jpg'),
+(237, 81, 'quan-tay-suong-ong-rong-lung-cao-ton-eo-cap-phoi-vien-trang-trang.jpg'),
+(238, 81, 'quan-tay-suong-ong-rong-lung-cao-ton-eo-cap-phoi-vien-trang-nau.jpg'),
+(239, 81, 'quan-tay-suong-ong-rong-lung-cao-ton-eo-cap-phoi-vien-trang-ghi.jpg'),
+(240, 82, 'quan-da-ong-suong-cao-cap-phoi-ly-ton-dang-cao-cap-main.jpg'),
+(241, 82, 'quan-da-ong-suong-cao-cap-phoi-ly-ton-dang-cao-cap-den.jpg'),
+(242, 82, 'quan-da-ong-suong-cao-cap-phoi-ly-ton-dang-cao-cap-xam.jpg'),
+(243, 83, 'quan-jean-nu-ong-suong-cao-cap-main.jpg'),
+(244, 83, 'quan-jean-nu-ong-suong-cao-cap-main.1jpg.webp'),
+(245, 83, 'quan-jean-nu-ong-suong-cao-cap-xanh-dam.jpg');
 
 -- --------------------------------------------------------
 
@@ -1400,7 +1479,108 @@ INSERT INTO `pro_variants` (`id`, `pro_id`, `cor_id`, `size_id`, `url_image`, `q
 (314, 69, 8, 54, 'aokong-dong-phuc-bong-chay-nam-dang-rong-con-do-trang.jpg', 164),
 (315, 69, 8, 55, 'aokong-dong-phuc-bong-chay-nam-dang-rong-con-do-trang.jpg', 163),
 (316, 69, 8, 56, 'aokong-dong-phuc-bong-chay-nam-dang-rong-con-do-trang.jpg', 13563),
-(317, 69, 8, 57, 'aokong-dong-phuc-bong-chay-nam-dang-rong-con-do-trang.jpg', 1653);
+(317, 69, 8, 57, 'aokong-dong-phuc-bong-chay-nam-dang-rong-con-do-trang.jpg', 1653),
+(318, 70, 12, 53, 'ao-khoac-denim-hoa-gian-di-thu-gian-co-co-ve-ao-be1.jpg', 523),
+(319, 70, 12, 54, 'ao-khoac-denim-hoa-gian-di-thu-gian-co-co-ve-ao-be1.jpg', 52),
+(320, 70, 12, 55, 'ao-khoac-denim-hoa-gian-di-thu-gian-co-co-ve-ao-be1.jpg', 1543),
+(321, 70, 12, 55, 'ao-khoac-denim-hoa-gian-di-thu-gian-co-co-ve-ao-be1.jpg', 2),
+(322, 70, 7, 53, 'ao-khoac-denim-hoa-gian-di-thu-gian-co-co-ve-ao-hong1.jpg', 163),
+(323, 70, 7, 54, 'ao-khoac-denim-hoa-gian-di-thu-gian-co-co-ve-ao-hong1.jpg', 25),
+(324, 70, 7, 55, 'ao-khoac-denim-hoa-gian-di-thu-gian-co-co-ve-ao-hong1.jpg', 43),
+(325, 70, 7, 55, 'ao-khoac-denim-hoa-gian-di-thu-gian-co-co-ve-ao-hong1.jpg', 23),
+(326, 71, 9, 53, 'ao-khoac-hoa-tiet-tron-thong-thong-cho-nu1.jpg', 4532),
+(327, 71, 9, 54, 'ao-khoac-hoa-tiet-tron-thong-thong-cho-nu1.jpg', 142),
+(328, 71, 9, 55, 'ao-khoac-hoa-tiet-tron-thong-thong-cho-nu1.jpg', 1356),
+(329, 72, 9, 53, 'ao-khoac-da-forgirl-ao-da-phoi-khoa-kieu-dang-crop-phong-cach-han-quoc-den.jpg', 523),
+(330, 72, 9, 54, 'ao-khoac-da-forgirl-ao-da-phoi-khoa-kieu-dang-crop-phong-cach-han-quoc-den.jpg', 2),
+(331, 72, 9, 55, 'ao-khoac-da-forgirl-ao-da-phoi-khoa-kieu-dang-crop-phong-cach-han-quoc-den.jpg', 152),
+(332, 72, 8, 53, 'ao-khoac-da-forgirl-ao-da-phoi-khoa-kieu-dang-crop-phong-cach-han-quoc-trang.jpg', 2),
+(333, 72, 8, 54, 'ao-khoac-da-forgirl-ao-da-phoi-khoa-kieu-dang-crop-phong-cach-han-quoc-trang.jpg', 1),
+(334, 72, 8, 55, 'ao-khoac-da-forgirl-ao-da-phoi-khoa-kieu-dang-crop-phong-cach-han-quoc-trang.jpg', 1),
+(335, 72, 49, 53, 'ao-khoac-da-forgirl-ao-da-phoi-khoa-kieu-dang-crop-phong-cach-han-quoc-xam-chi.jpg', 2),
+(336, 72, 49, 54, 'ao-khoac-da-forgirl-ao-da-phoi-khoa-kieu-dang-crop-phong-cach-han-quoc-xam-chi.jpg', 34),
+(337, 72, 49, 55, 'ao-khoac-da-forgirl-ao-da-phoi-khoa-kieu-dang-crop-phong-cach-han-quoc-xam-chi.jpg', 1523),
+(338, 72, 11, 53, 'ao-khoac-da-forgirl-ao-da-phoi-khoa-kieu-dang-crop-phong-cach-han-quoc-nau.jpg', 612),
+(339, 72, 11, 54, 'ao-khoac-da-forgirl-ao-da-phoi-khoa-kieu-dang-crop-phong-cach-han-quoc-nau.jpg', 1625),
+(340, 72, 11, 55, 'ao-khoac-da-forgirl-ao-da-phoi-khoa-kieu-dang-crop-phong-cach-han-quoc-nau.jpg', 2),
+(341, 73, 9, 53, 'ao-khoac-nu-biggsize-ao-khoac-ni-co-tron-dang-crop-den.jpg', 542),
+(342, 73, 9, 54, 'ao-khoac-nu-biggsize-ao-khoac-ni-co-tron-dang-crop-den.jpg', 2),
+(343, 73, 9, 55, 'ao-khoac-nu-biggsize-ao-khoac-ni-co-tron-dang-crop-den.jpg', 5),
+(344, 73, 10, 53, 'ao-khoac-nu-biggsize-ao-khoac-ni-co-tron-dang-crop-main5.jpg', 52),
+(345, 73, 10, 54, 'ao-khoac-nu-biggsize-ao-khoac-ni-co-tron-dang-crop-main5.jpg', 5622),
+(346, 73, 10, 55, 'ao-khoac-nu-biggsize-ao-khoac-ni-co-tron-dang-crop-main5.jpg', 52),
+(347, 73, 17, 53, 'ao-khoac-nu-biggsize-ao-khoac-ni-co-tron-dang-crop-xanh-than.jpg', 34),
+(348, 73, 17, 54, 'ao-khoac-nu-biggsize-ao-khoac-ni-co-tron-dang-crop-xanh-than.jpg', 43),
+(349, 73, 17, 55, 'ao-khoac-nu-biggsize-ao-khoac-ni-co-tron-dang-crop-xanh-than.jpg', 36),
+(350, 73, 12, 53, 'ao-khoac-nu-biggsize-ao-khoac-ni-co-tron-dang-crop-be.jpg', 54),
+(351, 73, 12, 54, 'ao-khoac-nu-biggsize-ao-khoac-ni-co-tron-dang-crop-be.jpg', 174),
+(352, 73, 12, 55, 'ao-khoac-nu-biggsize-ao-khoac-ni-co-tron-dang-crop-be.jpg', 4),
+(353, 74, 9, 53, 'vay-da-pu-chan-vay-om-mong-ton-dang-cap-cao-mau-thu-dong-main3.jpg', 41),
+(354, 74, 9, 54, 'vay-da-pu-chan-vay-om-mong-ton-dang-cap-cao-mau-thu-dong-main3.jpg', 25),
+(355, 74, 9, 55, 'vay-da-pu-chan-vay-om-mong-ton-dang-cap-cao-mau-thu-dong-main3.jpg', 245),
+(356, 74, 1, 53, 'vay-da-pu-chan-vay-om-mong-ton-dang-cap-cao-mau-thu-dong-main4.jpg', 2355),
+(357, 74, 1, 54, 'vay-da-pu-chan-vay-om-mong-ton-dang-cap-cao-mau-thu-dong-main4.jpg', 522),
+(358, 74, 1, 55, 'vay-da-pu-chan-vay-om-mong-ton-dang-cap-cao-mau-thu-dong-main4.jpg', 325),
+(359, 75, 8, 52, 'chan-vay-ngan-3-tang-cap-chun-co-bao-ho-ozenka-trang.jpg', 452),
+(360, 75, 8, 53, 'chan-vay-ngan-3-tang-cap-chun-co-bao-ho-ozenka-trang.jpg', 2),
+(361, 75, 8, 54, 'chan-vay-ngan-3-tang-cap-chun-co-bao-ho-ozenka-trang.jpg', 5623),
+(362, 75, 9, 52, 'chan-vay-ngan-3-tang-cap-chun-co-bao-ho-ozenka-den.jpg', 254),
+(363, 75, 9, 53, 'chan-vay-ngan-3-tang-cap-chun-co-bao-ho-ozenka-den.jpg', 25),
+(364, 75, 9, 54, 'chan-vay-ngan-3-tang-cap-chun-co-bao-ho-ozenka-den.jpg', 235),
+(365, 76, 9, 51, 'chan-vay-ngan-ke-caro-phoi-cuc-hai-ben-den1.jpg', 42),
+(366, 76, 9, 52, 'chan-vay-ngan-ke-caro-phoi-cuc-hai-ben-den1.jpg', 522),
+(367, 76, 9, 53, 'chan-vay-ngan-ke-caro-phoi-cuc-hai-ben-den1.jpg', 255),
+(368, 76, 9, 54, 'chan-vay-ngan-ke-caro-phoi-cuc-hai-ben-den1.jpg', 524),
+(369, 76, 11, 51, 'chan-vay-ngan-ke-caro-phoi-cuc-hai-ben-nau.jpg', 452),
+(370, 76, 11, 52, 'chan-vay-ngan-ke-caro-phoi-cuc-hai-ben-nau.jpg', 1245),
+(371, 76, 11, 53, 'chan-vay-ngan-ke-caro-phoi-cuc-hai-ben-nau.jpg', 152),
+(372, 76, 11, 54, 'chan-vay-ngan-ke-caro-phoi-cuc-hai-ben-nau.jpg', 422),
+(373, 76, 1, 51, 'chan-vay-ngan-ke-caro-phoi-cuc-hai-ben-do.jpg', 52),
+(374, 76, 1, 52, 'chan-vay-ngan-ke-caro-phoi-cuc-hai-ben-do.jpg', 24),
+(375, 76, 1, 53, 'chan-vay-ngan-ke-caro-phoi-cuc-hai-ben-do.jpg', 152),
+(376, 76, 1, 54, 'chan-vay-ngan-ke-caro-phoi-cuc-hai-ben-do.jpg', 42),
+(377, 77, 9, 52, 'chan-vay-ngan-cap-tre-form-slay-den1.jpg', 142),
+(378, 77, 9, 53, 'chan-vay-ngan-cap-tre-form-slay-den1.jpg', 5521),
+(379, 77, 8, 52, 'chan-vay-ngan-cap-tre-form-slay-trang1.jpg', 25),
+(380, 77, 8, 53, 'chan-vay-ngan-cap-tre-form-slay-trang1.jpg', 55),
+(381, 78, NULL, 52, NULL, 42),
+(382, 78, NULL, 53, NULL, 25),
+(383, 78, NULL, 54, NULL, 42),
+(384, 79, 7, NULL, 'vay-cuoi-hoa-tien-tu1.jpg', 11),
+(385, 80, 8, NULL, 'dam-da-hoi-vay-cuoi-ban-co-dau2.jpg', 100),
+(386, 81, 9, 52, 'quan-tay-suong-ong-rong-lung-cao-ton-eo-cap-phoi-vien-trang-den.jpg', 42),
+(387, 81, 9, 53, 'quan-tay-suong-ong-rong-lung-cao-ton-eo-cap-phoi-vien-trang-den.jpg', 25),
+(388, 81, 9, 54, 'quan-tay-suong-ong-rong-lung-cao-ton-eo-cap-phoi-vien-trang-den.jpg', 2564),
+(389, 81, 9, 54, 'quan-tay-suong-ong-rong-lung-cao-ton-eo-cap-phoi-vien-trang-den.jpg', 5623),
+(390, 81, 8, 52, 'quan-tay-suong-ong-rong-lung-cao-ton-eo-cap-phoi-vien-trang-trang.jpg', 26),
+(391, 81, 8, 53, 'quan-tay-suong-ong-rong-lung-cao-ton-eo-cap-phoi-vien-trang-trang.jpg', 2),
+(392, 81, 8, 54, 'quan-tay-suong-ong-rong-lung-cao-ton-eo-cap-phoi-vien-trang-trang.jpg', 265),
+(393, 81, 8, 54, 'quan-tay-suong-ong-rong-lung-cao-ton-eo-cap-phoi-vien-trang-trang.jpg', 25),
+(394, 81, 11, 52, 'quan-tay-suong-ong-rong-lung-cao-ton-eo-cap-phoi-vien-trang-nau.jpg', 65),
+(395, 81, 11, 53, 'quan-tay-suong-ong-rong-lung-cao-ton-eo-cap-phoi-vien-trang-nau.jpg', 36),
+(396, 81, 11, 54, 'quan-tay-suong-ong-rong-lung-cao-ton-eo-cap-phoi-vien-trang-nau.jpg', 36),
+(397, 81, 11, 54, 'quan-tay-suong-ong-rong-lung-cao-ton-eo-cap-phoi-vien-trang-nau.jpg', 3),
+(398, 81, 49, 52, 'quan-tay-suong-ong-rong-lung-cao-ton-eo-cap-phoi-vien-trang-ghi.jpg', 48),
+(399, 81, 49, 53, 'quan-tay-suong-ong-rong-lung-cao-ton-eo-cap-phoi-vien-trang-ghi.jpg', 4),
+(400, 81, 49, 54, 'quan-tay-suong-ong-rong-lung-cao-ton-eo-cap-phoi-vien-trang-ghi.jpg', 47),
+(401, 81, 49, 54, 'quan-tay-suong-ong-rong-lung-cao-ton-eo-cap-phoi-vien-trang-ghi.jpg', 7857),
+(402, 82, 9, 52, 'quan-da-ong-suong-cao-cap-phoi-ly-ton-dang-cao-cap-den.jpg', 452),
+(403, 82, 9, 53, 'quan-da-ong-suong-cao-cap-phoi-ly-ton-dang-cao-cap-den.jpg', 52),
+(404, 82, 9, 54, 'quan-da-ong-suong-cao-cap-phoi-ly-ton-dang-cao-cap-den.jpg', 53),
+(405, 82, 9, 55, 'quan-da-ong-suong-cao-cap-phoi-ly-ton-dang-cao-cap-den.jpg', 436),
+(406, 82, 10, 52, 'quan-da-ong-suong-cao-cap-phoi-ly-ton-dang-cao-cap-xam.jpg', 65),
+(407, 82, 10, 53, 'quan-da-ong-suong-cao-cap-phoi-ly-ton-dang-cao-cap-xam.jpg', 436),
+(408, 82, 10, 54, 'quan-da-ong-suong-cao-cap-phoi-ly-ton-dang-cao-cap-xam.jpg', 33),
+(409, 82, 10, 55, 'quan-da-ong-suong-cao-cap-phoi-ly-ton-dang-cao-cap-xam.jpg', 63),
+(410, 83, 5, 52, 'quan-jean-nu-ong-suong-cao-cap-xanh-dam.jpg', 421),
+(411, 83, 5, 53, 'quan-jean-nu-ong-suong-cao-cap-xanh-dam.jpg', 25),
+(412, 83, 5, 54, 'quan-jean-nu-ong-suong-cao-cap-xanh-dam.jpg', 523),
+(413, 83, 14, 52, 'quan-jean-nu-ong-suong-cao-cap-main.jpg', 256),
+(414, 83, 14, 53, 'quan-jean-nu-ong-suong-cao-cap-main.jpg', 621),
+(415, 83, 14, 54, 'quan-jean-nu-ong-suong-cao-cap-main.jpg', 265),
+(416, 83, 16, 52, 'quan-jean-nu-ong-suong-cao-cap-nau.jpg', 255),
+(417, 83, 16, 53, 'quan-jean-nu-ong-suong-cao-cap-nau.jpg', 25),
+(418, 83, 16, 54, 'quan-jean-nu-ong-suong-cao-cap-nau.jpg', 252);
 
 -- --------------------------------------------------------
 
@@ -1426,10 +1606,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `phone`, `email`, `url_image`, `password`, `address`, `address_detail`, `role`, `status`) VALUES
-(1, 'Admin', NULL, 'laptrinh05.net@gmail.com', NULL, '$2y$10$tuXBOMqWjNy6vhzLOhkn0OaoRDXJ9hp86Vyn.f.D.S4sv0X0OR4iW', NULL, NULL, 2, 0),
-(2, 'Đình Thiên', '0376373272', 'dinhthien2504@gmail.com', NULL, '$2y$10$tuXBOMqWjNy6vhzLOhkn0OaoRDXJ9hp86Vyn.f.D.S4sv0X0OR4iW', 'Cao Bằng, Huyện Bảo Lâm, Xã Đức Hạnh', 'Thôn 6, Kênh 234\n', 0, 0),
-(4, 'Đình Thiên', NULL, 'hackker3272@gmail.com', NULL, '$2y$10$tuXBOMqWjNy6vhzLOhkn0OaoRDXJ9hp86Vyn.f.D.S4sv0X0OR4iW', NULL, NULL, 0, 0),
-(5, 'Đình Thiên', NULL, 'dinhthien2545@gmail.com', NULL, '$2y$10$ATXOo2CiwlVynxCYOPGMdud3WgfToqHonJVGzKLbnKS/OaYL27egG', NULL, NULL, 0, 0);
+(1, 'Admin', NULL, 'laptrinh05.net@gmail.com', NULL, '123', NULL, NULL, 2, 0),
+(2, 'Đình Thiên', '0376373272', 'dinhthien2504@gmail.com', NULL, '123', 'Cao Bằng, Huyện Bảo Lâm, Xã Đức Hạnh', 'Thôn 6, Kênh 234\n', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -12160,7 +12338,7 @@ ALTER TABLE `carts`
 -- AUTO_INCREMENT cho bảng `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT cho bảng `districts`
@@ -12184,7 +12362,7 @@ ALTER TABLE `order_details`
 -- AUTO_INCREMENT cho bảng `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- AUTO_INCREMENT cho bảng `provinces`
@@ -12196,19 +12374,19 @@ ALTER TABLE `provinces`
 -- AUTO_INCREMENT cho bảng `pro_images`
 --
 ALTER TABLE `pro_images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=183;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=246;
 
 --
 -- AUTO_INCREMENT cho bảng `pro_variants`
 --
 ALTER TABLE `pro_variants`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=318;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=419;
 
 --
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `wards`
@@ -12283,3 +12461,4 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+storestorestore

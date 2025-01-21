@@ -9,7 +9,7 @@ class Product extends Base
     private $pro_image_model;
     private $pro_variant_model;
 
-    private static $item_page = 2;
+    private static $item_page = 10;
     public function __construct()
     {
         $this->category_model = $this->model('CategoryModel');

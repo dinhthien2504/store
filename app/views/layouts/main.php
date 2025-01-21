@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="<?=_WEB_ROOT_?>/assets/img/logo-site.store.png" type="image/x-icon">
     <title><?=$title_page ?? 'Trang Chủ Website';?></title>
     <link rel="stylesheet" href="<?=_WEB_ROOT_?>/assets/css/base.css">
     <link rel="stylesheet" href="<?=_WEB_ROOT_?>/assets/css/main.css">

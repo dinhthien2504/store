@@ -2,11 +2,11 @@
     <div class="row g-1 my-2">
         <div class="col-xxl-2 col-md-3 col-sm-4 col-0">
             <div class="category">
-                <h3 class="category__heading"><i class="fas fa-list-ul me-2"></i>Tất Cả Danh mục</h3>
+                <h3 class="category__heading"><i class="fas fa-list-ul me-2"></i>Theo Danh mục</h3>
                 <!-- category-item--active -->
                 <ul class="category-list">
-                    <?php if (!empty($cate_by_parent_id)): ?>
-                        <?php foreach ($cate_by_parent_id as $cate): ?>
+                    <?php if (!empty($cate_by_keyword)): ?>
+                        <?php foreach ($cate_by_keyword as $cate): ?>
                             <li class="category-item <?= $cate_id == $cate['id'] ? 'category-item--active' : '' ?>">
                                 <a onclick="handle__url_link(this, '<?= _WEB_ROOT_ ?>','<?= $cate['name'] ?>', 'cat<?= $cate['parent'] ?>-cid<?= $cate['id'] ?>')"
                                     class="category-item__link"><?= $cate['name'] ?></a>
@@ -49,7 +49,7 @@
             <p class="filter-keyword_pro">
                 <i class="fas fa-lightbulb"></i>
                     Bộ lọc tìm kiếm cho kết quả 
-                    <span>'Áo Khoác'</span>
+                    <span>'<?=isset($_GET['keyword']) ? trim($_GET['keyword']) : ''?>'</span>
             </p>
             <div class="category-filter ">
                 

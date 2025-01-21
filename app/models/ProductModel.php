@@ -106,8 +106,6 @@ class ProductModel extends Database{
                 $sql .= " OFFSET ". $offset ;
             }
         }
-        echo $sql;
-        echo $keyword;
         return $this->getAll($sql, [$keyword]);
     }
 

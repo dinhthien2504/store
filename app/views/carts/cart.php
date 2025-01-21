@@ -243,7 +243,7 @@
                         </button>
                     </div>
                     <div class="d-flex align-items-center gap-4">
-                        <p class="m-0 custom-cart__total">Tổng cộng: 0 đ</p>
+                        <p class="m-0 custom-cart__total">Tổng: 0 đ</p>
                         <button type="submit" name="submit_handle__buy" class="custom-btn custom-btn__primary">Mua hàng</button>
                     </div>
                     
