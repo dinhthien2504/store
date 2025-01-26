@@ -4,11 +4,11 @@ namespace app\core;
 use app\core\Router;
 use app\configs\Routes;
 class App {
-    private $__controller, $__action, $__router;
+    private  $router;
     public function __construct() {
-        $this->__router = new Router();
-        Routes::setupRoutes($this->__router);
+        $this->router = new Router();
+        Routes::setupRoutes($this->router);
         $url = $_SERVER['PATH_INFO'] ?? '/';
-        $this->__router->dispatch($url);
+        $this->router->dispatch($url);
     }
 }

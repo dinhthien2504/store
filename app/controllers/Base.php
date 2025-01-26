@@ -1,5 +1,6 @@
 <?php
 namespace app\controllers;
+use app\models\CartModel;
 use app\views\Viewer;
 abstract class Base extends Viewer
 {
@@ -28,7 +29,6 @@ abstract class Base extends Viewer
 
         return $base_url . '?' . $new_query;
     }
-
     protected function handle_url_page($total_page, $current_page)
     {
         $links = '';
@@ -76,7 +76,6 @@ abstract class Base extends Viewer
         $links .= '<li class="pagination-item">' . $this->handle_next_page($current_page, $total_page) . '</li>';
         return $links;
     }
-
     protected function handle_next_page($current_page, $total_page)
     {
         $link_next = '';
@@ -96,7 +95,6 @@ abstract class Base extends Viewer
         }
         return $link_next;
     }
-
     protected function handle_prev_page($current_page)
     {
         $link_prev = '';

@@ -1,3 +1,10 @@
+<?php  
+use app\models\CartModel;
+$cartModel = new CartModel();
+$user_id = $_SESSION['user']['id'] ?? 0;
+$cartModel->__set('user_id', $user_id);
+$cart_user_id_header = $cartModel->get_all_cart_by_user_id_header();
+?>
 <header class="header">
     <div class="grid wide">
         <nav class="header__navbar hide-on-mobile-tablet">
@@ -158,41 +165,37 @@
                 <?php endif; ?>
                 <div class="header__cart-wrap">
                     <i class="header__cart-icon fas fa-shopping-cart"></i>
-                    <span class="header__cart-notice">3</span>
-                    <!-- No cart : header__cart-list--no-cart -->
+                    <span class="header__cart-notice"><?=!empty($cart_user_id_header) ? count($cart_user_id_header) : 0?></span>
                     <div class="header__cart-list ">
-                        <!-- Nocart -->
-                        <img src="<?=_WEB_ROOT_?>/assets/img/no-cart.png" alt="No Cart" class="header__cart-no-cart-img" />
-                        <span class="header__cart-list-no-cart-msg">
-                            Chưa có sản phẩm
-                        </span>
                         <!-- Hascart -->
                         <h4 class="header__cart-heading">Sản phẩm đã thêm</h4>
                         <!-- Cart item -->
-                        <ul class="header__cart-list-item">
-                            <li class="header__cart-item">
-                                <img src="<?=_WEB_ROOT_?>/assets/img/pro/ao-khoac-boxy-ni-2-lop__be.jpg" alt="" class="header__cart-img" />
-                                <div class="header__cart-item-info">
-                                    <div class="header__cart-item-head">
-                                        <h5 class="header__cart-item-name">
-                                            Set dĩa nhôm 7075 39T cho Raider FI dĩa nhôm 7075 39T cho Raider FI
-                                            dĩa nhôm 7075 39T cho Raider FI
-                                        </h5>
-                                        <div class="header__cart-item-price-wrap">
-                                            <span class="header__cart-item-price">2.000.000đ</span>
-                                            <span class="header__cart-item-multiply">x</span>
-                                            <span class="header__cart-item-qnt">2</span>
+                        <div class="header__cart-list-item">
+                        <?php if(!empty($cart_user_id_header)): ?>
+                                <?php foreach($cart_user_id_header as $cart):?>
+                                <a  onclick="handle__url_link(this, '<?= _WEB_ROOT_ ?>','<?= $cart['name_pro'] ?>', 'i<?= $cart['pro_id'] ?>')"
+                                    class="header__cart-item ">
+                                    <img src="<?=_WEB_ROOT_?>/assets/img/pro/<?=$cart['url_image']?>" alt="<?=$cart['name_pro']?>" class="header__cart-img" />
+                                    <div class="header__cart-item-info">
+                                        <div class="header__cart-item-head">
+                                            <h5 class="header__cart-item-name"><?=$cart['name_pro']?></h5>
+                                            <div class="header__cart-item-price-wrap">
+                                                <span class="header__cart-item-price"><?=number_format($cart['price'])?> đ</span>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="header__cart-item-body">
-                                        <span class="header__cart-item-description">Phân loại : Bạc</span>
-                                        <span class="header__cart-item-remove">Xóa</span>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
+                                </a>
+                                <?php endforeach ?>
+                            
                         <a href="<?=_WEB_ROOT_?>/cart" class="header__cart-view-cart custom-btn custom-btn__primary">Xem giỏ hàng</a>
+                        <?php else: ?>
+                        <!-- Nocart -->
+                        <div class="header__cart-list--no-cart">
+                            <img src="<?=_WEB_ROOT_?>/assets/img/no-cart.png" alt="No Cart" class="header__cart-no-cart-img" />
+                        </div>
+                    <?php endif ?>
                     </div>
+                    
                 </div>
             </div>
         </div>
