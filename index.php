@@ -11,7 +11,7 @@ if(!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on'){
 }
 $web_root .= str_replace(strtolower($_SERVER['DOCUMENT_ROOT']), '', strtolower(_DIR_ROOT));
 $url = 'http://localhost:3000/store';
-define('_WEB_ROOT_', $url);
+define('_WEB_ROOT_', $web_root);
 
 spl_autoload_register( function($class) {
     $path = str_replace('\\', DIRECTORY_SEPARATOR, $class).'.php';
