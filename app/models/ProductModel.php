@@ -120,4 +120,42 @@ class ProductModel extends Database{
         }
         return $this->getOne($sql, [$keyword]);
     }
+
+
+    //Xử lý bên admin
+    public function get_all_pro_admin() {
+        $sql = 'SELECT pro.id, pro.name, pro.price, pro.discount_percent, pro.sell, SUM(p_v.quantity) as total_quantity, pro.status, ';
+        $sql .= '(SELECT pro_img.url_image FROM pro_images pro_img WHERE pro.id = pro_img.pro_id LIMIT 1) as url_image, ';
+        $sql .= '(SELECT CONCAT("[", GROUP_CONCAT(
+                    JSON_OBJECT(
+                        "cor_name", a_v_c.name, 
+                        "size_name", a_v_s.name,
+                        "url_image", p_v.url_image,
+                        "quantity", p_v.quantity
+                    )
+                ), "]")
+                ) as variants ';
+        $sql .= 'FROM products pro ';
+        $sql .= 'LEFT JOIN pro_variants p_v ON pro.id = p_v.pro_id ';
+        $sql .= 'LEFT JOIN attri_values a_v_c ON a_v_c.id = p_v.cor_id ';
+        $sql .= 'LEFT JOIN attri_values a_v_s ON a_v_s.id = p_v.size_id ';
+        $sql .= 'WHERE 1 ';
+        $sql .= 'GROUP BY pro.id ';
+        $sql .= 'ORDER BY id DESC ';
+        return $this->getAll($sql);
+    }
+    public function insert_pro() {
+        $sql = 'INSERT INTO products (cate_id, name, price, discount_percent, description, status) ';
+        $sql.= 'VALUES (?,?,?,?,?,?)';
+        return $this->insert($sql, $this->__gets());//$pro->get__cate_id(), $pro->get__name(), $pro->get__price(), $pro->get__discount_percent(), $pro->get__description(), $pro->get__status()
+    }
+    public function update_pro(product_model $pro) {
+        $sql = 'UPDATE products SET cate_id = ?, name = ?, price = ?, discount_percent = ?, description = ?, status = ? ';
+        $sql .= 'WHERE id = ?';
+        return $this->__db->update($sql, [$pro->get__cate_id(), $pro->get__name(), $pro->get__price(), $pro->get__discount_percent(), $pro->get__description(), $pro->get__status(), $pro->get__id()]);
+    }
+    public function delete_pro(product_model $pro) {
+        $sql = 'DELETE FROM products WHERE id =?';
+        return $this->__db->delete($sql, [$pro->get__id()]);
+    }
 }

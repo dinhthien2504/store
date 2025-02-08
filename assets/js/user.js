@@ -67,10 +67,11 @@ const check_exist_email = (name_check, callback) => {
         type: 'POST',
         data: { email: $(`#${name_check}`).val() },
         success: (data) => {
-            callback(data); 
+            callback(data);
         },
         error: () => {
             callback(false);
+            console.log($(`#${name_check}`).val());
         }
     });
 };

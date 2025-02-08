@@ -1,6 +1,5 @@
 <?php
 namespace app\controllers;
-use app\models\CartModel;
 use app\views\Viewer;
 abstract class Base extends Viewer
 {

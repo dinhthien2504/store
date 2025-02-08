@@ -70,10 +70,10 @@ class ProVariantModel extends Database{
     
 
     // //Xử lý bên admin 
-    // public function insert_variant_pro(pro_variant_model $pro_variant) {
-    //     $sql = 'INSERT INTO pro_variants (pro_id, cor_id, size_id, url_image, quantity) VALUES (?,?,?,?,?)';
-    //     return $this->insert($sql, [$pro_variant->get__pro_id(), $pro_variant->get__cor_id(), $pro_variant->get__size_id(), $pro_variant->get__url_image(), $pro_variant->get__quantity()]);
-    // } 
+    public function insert_variant_pro() {
+        $sql = 'INSERT INTO pro_variants (pro_id, cor_id, size_id, url_image, quantity) VALUES (?,?,?,?,?)';
+        return $this->insert($sql, $this->__gets());
+    } 
     // public function get_all_variant_pro_id(pro_variant_model $pro_variant) {
     //     $sql = 'SELECT p_v.id, a_v_c.name as cor_name, a_v_s.name as size_name, ';
     //     $sql .= 'p_v.quantity, p_v.url_image  ';

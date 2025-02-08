@@ -2,11 +2,16 @@
 namespace app\configs;
 
 use app\core\Router as Router;
+//User
 use app\controllers\Page;
 use app\controllers\Product;
 use app\controllers\Ajax;
 use app\controllers\User;
 use app\controllers\Cart;
+
+//Admin
+use app\controllers\admin\Dashboard;
+use app\controllers\admin\Product as ProductAdmin;
 class Routes {
     public static function setupRoutes(Router $router): void {
         //Home
@@ -37,5 +42,18 @@ class Routes {
         $router->create(path: '/get_district_province_id', params: [Ajax::class, 'get_district_province_id']);
         $router->create(path: '/get_ward_district_id', params: [Ajax::class, 'get_ward_district_id']);
         $router->create(path: '/update_address', params: [Ajax::class, 'update_address']);
+        $router->create(path: '/admin/get_attri_val_by_attri_id', params: [Ajax::class, 'get_attri_val_by_attri_id']);
+
+        //Ajax Admin
+        $router->create(path: '/admin/get_cate_chirld_by_parent', params: [Ajax::class, 'get_cate_chirld_by_parent']);
+        $router->create(path: '/admin/get_attri_val_select_2', params: [Ajax::class, 'get_attri_val_select_2']);
+
+
+        //Admin
+        $router->create(path: '/admin/', params: [Dashboard::class, 'index']);
+        //Admin product
+        $router->create(path: '/admin/product', params: [ProductAdmin::class, 'index']);
+        $router->create(path: '/admin/add-product', params: [ProductAdmin::class, 'add']);
+        $router->create(path: '/admin/product/handle_add', params: [ProductAdmin::class, 'handle_add']);
     }
 }

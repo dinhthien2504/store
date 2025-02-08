@@ -14,10 +14,10 @@ class ProImageModel extends Database{
     }
 
     //Xử lý bên admin
-    // public function insert_image_pro(pro_image_model $pro_img) {
-    //     $sql = "INSERT INTO pro_images (pro_id, url_image) VALUES (?,?)";
-    //     return $this->__db->insert($sql, [$pro_img->get__pro_id(), $pro_img->get__url_image()]);
-    // }
+    public function insert_image_pro() {
+        $sql = "INSERT INTO pro_images (pro_id, url_image) VALUES (?,?)";
+        return $this->insert($sql, $this->__gets());
+    }
     // public function delete_img_pro(pro_image_model $pro_img) {
     //     $sql = "DELETE FROM pro_images WHERE pro_id = ?";
     //     return $this->__db->delete($sql, [$pro_img->get__pro_id()]);

@@ -32,4 +32,20 @@ class CategoryModel extends Database {
         $sql .= "AND cate.status = 0";
         return $this->getOne($sql, [$this->__get('cate_id')]);
     }
+
+    //Xử lý bên admin
+    public function get_all_cate_parent_admin() {
+        $sql = 'SELECT id, name ';
+        $sql .= 'FROM categories ';
+        $sql .= 'WHERE 1 ';
+        $sql .= 'AND parent = 0';
+        return $this->getAll($sql);
+    }
+    public function get_cate_by_cate_id(category_model $cate) {
+        $sql = 'SELECT c.parent as parent_id, c.id as chirld_id, c.name as chirld_name, ';
+        $sql .= '(SELECT name FROM categories WHERE id = c.parent ) as parent_name ';
+        $sql .= 'FROM categories c ';
+        $sql .= 'WHERE c.id = ?';
+        return $this->__db->getOne($sql, [$cate->get__id()]);
+    }
 }

@@ -59,7 +59,7 @@ const get_cate_chirld_by_parent = (el = null, id, name) => {
     }
 
     $.ajax({
-        url: `../Ajax/get_cate_chirld_by_parent`,
+        url: `get_cate_chirld_by_parent`,
         type: 'POST',
         data: {
             parent_id: id
@@ -132,7 +132,7 @@ const change_attri_select = (el_select) => {
 //Lấy dữ liệu attri_values từ server
 const get_attri_val_by_attri_id = (selected_val) => {
     $.ajax({
-        url: `../Ajax/get_attri_val_by_attri_id`,
+        url: `get_attri_val_by_attri_id`,
         type: 'POST',
         data: {
             attri_id: selected_val
@@ -267,7 +267,7 @@ const updated_count = () => {
 //Hàm thêm phân loại mới 
 const add_select__2 = () => {
     $.ajax({
-        url: `../Ajax/get_attri_val_select__2`,
+        url: `get_attri_val_select_2`,
         type: 'GET',
         success: (data) => {
             show_add_select(2);
