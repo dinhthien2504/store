@@ -19,7 +19,7 @@
                         <div class="row g-1">
                             <div class="col-12">
                                 <div class="custom-detail__container-img-main">
-                                    <img src="<?= _WEB_ROOT_ ?>/assets/img/pro/<?= $pros_image[0]['url_image'] ?>"
+                                    <img src="<?= _WEB_ROOT_ ?>/public/assets/img/pro/<?= $pros_image[0]['url_image'] ?>"
                                         class="custom-detail__img--main" alt="">
                                 </div>
                             </div>
@@ -28,7 +28,7 @@
                                     <?php foreach ($pros_image as $pro_img): ?>
                                         <div onclick="change_img_main(this, '.custom-detail__img--item')"
                                             class="custom-detail__img--item">
-                                            <img src="<?= _WEB_ROOT_ ?>/assets/img/pro/<?= $pro_img['url_image'] ?>"
+                                            <img src="<?= _WEB_ROOT_ ?>/public/assets/img/pro/<?= $pro_img['url_image'] ?>"
                                                 class="cursor-pointer" alt="">
                                         </div>
                                     <?php endforeach ?>
@@ -74,7 +74,7 @@
                                         <?php foreach ($cor_size_pro_id as $cor): ?>
                                             <div class="custom-detail__img--color"
                                                 onclick="change_cor(this, '<?= $cor['pro_id'] ?>', <?= $cor['cor_id'] ?>)">
-                                                <img src="<?= _WEB_ROOT_ ?>/assets/img/pro/<?= $cor['url_image'] ?>"
+                                                <img src="<?= _WEB_ROOT_ ?>/public/assets/img/pro/<?= $cor['url_image'] ?>"
                                                     class="cursor-pointer" alt="">
                                                 <p class="m-0"><?= $cor['name'] ?></p>
                                             </div>
@@ -111,7 +111,7 @@
                                         <?php foreach ($color_pro_id as $cor): ?>
                                             <div class="custom-detail__img--color"
                                                 onclick="get_quantity(this, '.custom-detail__img--color', '<?= $cor['pro_id'] ?>', '<?= $cor['cor_id'] ?>')">
-                                                <img src="<?= _WEB_ROOT_ ?>/assets/img/pro/<?= $cor['url_image'] ?>"
+                                                <img src="<?= _WEB_ROOT_ ?>/public/assets/img/pro/<?= $cor['url_image'] ?>"
                                                     class="cursor-pointer" alt="">
                                                 <p class="m-0"><?= $cor['name'] ?></p>
                                             </div>
@@ -303,7 +303,7 @@
                                     <a onclick="handle__url_link(this, '<?= _WEB_ROOT_ ?>','<?= $pro_cate['name'] ?>', 'i<?= $pro_cate['id'] ?>')"
                                         class="custom-pro__item">
                                         <div class="custom-pro__item__img"
-                                            style="background-image: url(<?= _WEB_ROOT_ ?>/assets/img/pro/<?= $pro_cate['url_image'] ?>);">
+                                            style="background-image: url(<?= _WEB_ROOT_ ?>/public/assets/img/pro/<?= $pro_cate['url_image'] ?>);">
                                         </div>
                                         <h4 class="custom-pro__item__name"><?= $pro_cate['name'] ?></h4>
                                         <div class="custom-pro__item__price">

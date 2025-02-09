@@ -144,18 +144,25 @@ class ProductModel extends Database{
         $sql .= 'ORDER BY id DESC ';
         return $this->getAll($sql);
     }
+    public function get_pro_by_id_admin() {
+        $sql = 'SELECT pro.id, pro.cate_id, pro.name, pro.price, pro.discount_percent, pro.sell, pro.description ';
+        $sql .= 'FROM products pro ';
+        $sql .= 'WHERE 1 ';
+        $sql .= 'AND pro.id = ? ';
+        return $this->getOne($sql, [$this->__get('pro_id')]);
+    }
     public function insert_pro() {
         $sql = 'INSERT INTO products (cate_id, name, price, discount_percent, description, status) ';
         $sql.= 'VALUES (?,?,?,?,?,?)';
-        return $this->insert($sql, $this->__gets());//$pro->get__cate_id(), $pro->get__name(), $pro->get__price(), $pro->get__discount_percent(), $pro->get__description(), $pro->get__status()
+        return $this->insert($sql, $this->__gets());
     }
-    public function update_pro(product_model $pro) {
+    public function update_pro() {
         $sql = 'UPDATE products SET cate_id = ?, name = ?, price = ?, discount_percent = ?, description = ?, status = ? ';
         $sql .= 'WHERE id = ?';
-        return $this->__db->update($sql, [$pro->get__cate_id(), $pro->get__name(), $pro->get__price(), $pro->get__discount_percent(), $pro->get__description(), $pro->get__status(), $pro->get__id()]);
+        return $this->update($sql, $this->__gets());
     }
-    public function delete_pro(product_model $pro) {
-        $sql = 'DELETE FROM products WHERE id =?';
-        return $this->__db->delete($sql, [$pro->get__id()]);
+    public function delete_pro() {
+        $sql = 'DELETE FROM products WHERE id = ?';
+        return $this->delete($sql, [$this->__get('pro_id')]);
     }
 }

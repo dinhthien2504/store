@@ -74,29 +74,29 @@ class ProVariantModel extends Database{
         $sql = 'INSERT INTO pro_variants (pro_id, cor_id, size_id, url_image, quantity) VALUES (?,?,?,?,?)';
         return $this->insert($sql, $this->__gets());
     } 
-    // public function get_all_variant_pro_id(pro_variant_model $pro_variant) {
-    //     $sql = 'SELECT p_v.id, a_v_c.name as cor_name, a_v_s.name as size_name, ';
-    //     $sql .= 'p_v.quantity, p_v.url_image  ';
-    //     $sql .= 'FROM pro_variants p_v ';
-    //     $sql .= 'LEFT JOIN attri_values a_v_c ON a_v_c.id = p_v.cor_id ';
-    //     $sql .= 'LEFT JOIN attri_values a_v_s ON a_v_s.id = p_v.size_id ';
-    //     $sql .= ' WHERE pro_id = ? ';
-    //     $sql .= 'ORDER BY a_v_c.name DESC, a_v_s.name ASC';
-    //     return $this->getAll($sql, [$pro_variant->get__pro_id()]);
-    // }
-    // public function update_variant_pro(pro_variant_model $pro_variant) {
-    //     $sql = 'UPDATE pro_variants SET quantity = ?, url_image = ? ';
-    //     $sql .= 'WHERE id = ?';
-    //     return $this->update($sql, [$pro_variant->get__quantity(), $pro_variant->get__url_image(),  $pro_variant->get__id()]);
-    // } 
-    // public function delete_variant_pro(pro_variant_model $pro_variant) {
-    //     $sql = 'DELETE FROM pro_variants WHERE pro_id = ?';
-    //     return $this->delete($sql, [$pro_variant->get__pro_id()]);
-    // }
-    // public function get_all_img_variant_by_pro_id(pro_variant_model $pro_variant) {
-    //     $sql = 'SELECT url_image FROM pro_variants WHERE pro_id = ?';
-    //     return $this->getAll($sql, [$pro_variant->get__pro_id()]);
-    // }
+    public function get_all_variant_pro_id() {
+        $sql = 'SELECT p_v.id, a_v_c.name as cor_name, a_v_s.name as size_name, ';
+        $sql .= 'p_v.quantity, p_v.url_image  ';
+        $sql .= 'FROM pro_variants p_v ';
+        $sql .= 'LEFT JOIN attri_values a_v_c ON a_v_c.id = p_v.cor_id ';
+        $sql .= 'LEFT JOIN attri_values a_v_s ON a_v_s.id = p_v.size_id ';
+        $sql .= ' WHERE pro_id = ? ';
+        $sql .= 'ORDER BY a_v_c.name DESC, a_v_s.name ASC';
+        return $this->getAll($sql, [$this->__get('pro_id')]);
+    }
+    public function update_variant_pro() {
+        $sql = 'UPDATE pro_variants SET quantity = ?, url_image = ? ';
+        $sql .= 'WHERE id = ?';
+        return $this->update($sql, $this->__gets());
+    } 
+    public function delete_variant_by_pro_id() {
+        $sql = 'DELETE FROM pro_variants WHERE pro_id = ?';
+        return $this->delete($sql, [$this->__get('pro_id')]);
+    }
+    public function get_all_img_variant_by_pro_id() {
+        $sql = 'SELECT url_image FROM pro_variants WHERE pro_id = ?';
+        return $this->getAll($sql, [$this->__get('pro_id')]);
+    }
     public function get_quantity_by_id() {
         $sql = 'SELECT id, quantity FROM pro_variants WHERE id = ?';
         return $this->getOne($sql, [$this->__get('id')]);

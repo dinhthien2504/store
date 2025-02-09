@@ -67,7 +67,7 @@
                         <a onclick="handle__url_link(this, '<?= _WEB_ROOT_ ?>','<?= $cate['name'] ?>', 'cat<?= $cate['id'] ?>-cidnull')"
                             class="custom-pro__item m-0 p-3 ">
                             <div class="custom-pro__item__img p-5 justify-content-center d-flex align-items-center"
-                                style="background-image: url(<?= _WEB_ROOT_ ?>/assets/img/cate/<?= $cate['url_image'] ?>);">
+                                style="background-image: url(<?= _WEB_ROOT_ ?>/public/assets/img/cate/<?= $cate['url_image'] ?>);">
                             </div>
                             <h4 class="custom-pro__item__name text-center m-0"><?= $cate['name'] ?></h4>
                         </a>
@@ -92,7 +92,7 @@
                         <a onclick="handle__url_link(this, '<?= _WEB_ROOT_ ?>','<?= $__pro['name'] ?>', 'i<?= $__pro['id'] ?>')"
                             class="custom-pro__item">
                             <div class="custom-pro__item__img"
-                                style="background-image: url(<?= _WEB_ROOT_ ?>/assets/img/pro/<?= $__pro['url_image'] ?>);">
+                                style="background-image: url(<?= _WEB_ROOT_ ?>/public/assets/img/pro/<?= $__pro['url_image'] ?>);">
                             </div>
                             <h4 class="custom-pro__item__name"><?= $__pro['name'] ?></h4>
                             <div class="custom-pro__item__price">
@@ -145,7 +145,7 @@
                         <a onclick="handle__url_link(this, '<?= _WEB_ROOT_ ?>','<?= $__pro['name'] ?>', 'i<?= $__pro['id'] ?>')"
                             class="custom-pro__item">
                             <div class="custom-pro__item__img"
-                                style="background-image: url(<?= _WEB_ROOT_ ?>/assets/img/pro/<?= $__pro['url_image'] ?>);">
+                                style="background-image: url(<?= _WEB_ROOT_ ?>/public/assets/img/pro/<?= $__pro['url_image'] ?>);">
                             </div>
                             <h4 class="custom-pro__item__name"><?= $__pro['name'] ?></h4>
                             <div class="custom-pro__item__price">

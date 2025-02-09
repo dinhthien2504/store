@@ -175,7 +175,7 @@ $cart_user_id_header = $cartModel->get_all_cart_by_user_id_header();
                                 <?php foreach($cart_user_id_header as $cart):?>
                                 <a  onclick="handle__url_link(this, '<?= _WEB_ROOT_ ?>','<?= $cart['name_pro'] ?>', 'i<?= $cart['pro_id'] ?>')"
                                     class="header__cart-item ">
-                                    <img src="<?=_WEB_ROOT_?>/assets/img/pro/<?=$cart['url_image']?>" alt="<?=$cart['name_pro']?>" class="header__cart-img" />
+                                    <img src="<?=_WEB_ROOT_?>/public/assets/img/pro/<?=$cart['url_image']?>" alt="<?=$cart['name_pro']?>" class="header__cart-img" />
                                     <div class="header__cart-item-info">
                                         <div class="header__cart-item-head">
                                             <h5 class="header__cart-item-name"><?=$cart['name_pro']?></h5>
@@ -191,7 +191,7 @@ $cart_user_id_header = $cartModel->get_all_cart_by_user_id_header();
                         <?php else: ?>
                         <!-- Nocart -->
                         <div class="header__cart-list--no-cart">
-                            <img src="<?=_WEB_ROOT_?>/assets/img/no-cart.png" alt="No Cart" class="header__cart-no-cart-img" />
+                            <img src="<?=_WEB_ROOT_?>/public/assets/img/no-cart.png" alt="No Cart" class="header__cart-no-cart-img" />
                         </div>
                     <?php endif ?>
                     </div>

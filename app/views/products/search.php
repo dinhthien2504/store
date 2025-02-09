@@ -120,7 +120,7 @@
                                     <a onclick="handle__url_link(this, '<?= _WEB_ROOT_ ?>','<?= $pro_search['name'] ?>', 'i<?= $pro_search['id'] ?>')"
                                         class="custom-pro__item">
                                         <div class="custom-pro__item__img"
-                                            style="background-image: url(<?= _WEB_ROOT_ ?>/assets/img/pro/<?= $pro_search['url_image'] ?>);">
+                                            style="background-image: url(<?= _WEB_ROOT_ ?>/public/assets/img/pro/<?= $pro_search['url_image'] ?>);">
                                         </div>
                                         <h4 class="custom-pro__item__name"><?= $pro_search['name'] ?></h4>
                                         <div class="custom-pro__item__price">

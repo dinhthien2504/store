@@ -19,7 +19,6 @@ class CategoryModel extends Database {
         $sql .= "FROM categories ";
         $sql .= "WHERE 1 ";
         $sql .= "AND parent = ? ";
-        $sql .= "AND status = 0";
         return $this->getAll($sql, [$this->__get('parent_id')]);
     }
 
@@ -41,11 +40,11 @@ class CategoryModel extends Database {
         $sql .= 'AND parent = 0';
         return $this->getAll($sql);
     }
-    public function get_cate_by_cate_id(category_model $cate) {
+    public function get_cate_by_cate_id() {
         $sql = 'SELECT c.parent as parent_id, c.id as chirld_id, c.name as chirld_name, ';
         $sql .= '(SELECT name FROM categories WHERE id = c.parent ) as parent_name ';
         $sql .= 'FROM categories c ';
         $sql .= 'WHERE c.id = ?';
-        return $this->__db->getOne($sql, [$cate->get__id()]);
+        return $this->getOne($sql, [$this->__get('cate_id')]);
     }
 }

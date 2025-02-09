@@ -55,5 +55,9 @@ class Routes {
         $router->create(path: '/admin/product', params: [ProductAdmin::class, 'index']);
         $router->create(path: '/admin/add-product', params: [ProductAdmin::class, 'add']);
         $router->create(path: '/admin/product/handle_add', params: [ProductAdmin::class, 'handle_add']);
+        $router->create(path: '/admin/edit-product-{/+d}', params: [ProductAdmin::class, 'edit']);
+        $router->create(path: '/admin/product/handle_edit', params: [ProductAdmin::class, 'handle_edit']);
+        $router->create(path: '/admin/product/handle-del-{/+d}', params: [ProductAdmin::class, 'handle_del']);
+        $router->create(path: '/admin/product/handle_del_groups', params: [ProductAdmin::class, 'handle_del_groups']);
     }
 }

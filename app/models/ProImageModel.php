@@ -18,8 +18,12 @@ class ProImageModel extends Database{
         $sql = "INSERT INTO pro_images (pro_id, url_image) VALUES (?,?)";
         return $this->insert($sql, $this->__gets());
     }
-    // public function delete_img_pro(pro_image_model $pro_img) {
-    //     $sql = "DELETE FROM pro_images WHERE pro_id = ?";
-    //     return $this->__db->delete($sql, [$pro_img->get__pro_id()]);
-    // }
+    public function delete_img_pro_by_id() {
+        $sql = "DELETE FROM pro_images WHERE id = ?";
+        return $this->delete($sql, [$this->__get('id')]);
+    }
+    public function delete_img_pro_by_pro_id() {
+        $sql = "DELETE FROM pro_images WHERE pro_id = ?";
+        return $this->delete($sql, [$this->__get('pro_id')]);
+    }
 }

@@ -8,7 +8,7 @@
     <?php if (!empty($data_all_pro)): ?>
         <div class="custom-content__show p-3">
             <div class="custom-content__show--top">
-                <p>10 sản phẩm</p>
+                <p><?=count($data_all_pro)?> sản phẩm</p>
                 <form>
                     <input type="text" placeholder="Tìm kiếm...">
                     <button type="submit">Tìm</button>
@@ -61,7 +61,7 @@
                                             <div class="row d-flex g-0">
                                                 <div class="col-lg-3 col-sm-2 col-3">
                                                     <img style="width: 60px; height: 60px; object-fit: cover;"
-                                                        src="<?= _WEB_ROOT_ ?>/assets/img/pro/<?= $pro['url_image'] ?>" alt="">
+                                                        src="<?= _WEB_ROOT_ ?>/public/assets/img/pro/<?= $pro['url_image'] ?>" alt="">
                                                 </div>
                                                 <div class="col-lg-9 col-sm-10 col-9">
                                                     <p class="m-0 text-black fs-15 fw-bold"><?= $pro['name'] ?></p>
@@ -88,9 +88,9 @@
                                         </div>
                                         <div class="col-lg-2 col-2 ">
                                             <div class="d-flex justify-content-center gap-2">
-                                                <a href="<?= _WEB_ROOT_ ?>/admin/sua-san-pham-<?= $pro['id'] ?>" style="width: 50px;" data-bs-toggle="tooltip" title="Chỉnh sửa"
+                                                <a href="<?= _WEB_ROOT_ ?>/admin/edit-product-<?= $pro['id'] ?>" style="width: 50px;" data-bs-toggle="tooltip" title="Chỉnh sửa"
                                                     class="btn btn-outline-warning btn-sm "><i class="ph ph-pen"></i></a>
-                                                <a href="<?= _WEB_ROOT_ ?>/admin/xoa-san-pham-<?= $pro['id'] ?>" style="width: 50px;" data-bs-toggle="tooltip" title="Xóa!"
+                                                <a href="<?= _WEB_ROOT_ ?>/admin/product/handle-del-<?= $pro['id'] ?>" style="width: 50px;" data-bs-toggle="tooltip" title="Xóa!"
                                                 onclick="return confirm('Bạn có chắc muốn xóa sản phẩm!')" class="btn btn-outline-danger btn-sm "><i
                                                         class="ph ph-trash"></i></a>
                                             </div>
@@ -115,12 +115,12 @@
                                                                 <div class="col-lg-2 col-sm-2 col-3 ">
                                                                     <?php if ($pro_variant['url_image'] != null): ?>
                                                                         <img style="width: 40px; height: 40px; object-fit: cover;"
-                                                                            src="<?= _WEB_ROOT_ ?>/assets/img/pro/<?= $pro_variant['url_image'] ?>"
+                                                                            src="<?= _WEB_ROOT_ ?>/public/assets/img/pro/<?= $pro_variant['url_image'] ?>"
                                                                             alt="">
                                                                     <?php endif ?>
                                                                     <?php if ($pro_variant['url_image'] == null): ?>
                                                                         <img style="width: 40px; height: 40px; object-fit: cover;"
-                                                                            src="<?= _WEB_ROOT_ ?>/assets/img/pro/<?= $pro['url_image'] ?>" alt="">
+                                                                            src="<?= _WEB_ROOT_ ?>/public/assets/img/pro/<?= $pro['url_image'] ?>" alt="">
                                                                     <?php endif ?>
                                                                 </div>
                                                                 <div class="col-lg-10 col-sm-10 col-9 d-flex align-items-center">

@@ -6,9 +6,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- STYLESHEET -->
-  <link rel="stylesheet" href="<?= _WEB_ROOT_ ?>/assets/css/admin/main.css" />
-  <link rel="stylesheet" href="<?= _WEB_ROOT_ ?>/assets/messager/messager.css" />
-  <link rel="stylesheet" href="<?= _WEB_ROOT_ ?>/assets/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="<?= _WEB_ROOT_ ?>/public/assets/css/admin/main.css" />
+  <link rel="stylesheet" href="<?= _WEB_ROOT_ ?>/public/assets/messager/messager.css" />
+  <link rel="stylesheet" href="<?= _WEB_ROOT_ ?>/public/assets/bootstrap/bootstrap.min.css">
   <!-- ICONS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
@@ -27,15 +27,15 @@
   <?= $this->render('layouts/messager'); ?>
   <div id="messager"></div>
   <!-- Jquery -->
-  <script src="<?= _WEB_ROOT_ ?>/assets/jquery/jquery-3.7.1.min.js"></script>
+  <script src="<?= _WEB_ROOT_ ?>/public/assets/jquery/jquery-3.7.1.min.js"></script>
   <!-- Messager -->
-  <script src="<?= _WEB_ROOT_ ?>/assets/messager/messager.js"></script>
+  <script src="<?= _WEB_ROOT_ ?>/public/assets/messager/messager.js"></script>
   <!-- Bootstrap -->
-  <script src="<?= _WEB_ROOT_ ?>/assets/bootstrap/bootstrap.bundle.min.js"></script>
+  <script src="<?= _WEB_ROOT_ ?>/public/assets/bootstrap/bootstrap.bundle.min.js"></script>
   <!-- Custom Main -->
-  <script src="<?= _WEB_ROOT_ ?>/assets/js/admin/main.js"></script>
+  <script src="<?= _WEB_ROOT_ ?>/public/assets/js/admin/main.js"></script>
   <!-- Custom Pro -->
-  <script src="<?= _WEB_ROOT_ ?>/assets/js/admin/pro.js"></script>
+  <script src="<?= _WEB_ROOT_ ?>/public/assets/js/admin/pro.js"></script>
 </body>
 
 </html>

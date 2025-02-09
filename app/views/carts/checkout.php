@@ -71,11 +71,11 @@
                                                         <?php if (!empty($pro_variant['url_image'])): ?>
                                                             <img style="width: 80px; height: 80px; object-fit: cover;"
                                                                 alt="<?= $cart['name_pro'] ?>"
-                                                                src="<?= _WEB_ROOT_ ?>/assets/img/pro/<?= $pro_variant['url_image'] ?>">
+                                                                src="<?= _WEB_ROOT_ ?>/public/assets/img/pro/<?= $pro_variant['url_image'] ?>">
                                                         <?php else: ?>
                                                             <img style="width: 80px; height: 80px; object-fit: cover;"
                                                                 alt="<?= $cart['name_pro'] ?>"
-                                                                src="<?= _WEB_ROOT_ ?>/assets/img/pro/<?= $cart['url_image'] ?>">
+                                                                src="<?= _WEB_ROOT_ ?>/public/assets/img/pro/<?= $cart['url_image'] ?>">
                                                         <?php endif; ?>
                                                     </div>
                                                     <div class="col-lg-6 col-sm-10 col-9">

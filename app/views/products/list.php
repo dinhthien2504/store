@@ -112,7 +112,7 @@
                                     <a onclick="handle__url_link(this, '<?= _WEB_ROOT_ ?>','<?= $pro_cate['name'] ?>', 'i<?= $pro_cate['id'] ?>')"
                                         class="custom-pro__item">
                                         <div class="custom-pro__item__img"
-                                            style="background-image: url(<?= _WEB_ROOT_ ?>/assets/img/pro/<?= $pro_cate['url_image'] ?>);">
+                                            style="background-image: url(<?= _WEB_ROOT_ ?>/public/assets/img/pro/<?= $pro_cate['url_image'] ?>);">
                                         </div>
                                         <h4 class="custom-pro__item__name"><?= $pro_cate['name'] ?></h4>
                                         <div class="custom-pro__item__price">

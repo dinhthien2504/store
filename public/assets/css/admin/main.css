@@ -152,7 +152,6 @@ body {
 .custom-menu-btn {
     position: absolute;
     right: -14px;
-    top: 3.5%;
     width: 28px;
     height: 28px;
     border-radius: 8px;
@@ -356,7 +355,7 @@ body {
     background-color: var(--primary-color);
 }
 .fs-15 {
-    font-size: 15px;
+    font-size: 15px!important;
 }
 .container-custom-content__box--img--basic {
     display: flex;
