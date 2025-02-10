@@ -36,6 +36,8 @@
   <script src="<?= _WEB_ROOT_ ?>/public/assets/js/admin/main.js"></script>
   <!-- Custom Pro -->
   <script src="<?= _WEB_ROOT_ ?>/public/assets/js/admin/pro.js"></script>
+  <!-- Custom Cate -->
+  <script src="<?= _WEB_ROOT_ ?>/public/assets/js/admin/cate.js"></script>
 </body>
 
 </html>

@@ -12,6 +12,7 @@ use app\controllers\Cart;
 //Admin
 use app\controllers\admin\Dashboard;
 use app\controllers\admin\Product as ProductAdmin;
+use app\controllers\admin\Category as CategoryAdmin;
 class Routes {
     public static function setupRoutes(Router $router): void {
         //Home
@@ -59,5 +60,11 @@ class Routes {
         $router->create(path: '/admin/product/handle_edit', params: [ProductAdmin::class, 'handle_edit']);
         $router->create(path: '/admin/product/handle-del-{/+d}', params: [ProductAdmin::class, 'handle_del']);
         $router->create(path: '/admin/product/handle_del_groups', params: [ProductAdmin::class, 'handle_del_groups']);
+
+        //Admin category
+        $router->create(path: '/admin/category', params: [CategoryAdmin::class, 'index']);
+        $router->create(path: '/admin/category/handle_add', params: [CategoryAdmin::class, 'handle_add']);
+        $router->create(path: '/admin/category/handle-del-{/+d}', params: [CategoryAdmin::class, 'handle_del']);
+        $router->create(path: '/admin/category/handle_del_groups', params: [CategoryAdmin::class, 'handle_del_groups']);
     }
 }

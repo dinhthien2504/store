@@ -3,6 +3,7 @@ namespace app\controllers\admin;
 use app\controllers\Base;
 class Product extends Base{
     public $data;
+    private static $item_page = 5;
     private $ProductModel, $CategoryModel, $AttritubeModel, $AttriValueModel, $ProImageModel, $ProVariantModel;
     public function __construct() {
         $this->ProductModel = $this->model('ProductModel');
@@ -13,7 +14,29 @@ class Product extends Base{
         $this->ProVariantModel = $this->model('ProVariantModel');
     }
     public function index() {
+        //Đặt số lượng phần tử cho trang
+        $this->ProductModel->__set('item_page', self::$item_page);
+
+        //Lấy trang hiện tại nếu có
+        $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+        $this->ProductModel->__set('current_page', $current_page);
+
+        //Lấy từ khóa tìm kiếm nếu có
+        $keyword = isset($_GET['keyword']) ? trim($_GET['keyword']) : ''; 
+        $this->ProductModel->__set('keyword', $keyword);
+
+        //Lấy tổng danh mục cha để tính số trang
+        $total_pro_handle_page = $this->ProductModel->total_pro_handle_page();
+        $total_page = ceil($total_pro_handle_page['total'] / self::$item_page);
+        //Xử lý đường dẫn cho phân trang
+        if ($total_page > 1) {
+            $links = $this->handle_url_page($total_page, $current_page);
+            $this->data['sub_content']['links'] = $links;
+        }
         $data_all_pro = $this->ProductModel->get_all_pro_admin();
+        //Tổng số sản Phẩm
+        $total_pro = $this->ProductModel->total_pro_admin();
+        $this->data['sub_content']['total_pro'] = $total_pro;
         $this->data['sub_content']['data_all_pro'] = $data_all_pro;
         $this->data['title_page'] = 'Quản Lý Sản Phẩm';
         $this->data['content'] = 'admin/products/index';

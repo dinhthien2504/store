@@ -8,9 +8,10 @@
     <?php if (!empty($data_all_pro)): ?>
         <div class="custom-content__show p-3">
             <div class="custom-content__show--top">
-                <p><?=count($data_all_pro)?> sản phẩm</p>
-                <form>
-                    <input type="text" placeholder="Tìm kiếm...">
+                <p><?=$total_pro['total']?> sản phẩm</p>
+                <form method="GET">
+                    <input type="hidden" name="page" value="1">
+                    <input type="text" name="keyword" value="<?=isset($_GET['keyword']) ? $_GET['keyword'] : '';?>" placeholder="Tìm kiếm...">
                     <button type="submit">Tìm</button>
                 </form>
             </div>
@@ -160,6 +161,10 @@
                         </div>
                         <hr>
                     <?php endforeach ?>
+                    <ul class="pagination">
+                        <?php if (isset($links))
+                        echo $links; ?>
+                    </ul>
                     <!-- End item pro -->
                     <div class="custom-content__button bg-light p-4 mt-3">
                         <div class="d-flex justify-content-between align-items-center">

@@ -17,10 +17,10 @@ class User extends Base
             $user = $this->user_model->get_user_login();
             if ($user && password_verify( trim($_POST['login_pwd']), $user['password'])) {
                 $_SESSION['user'] = $user;
+                $_SESSION['messager'] = ['title' => 'Thành công!', 'mess' => 'Đăng nhập thành công!', 'type' => 'success'];
                 if ($user['role'] == 2) {
-                    header('Location: ' . _WEB_ROOT . '/admin/san-pham');
+                    header('Location: ' . _WEB_ROOT_ . '/admin/');
                 } else {
-                    $_SESSION['messager'] = ['title' => 'Thành công!', 'mess' => 'Đăng nhập thành công!', 'type' => 'success'];
                     header("Location: " . $_SERVER['HTTP_REFERER']);
                 }
             } else {

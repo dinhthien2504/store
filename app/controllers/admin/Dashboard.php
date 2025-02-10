@@ -1,9 +1,13 @@
 <?php 
 namespace app\controllers\admin;
-
-class Dashboard {
+use app\controllers\Base;
+class Dashboard extends Base{
+    public $data;
     public function index() {
-        echo 'Trang chủ quản trị';
+        $this->data['title_page'] = 'Dashboard';
+        $this->data['content'] = 'admin/dashboard';
+        $this->data['sub_content'] = [];
+        $this->render('layouts/main_admin', $this->data);
     }
    
 }

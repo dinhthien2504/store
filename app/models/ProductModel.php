@@ -124,6 +124,9 @@ class ProductModel extends Database{
 
     //Xử lý bên admin
     public function get_all_pro_admin() {
+        $item_page = $this->__get('item_page');
+        $offset = ($this->__get('current_page') - 1) * $item_page;
+        $keyword = '%'.$this->__get('keyword').'%';
         $sql = 'SELECT pro.id, pro.name, pro.price, pro.discount_percent, pro.sell, SUM(p_v.quantity) as total_quantity, pro.status, ';
         $sql .= '(SELECT pro_img.url_image FROM pro_images pro_img WHERE pro.id = pro_img.pro_id LIMIT 1) as url_image, ';
         $sql .= '(SELECT CONCAT("[", GROUP_CONCAT(
@@ -140,9 +143,11 @@ class ProductModel extends Database{
         $sql .= 'LEFT JOIN attri_values a_v_c ON a_v_c.id = p_v.cor_id ';
         $sql .= 'LEFT JOIN attri_values a_v_s ON a_v_s.id = p_v.size_id ';
         $sql .= 'WHERE 1 ';
+        $sql .= 'AND pro.name LIKE ? ';
         $sql .= 'GROUP BY pro.id ';
         $sql .= 'ORDER BY id DESC ';
-        return $this->getAll($sql);
+        $sql .= 'LIMIT '.$item_page.' OFFSET '.$offset;
+        return $this->getAll($sql, [$keyword]);
     }
     public function get_pro_by_id_admin() {
         $sql = 'SELECT pro.id, pro.cate_id, pro.name, pro.price, pro.discount_percent, pro.sell, pro.description ';
@@ -164,5 +169,24 @@ class ProductModel extends Database{
     public function delete_pro() {
         $sql = 'DELETE FROM products WHERE id = ?';
         return $this->delete($sql, [$this->__get('pro_id')]);
+    }
+    public function get_pro_by_cate_id() {
+        $sql = 'SELECT id ';
+        $sql.= 'FROM products ';
+        $sql.= 'WHERE 1 ';
+        $sql.= 'AND cate_id = ? ';
+        return $this->getOne($sql, [$this->__get('cate_id')]);
+    }
+
+    public function total_pro_handle_page() {
+        $keyword = '%'.$this->__get('keyword').'%';
+        $sql = "SELECT COUNT(*) as total FROM products ";
+        $sql .= "WHERE 1 ";
+        $sql .= "AND name LIKE ?";
+        return $this->getOne($sql, [$keyword]);
+    }
+    public function total_pro_admin() {
+        $sql = "SELECT COUNT(*) as total FROM products";
+        return $this->getOne($sql);
     }
 }

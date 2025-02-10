@@ -1,0 +1,124 @@
+        <?php foreach ($data_all_pro as $pro): ?>
+                            <div class="custom-table__item ">
+                                <div class="row my-4 g-0">
+                                    <!-- Checkbox Column -->
+                                    <div class="col-1">
+                                        <div class="text-center">
+                                            <input type="checkbox" value="<?= $pro['id'] ?>" name="pro__del_groups[]"
+                                                class="custom-table__check check-item" type="checkbox">
+                                        </div>
+                                    </div>
+                                    <!-- Product Details -->
+                                    <div class="col-11">
+                                        <div class="row g-0">
+                                            <div class="col-lg-5 col-12">
+                                                <div class="row d-flex g-0">
+                                                    <div class="col-lg-3 col-sm-2 col-3">
+                                                        <img style="width: 60px; height: 60px; object-fit: cover;"
+                                                            src="<?= _WEB_ROOT_ ?>/public/assets/img/pro/<?= $pro['url_image'] ?>"
+                                                            alt="">
+                                                    </div>
+                                                    <div class="col-lg-9 col-sm-10 col-9">
+                                                        <p class="m-0 text-black fs-15 fw-bold"><?= $pro['name'] ?></p>
+                                                        <p class="m-0 fs-12">ID Sản phẩm: <?= $pro['id'] ?> - (
+                                                            <?php if ($pro['status'] == 0): ?>
+                                                                <span class="text-success">Đang hoạt động</span>
+                                                            <?php else: ?>
+                                                                <span class="text-danger">Hiện đang ẩn</span>
+                                                            <?php endif; ?>
+                                                            )
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Sales and Price -->
+                                            <div class="col-lg-1 col-3">
+                                                <p class="m-0 fs-12 text-center"><?= $pro['sell'] ?></p>
+                                            </div>
+                                            <div class="col-lg-2 col-4">
+                                                <p class="m-0 fs-12 text-center"><?= $pro['total_quantity'] ?></p>
+                                            </div>
+                                            <div class="col-lg-2 col-3">
+                                                <p class="m-0 text-black fs-12 text-center">
+                                                    <?= number_format($pro['price']) ?> đ</p>
+                                            </div>
+                                            <div class="col-lg-2 col-2 ">
+                                                <div class="d-flex justify-content-center gap-2">
+                                                    <a href="<?= _WEB_ROOT_ ?>/admin/edit-product-<?= $pro['id'] ?>"
+                                                        style="width: 50px;" data-bs-toggle="tooltip" title="Chỉnh sửa"
+                                                        class="btn btn-outline-warning btn-sm "><i
+                                                            class="ph ph-pen"></i></a>
+                                                    <a href="<?= _WEB_ROOT_ ?>/admin/product/handle-del-<?= $pro['id'] ?>"
+                                                        style="width: 50px;" data-bs-toggle="tooltip" title="Xóa!"
+                                                        onclick="return confirm('Bạn có chắc muốn xóa sản phẩm!')"
+                                                        class="btn btn-outline-danger btn-sm "><i
+                                                            class="ph ph-trash"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Variants Section -->
+                                <?php if (!empty($pro['variants'])):
+                                    // Chuyển chuỗi JSON thành mảng
+                                    $data = json_decode($pro['variants'], true); ?>
+                                    <div class="container-variants">
+                                        <?php foreach ($data as $pro_variant): ?>
+                                            <div class="variant-item">
+                                                <div class="row ">
+                                                    <div class="col-1"></div>
+                                                    <div class="col-11">
+                                                        <div class="row g-0 p-2 bg-light align-items-center">
+                                                            <!-- Variant Item 1 -->
+                                                            <div class="col-lg-5 col-12 bg-light">
+                                                                <div class="row d-flex g-0 ">
+                                                                    <div class="col-lg-2 col-sm-2 col-3 ">
+                                                                        <?php if ($pro_variant['url_image'] != null): ?>
+                                                                            <img style="width: 40px; height: 40px; object-fit: cover;"
+                                                                                src="<?= _WEB_ROOT_ ?>/public/assets/img/pro/<?= $pro_variant['url_image'] ?>"
+                                                                                alt="">
+                                                                        <?php endif ?>
+                                                                        <?php if ($pro_variant['url_image'] == null): ?>
+                                                                            <img style="width: 40px; height: 40px; object-fit: cover;"
+                                                                                src="<?= _WEB_ROOT_ ?>/public/assets/img/pro/<?= $pro['url_image'] ?>"
+                                                                                alt="">
+                                                                        <?php endif ?>
+                                                                    </div>
+                                                                    <div
+                                                                        class="col-lg-10 col-sm-10 col-9 d-flex align-items-center">
+                                                                        <p class="m-0 text-black fs-12">
+                                                                            <?php if ($pro_variant['cor_name'] != ''):
+                                                                                echo $pro_variant['cor_name'];
+                                                                            endif ?>
+                                                                            <?php if ($pro_variant['cor_name'] != '' && $pro_variant['size_name'] != ''):
+                                                                                echo ', ';
+                                                                            endif ?>
+                                                                            <?php if ($pro_variant['size_name'] != ''):
+                                                                                echo ' ' . $pro_variant['size_name'] . '';
+                                                                            endif ?>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-1 col-3 bg-light">
+                                                                <p class="m-0 fs-12 text-center">0</p>
+                                                            </div>
+                                                            <div class="col-lg-2 col-3 bg-light">
+                                                                <p class="m-0 text-center fs-12"><?= $pro_variant['quantity'] ?></p>
+                                                            </div>
+                                                            <hr>
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?php endforeach ?>
+                                        <div class="text-center mt-2">
+                                            <button type="button" class="btn-toggle-variants">Xem thêm</button>
+                                        </div>
+                                    </div>
+                                <?php endif ?>
+                            </div>
+                            <hr>
+                        <?php endforeach ?>
