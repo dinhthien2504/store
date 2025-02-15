@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" href="<?=_WEB_ROOT_?>/public/assets/img/logo-site.store.png" type="image/x-icon">
   <!-- STYLESHEET -->
   <link rel="stylesheet" href="<?= _WEB_ROOT_ ?>/public/assets/css/admin/main.css" />
   <link rel="stylesheet" href="<?= _WEB_ROOT_ ?>/public/assets/messager/messager.css" />

@@ -132,7 +132,9 @@ html {
     inset 4px 4px 8px rgba(175, 230, 255, 0.5),
     inset -4px -4px 8px rgba(19, 95, 216, 0.35);
 }
-
+.custom-text-primary {
+  color: var(--primary-color);
+}
 .custom-btn__primary:hover {
   background-position: right top;
 }

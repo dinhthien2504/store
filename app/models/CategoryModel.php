@@ -37,8 +37,17 @@ class CategoryModel extends Database {
         $sql = 'SELECT id, name ';
         $sql .= 'FROM categories ';
         $sql .= 'WHERE 1 ';
-        $sql .= 'AND parent = 0';
+        $sql .= 'AND parent = 0 ';
+        $sql .= 'ORDER BY id DESC';
         return $this->getAll($sql);
+    }
+    public function get_all_cate_parent_edit() {
+        $sql = 'SELECT id, name ';
+        $sql .= 'FROM categories ';
+        $sql .= 'WHERE id != ? ';
+        $sql .= 'AND parent = 0 ';
+        $sql .= 'ORDER BY id DESC';
+        return $this->getAll($sql, [$this->__get('id')]);
     }
     public function get_cate_by_cate_id() {
         $sql = 'SELECT c.parent as parent_id, c.id as chirld_id, c.name as chirld_name, ';
@@ -83,7 +92,6 @@ class CategoryModel extends Database {
     public function delete_cate() {
         $img = $this->get_img_by_cate_id($this->__get('parent_id'));
         $file_path = dirname(__DIR__, 2) . '/public/assets/img/cate/' . $img['url_image'];
-        // echo $file_path;exit;
         $sql = "DELETE FROM categories WHERE id =?";
         if (file_exists($file_path)) {
             unlink($file_path);
@@ -105,4 +113,13 @@ class CategoryModel extends Database {
         $sql .= "AND name LIKE ?";
         return $this->getOne($sql, [$keyword]);
     }
+    public function get_one_cate_by_id() {
+        $sql = "SELECT * FROM categories WHERE id =?";
+        return $this->getOne($sql, [$this->__get('id')]);
+    }
+    public function update_cate() {
+        $sql = "UPDATE categories SET name =?, parent =?, url_image =? WHERE id =?";
+        return $this->update($sql, $this->__gets());
+    }
+    
 }                                   

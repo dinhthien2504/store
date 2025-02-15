@@ -26,6 +26,8 @@ class Routes {
         $router->create(path: '/handle_login', params: [User::class, 'handle_login']);
         $router->create(path: '/handle_register', params: [User::class, 'handle_register']);
         $router->create(path: '/logout', params: [User::class, 'logout']);
+        $router->create(path: '/user/profile', params: [User::class, 'profile']);
+        $router->create(path: '/user/purchase', params: [User::class, 'purchase']);
         
         //Cart
         $router->create(path: '/cart', params: [Cart::class, 'cart']);
@@ -48,6 +50,7 @@ class Routes {
         //Ajax Admin
         $router->create(path: '/admin/get_cate_chirld_by_parent', params: [Ajax::class, 'get_cate_chirld_by_parent']);
         $router->create(path: '/admin/get_attri_val_select_2', params: [Ajax::class, 'get_attri_val_select_2']);
+        $router->create(path: '/admin/get_cate_by_cate_id', params: [Ajax::class, 'get_cate_by_cate_id']);
 
 
         //Admin
@@ -64,6 +67,7 @@ class Routes {
         //Admin category
         $router->create(path: '/admin/category', params: [CategoryAdmin::class, 'index']);
         $router->create(path: '/admin/category/handle_add', params: [CategoryAdmin::class, 'handle_add']);
+        $router->create(path: '/admin/category/handle_edit', params: [CategoryAdmin::class, 'handle_edit']);
         $router->create(path: '/admin/category/handle-del-{/+d}', params: [CategoryAdmin::class, 'handle_del']);
         $router->create(path: '/admin/category/handle_del_groups', params: [CategoryAdmin::class, 'handle_del_groups']);
     }

@@ -3,6 +3,7 @@ namespace app\controllers;
 use app\controllers\Base;
 class User extends Base
 {
+    public $data;
     private $user_model;
 
     public function __construct()
@@ -39,6 +40,20 @@ class User extends Base
                 header("Location: " . $_SERVER['HTTP_REFERER']);
             }
         }
+    }
+    public function profile() {
+        $this->data['sub_content'] = [];
+        
+        $this->data['title_page'] = 'Tài Khoản';
+        $this->data['content'] = 'auth/profile';
+        $this->render('layouts/main', $this->data);
+    }
+    public function purchase() {
+        $this->data['sub_content'] = [];
+        
+        $this->data['title_page'] = 'Tài Khoản';
+        $this->data['content'] = 'auth/purchase';
+        $this->render('layouts/main', $this->data);
     }
     public function logout()
     {

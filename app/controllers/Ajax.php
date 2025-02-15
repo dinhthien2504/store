@@ -53,7 +53,89 @@ class Ajax extends Base
         }
     }
 
-    //Các hàm trang thêm sản phẩm
+    //cart
+    public function update_quantity_cart()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cart_id']) && isset($_POST['quantity'])) {
+            $this->CartModel->__sets(['quantity_new' => $_POST['quantity'], 'id' => $_POST['cart_id']]);
+            $check = $this->CartModel->update_cart();
+            if ($check > 0) {
+                echo 1;
+            }
+        }
+    }
+
+    // order
+    public function get_province()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $data = $this->ProvinceModel->get_all_province();
+            if (!empty($data)) {
+                $out_put = '';
+                foreach ($data as $province) {
+                    $out_put .= '<li onclick="get_district_province_id(\'' . $province['id'] . '\', \'' . $province['name'] . '\')">' . $province['name'] . '</li>';
+                }
+                echo $out_put;
+            }
+        }
+    }
+    public function get_district_province_id()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $this->DistrictModel->__set('province_id', $_POST['province_id']);
+            $data = $this->DistrictModel->get_all_district_by_province_id();
+            if (!empty($data)) {
+                $out_put = '';
+                foreach ($data as $district) {
+                    $out_put .= '<li onclick="get_ward_district_id(\'' . $district['id'] . '\', \'' . $district['name'] . '\')">' . $district['name'] . '</li>';
+                }
+                echo $out_put;
+            }
+        }
+    }
+    public function get_ward_district_id()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $this->WardModel->__set('district_id', $_POST['district_id']);
+            $data = $this->WardModel->get_all_ward_by_district_id();
+            if (!empty($data)) {
+                $out_put = '';
+                foreach ($data as $ward) {
+                    $out_put .= '<li onclick="action_ward(\'' . $ward['name'] . '\')">' . $ward['name'] . '</li>';
+                }
+                echo $out_put;
+            }
+        }
+    }
+
+    //User
+    public function update_address()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $user_id = $_SESSION['user']['id'] ?? 0;
+            $this->UserModel->__sets([trim($_POST['name']), trim($_POST['phone']), trim($_POST['address']), trim($_POST['address_detail']), $user_id]);
+            $check = $this->UserModel->update_order_user($this->usemodel);
+            if ($check > 0) {
+                $_SESSION['user']['name'] = $_POST['name'];
+                $_SESSION['user']['phone'] = $_POST['phone'];
+                $_SESSION['user']['address'] = $_POST['address'];
+                $_SESSION['user']['address_detail'] = $_POST['address_detail'];
+                echo $check;
+            }
+        }
+    }
+    public function check_email()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $this->UserModel->__set('email', trim($_POST['email']));
+            $check = $this->UserModel->get_user_login();
+            if (!empty($check)) {
+                echo 1;
+            }
+        }
+    }
+
+    //Các hàm trang thêm sản phẩm admin
     public function get_cate_chirld_by_parent()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -133,85 +215,45 @@ class Ajax extends Base
         }
     }
 
-
-    //cart
-    public function update_quantity_cart()
-    {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cart_id']) && isset($_POST['quantity'])) {
-            $this->CartModel->__sets(['quantity_new' => $_POST['quantity'], 'id' => $_POST['cart_id']]);
-            $check = $this->CartModel->update_cart();
-            if ($check > 0) {
-                echo 1;
-            }
-        }
-    }
-
-    // order
-    public function get_province()
-    {
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $data = $this->ProvinceModel->get_all_province();
-            if (!empty($data)) {
-                $out_put = '';
-                foreach ($data as $province) {
-                    $out_put .= '<li onclick="get_district_province_id(\'' . $province['id'] . '\', \'' . $province['name'] . '\')">' . $province['name'] . '</li>';
-                }
-                echo $out_put;
-            }
-        }
-    }
-    public function get_district_province_id()
+    //Các hàm xử lý danh mục admin
+    public function get_cate_by_cate_id()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $this->DistrictModel->__set('province_id', $_POST['province_id']);
-            $data = $this->DistrictModel->get_all_district_by_province_id();
+            $this->CategoryModel->__set('id', $_POST['cate_id']);
+            $data = $this->CategoryModel->get_one_cate_by_id();
             if (!empty($data)) {
-                $out_put = '';
-                foreach ($data as $district) {
-                    $out_put .= '<li onclick="get_ward_district_id(\'' . $district['id'] . '\', \'' . $district['name'] . '\')">' . $district['name'] . '</li>';
-                }
-                echo $out_put;
-            }
-        }
-    }
-    public function get_ward_district_id()
-    {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $this->WardModel->__set('district_id', $_POST['district_id']);
-            $data = $this->WardModel->get_all_ward_by_district_id();
-            if (!empty($data)) {
-                $out_put = '';
-                foreach ($data as $ward) {
-                    $out_put .= '<li onclick="action_ward(\'' . $ward['name'] . '\')">' . $ward['name'] . '</li>';
-                }
-                echo $out_put;
-            }
-        }
-    }
-
-    //User
-    public function update_address()
-    {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $user_id = $_SESSION['user']['id'] ?? 0;
-            $this->UserModel->__sets([trim($_POST['name']), trim($_POST['phone']), trim($_POST['address']), trim($_POST['address_detail']), $user_id]);
-            $check = $this->UserModel->update_order_user($this->usemodel);
-            if ($check > 0) {
-                $_SESSION['user']['name'] = $_POST['name'];
-                $_SESSION['user']['phone'] = $_POST['phone'];
-                $_SESSION['user']['address'] = $_POST['address'];
-                $_SESSION['user']['address_detail'] = $_POST['address_detail'];
-                echo $check;
-            }
-        }
-    }
-    public function check_email()
-    {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $this->UserModel->__set('email', trim($_POST['email']));
-            $check = $this->UserModel->get_user_login();
-            if (!empty($check)) {
-                echo 1;
+                $data_cate_parent = $this->CategoryModel->get_all_cate_parent_edit();
+                $url_main = 'https://static.vecteezy.com/system/resources/thumbnails/014/440/983/small_2x/image-icon-design-in-blue-circle-png.png';
+                $url_img = ($data['url_image'] == null) ? $url_main : ''._WEB_ROOT_.'/public/assets/img/cate/'.$data['url_image'];
+                $output = '';
+                $output .= '<div class="mb-3">
+                    <label class="fs-15" for="name_cate">Tên danh mục <span class="star">*</span></label>
+                    <input type="text" class="form-control fs-15" value="'.$data['name'].'" id="name_cate_edit" name="name_cate">
+                    </div>                                                                  
+                    <div class="mb-3">  
+                        <label class="fs-15" for="parent_id">Danh mục cha</label>
+                        <select class="form-select fs-15" id="parent_id" name="parent_id">  
+                            <option value="0">None</option>';
+                            foreach($data_cate_parent as $cate) {
+                                $selected = ($data['parent'] == $cate['id']) ? 'selected' : '';
+                                $output .= '<option value="'.$cate['id'].'" '.$selected.'>'.$cate['name'].'</option>';
+                            }
+                        $output .= '</select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="fs-15" for="img_cate">Hình ảnh</label>
+                        <div onclick="action_input(this)"
+                            class="custom-content__box--img--basic custom--flex__column">
+                            <input type="hidden" name="cate_id" value="'.$data['id'].'">
+                            <input type="hidden" name="parent_old" value="'.$data['parent'].'">
+                            <p class="m-0 fs-12 text-center">Chọn ảnh</p>
+                            <input type="file" hidden name="img_cate" class="input_file" onchange="handle_img__cor_change(this)">
+                            <div class="d-flex flex-column align-items-center justify-content-center text-center custom-text-primary w-100">
+                                <img src="'.$url_img.'" class="w-50 h-50" alt="hinh-anh">
+                            </div>
+                        </div>
+                    </div>';
+                    echo $output;
             }
         }
     }

@@ -14,9 +14,9 @@
                     </div>                                                                  
                     <div class="mb-3">  
                         <label class="fs-15" for="parent_id">Danh mục cha</label>
-                        <select class="form-select fs-15" id="parent_id" name="parent_id">
+                        <select class="form-select fs-15" id="parent_id" name="parent_id">  
                             <option value="0">None</option>
-                            <?php foreach($data_cate_all as $cate):?>
+                            <?php foreach($data_cate_parent as $cate):?>
                             <option value="<?php echo $cate['id']?>"><?=$cate['name']?></option>
                             <?php endforeach;?>
                         </select>
@@ -112,10 +112,10 @@
                                             </div>
                                             <div class="col-lg-3 col-2 ">
                                                 <div class="d-flex justify-content-center gap-2">
-                                                    <a href="<?= _WEB_ROOT_ ?>/admin/edit-category-<?=$cate['id']?>" style="width: 50px;"
-                                                        data-bs-toggle="tooltip" title="Chỉnh sửa"
-                                                        class="btn btn-outline-warning btn-sm "><i
-                                                            class="ph ph-pen"></i></a>
+                                                    <button type="button" class="btn btn-outline-warning btn-sm" onclick="get_cate_by_cate_id(this)"
+                                                    data-id="<?=$cate['id']?>" data-bs-toggle="modal" data-bs-target="#myModalEdit">
+                                                        <i class="ph ph-pen"></i>
+                                                    </button>
                                                     <a href="<?= _WEB_ROOT_ ?>/admin/category/handle-del-<?=$cate['id']?>"
                                                         style="width: 50px;" data-bs-toggle="tooltip" title="Xóa!"
                                                         onclick="return confirm('Bạn có chắc muốn xóa danh mục này!')"
@@ -158,10 +158,10 @@
                                                     </div>
                                                     <div class="col-lg-3 col-2 ">
                                                         <div class="d-flex justify-content-center gap-2">
-                                                            <a href="<?= _WEB_ROOT_ ?>/admin/edit-category-<?=$cate_children['id']?>" style="width: 50px;"
-                                                                data-bs-toggle="tooltip" title="Chỉnh sửa"
-                                                                class="btn btn-outline-warning btn-sm "><i
-                                                                    class="ph ph-pen"></i></a>
+                                                            <button type="button" class="btn btn-outline-warning btn-sm" onclick="get_cate_by_cate_id(this)"
+                                                            data-id="<?=$cate_children['id']?>" data-bs-toggle="modal" data-bs-target="#myModalEdit">
+                                                                <i class="ph ph-pen"></i>
+                                                            </button>
                                                             <a href="<?= _WEB_ROOT_ ?>/admin/category/handle-del-<?=$cate_children['id']?>"
                                                                 style="width: 50px;" data-bs-toggle="tooltip" title="Xóa!"
                                                                 onclick="return confirm('Bạn có chắc muốn xóa danh mục này!')"
@@ -206,4 +206,24 @@
         </div>    
         <?php endif; ?>
     </div> 
+</div>
+<!-- The Modal -->
+<div class="modal" id="myModalEdit">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title fs-6 fw-bold">Chỉnh Sửa Danh Mục</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form action="<?=_WEB_ROOT_?>/admin/category/handle_edit" method="post" onsubmit="return valid_edit_cate()" class="mt-3" enctype="multipart/form-data">
+                <!-- Modal body -->
+                <div class="modal-body" id="show_edit_cate"></div>
+                <!-- Modal footer -->
+                <div class="modal-footer">  
+                    <button type="submit" name="submit_edit" class="custom-btn custom-btn__primary">Cập Nhật</button>
+                </div>
+            </form>
+        </div>
+  </div>
 </div>

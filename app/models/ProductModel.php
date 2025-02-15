@@ -3,9 +3,11 @@ namespace app\models;
 use app\core\Database;
 use app\models\ModelSetup;
 
-class ProductModel extends Database{
+class ProductModel extends Database
+{
     use ModelSetup;
-    public function get_all_home($key = 'id', $method = 'DESC'){
+    public function get_all_home($key = 'id', $method = 'DESC')
+    {
         $sql = "SELECT pro.id, pro.name, pro.cate_id, ";
         $sql .= "pro.price, pro.discount_percent, pro.sell, ";
         $sql .= "(SELECT pro_img.url_image FROM pro_images pro_img WHERE pro_img.pro_id = pro.id LIMIT 1) AS url_image ";
@@ -17,7 +19,8 @@ class ProductModel extends Database{
         return $this->getAll($sql);
     }
 
-    public function get_one_pro_by_id(){
+    public function get_one_pro_by_id()
+    {
         $sql = "SELECT pro.id as id, pro.name as name, pro.cate_id as cate_id, ";
         $sql .= "pro.price as price, pro.discount_percent as discount_percent, ";
         $sql .= "pro.sell as sell, pro.description as description, ";
@@ -28,7 +31,8 @@ class ProductModel extends Database{
         return $this->getOne($sql, [$this->__get('id')]);
     }
 
-    public function get_pro_relate_by_cate_id() {
+    public function get_pro_relate_by_cate_id()
+    {
         $sql = "SELECT pro.id, pro.name, pro.cate_id, ";
         $sql .= "pro.price, pro.discount_percent, pro.sell, ";
         $sql .= "(SELECT pro_img.url_image FROM pro_images pro_img WHERE pro_img.pro_id = pro.id LIMIT 1) AS url_image ";
@@ -40,25 +44,27 @@ class ProductModel extends Database{
         $sql .= "LIMIT 6";
         return $this->getAll($sql, [$this->__get('cate_id'), $this->__get('id')]);
     }
-    public function count_all_pro_by_cate_id() {
+    public function count_all_pro_by_cate_id()
+    {
         $cate_id = $this->__get('cate_id');
         $query = [$this->__get('parent_id')];
-        
+
         $sql = "SELECT count(pro.id) as total_pro ";
-        $sql .= "FROM products pro "; 
+        $sql .= "FROM products pro ";
         $sql .= "LEFT JOIN categories cate ON pro.cate_id = cate.id ";
         $sql .= "WHERE cate.parent = ? ";
-        if(!empty($cate_id)){
+        if (!empty($cate_id)) {
             $sql .= "AND pro.cate_id = ? ";
             $query[] = $cate_id;
         }
         $sql .= "AND pro.status = 0 ";
-        if(!empty($this->__get('filter'))) {
-            $sql .=  implode(' ', $this->__get('filter'), );
+        if (!empty($this->__get('filter'))) {
+            $sql .= implode(' ', $this->__get('filter'), );
         }
         return $this->getOne($sql, $query);
     }
-    public function get_all_pro_by_cate_id() {
+    public function get_all_pro_by_cate_id()
+    {
         $item_page = $this->__get('item_page');
         $offset = ($this->__get('current_page') - 1) * $item_page;
         $cate_id = $this->__get('cate_id');
@@ -67,66 +73,69 @@ class ProductModel extends Database{
         $sql = "SELECT pro.id, pro.name, pro.cate_id, ";
         $sql .= "pro.price, pro.discount_percent, pro.sell, ";
         $sql .= "(SELECT pro_img.url_image FROM pro_images pro_img WHERE pro_img.pro_id = pro.id LIMIT 1) AS url_image ";
-        $sql .= "FROM products pro "; 
+        $sql .= "FROM products pro ";
         $sql .= "LEFT JOIN categories cate ON pro.cate_id = cate.id ";
         $sql .= "WHERE cate.parent = ? ";
-        if(!empty($cate_id)){
+        if (!empty($cate_id)) {
             $sql .= "AND pro.cate_id = ? ";
             $query[] = $cate_id;
         }
         $sql .= "AND pro.status = 0 ";
-        if(!empty($this->__get('filter'))) {
-            $sql .=  implode(' ', $this->__get('filter'), );
+        if (!empty($this->__get('filter'))) {
+            $sql .= implode(' ', $this->__get('filter'), );
         }
-        if($this->__get('total_page') > 1) {
-            $sql .= "LIMIT ".$item_page." ";
-            if($offset >= 0) {
-                $sql .= " OFFSET ". $offset ;
+        if ($this->__get('total_page') > 1) {
+            $sql .= "LIMIT " . $item_page . " ";
+            if ($offset >= 0) {
+                $sql .= " OFFSET " . $offset;
             }
         }
         return $this->getAll($sql, $query);
     }
 
-    public function get_all_pro_by_keyword() {
+    public function get_all_pro_by_keyword()
+    {
         $item_page = $this->__get('item_page');
         $offset = ($this->__get('current_page') - 1) * $item_page;
-        $keyword = '%'.$this->__get('keyword').'%';
+        $keyword = '%' . $this->__get('keyword') . '%';
         $sql = "SELECT pro.id, pro.name, pro.cate_id, ";
         $sql .= "pro.price, pro.discount_percent, pro.sell, ";
         $sql .= "(SELECT pro_img.url_image FROM pro_images pro_img WHERE pro_img.pro_id = pro.id LIMIT 1) AS url_image ";
-        $sql .= "FROM products pro "; 
+        $sql .= "FROM products pro ";
         $sql .= "WHERE pro.name like ? ";
         $sql .= "AND pro.status = 0 ";
-        if(!empty($this->__get('filter'))) {
-            $sql .=  implode(' ', $this->__get('filter'), );
+        if (!empty($this->__get('filter'))) {
+            $sql .= implode(' ', $this->__get('filter'), );
         }
-        if($this->__get('total_page') > 1) {
-            $sql .= "LIMIT ".$item_page." ";
-            if($offset >= 0) {
-                $sql .= " OFFSET ". $offset ;
+        if ($this->__get('total_page') > 1) {
+            $sql .= "LIMIT " . $item_page . " ";
+            if ($offset >= 0) {
+                $sql .= " OFFSET " . $offset;
             }
         }
         return $this->getAll($sql, [$keyword]);
     }
 
-    public function count_all_pro_by_keyword() {
-        $keyword = '%'.$this->__get('keyword').'%';
+    public function count_all_pro_by_keyword()
+    {
+        $keyword = '%' . $this->__get('keyword') . '%';
         $sql = "SELECT count(pro.id) as total_pro ";
-        $sql .= "FROM products pro "; 
+        $sql .= "FROM products pro ";
         $sql .= "WHERE pro.name like ? ";
         $sql .= "AND pro.status = 0 ";
-        if(!empty($this->__get('filter'))) {
-            $sql .=  implode(' ', $this->__get('filter'), );
+        if (!empty($this->__get('filter'))) {
+            $sql .= implode(' ', $this->__get('filter'), );
         }
         return $this->getOne($sql, [$keyword]);
     }
 
 
     //Xử lý bên admin
-    public function get_all_pro_admin() {
+    public function get_all_pro_admin()
+    {
         $item_page = $this->__get('item_page');
         $offset = ($this->__get('current_page') - 1) * $item_page;
-        $keyword = '%'.$this->__get('keyword').'%';
+        $keyword = '%' . $this->__get('keyword') . '%';
         $sql = 'SELECT pro.id, pro.name, pro.price, pro.discount_percent, pro.sell, SUM(p_v.quantity) as total_quantity, pro.status, ';
         $sql .= '(SELECT pro_img.url_image FROM pro_images pro_img WHERE pro.id = pro_img.pro_id LIMIT 1) as url_image, ';
         $sql .= '(SELECT CONCAT("[", GROUP_CONCAT(
@@ -146,46 +155,53 @@ class ProductModel extends Database{
         $sql .= 'AND pro.name LIKE ? ';
         $sql .= 'GROUP BY pro.id ';
         $sql .= 'ORDER BY id DESC ';
-        $sql .= 'LIMIT '.$item_page.' OFFSET '.$offset;
+        $sql .= 'LIMIT ' . $item_page . ' OFFSET ' . $offset;
         return $this->getAll($sql, [$keyword]);
     }
-    public function get_pro_by_id_admin() {
+    public function get_pro_by_id_admin()
+    {
         $sql = 'SELECT pro.id, pro.cate_id, pro.name, pro.price, pro.discount_percent, pro.sell, pro.description ';
         $sql .= 'FROM products pro ';
         $sql .= 'WHERE 1 ';
         $sql .= 'AND pro.id = ? ';
         return $this->getOne($sql, [$this->__get('pro_id')]);
     }
-    public function insert_pro() {
+    public function insert_pro()
+    {
         $sql = 'INSERT INTO products (cate_id, name, price, discount_percent, description, status) ';
-        $sql.= 'VALUES (?,?,?,?,?,?)';
+        $sql .= 'VALUES (?,?,?,?,?,?)';
         return $this->insert($sql, $this->__gets());
     }
-    public function update_pro() {
+    public function update_pro()
+    {
         $sql = 'UPDATE products SET cate_id = ?, name = ?, price = ?, discount_percent = ?, description = ?, status = ? ';
         $sql .= 'WHERE id = ?';
         return $this->update($sql, $this->__gets());
     }
-    public function delete_pro() {
+    public function delete_pro()
+    {
         $sql = 'DELETE FROM products WHERE id = ?';
         return $this->delete($sql, [$this->__get('pro_id')]);
     }
-    public function get_pro_by_cate_id() {
+    public function get_pro_by_cate_id()
+    {
         $sql = 'SELECT id ';
-        $sql.= 'FROM products ';
-        $sql.= 'WHERE 1 ';
-        $sql.= 'AND cate_id = ? ';
+        $sql .= 'FROM products ';
+        $sql .= 'WHERE 1 ';
+        $sql .= 'AND cate_id = ? ';
         return $this->getOne($sql, [$this->__get('cate_id')]);
     }
 
-    public function total_pro_handle_page() {
-        $keyword = '%'.$this->__get('keyword').'%';
+    public function total_pro_handle_page()
+    {
+        $keyword = '%' . $this->__get('keyword') . '%';
         $sql = "SELECT COUNT(*) as total FROM products ";
         $sql .= "WHERE 1 ";
         $sql .= "AND name LIKE ?";
         return $this->getOne($sql, [$keyword]);
     }
-    public function total_pro_admin() {
+    public function total_pro_admin()
+    {
         $sql = "SELECT COUNT(*) as total FROM products";
         return $this->getOne($sql);
     }

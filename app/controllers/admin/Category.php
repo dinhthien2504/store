@@ -23,6 +23,9 @@ class Category extends Base {
         $keyword = isset($_GET['keyword']) ? trim($_GET['keyword']) : ''; 
         $this->CategoryModel->__set('keyword', $keyword);
 
+        //Lấy danh mục cha
+        $data_cate_parent = $this->CategoryModel->get_all_cate_parent_admin();
+        $this->data['sub_content']['data_cate_parent'] = $data_cate_parent;
         //Lấy danh mục
         $data_cate_all = $this->CategoryModel->get_all_cate_show_admin();
         
@@ -34,12 +37,12 @@ class Category extends Base {
             $links = $this->handle_url_page($total_page, $current_page);
             $this->data['sub_content']['links'] = $links;
         }
+        //Tổng danh mục
         $total_cate = $this->CategoryModel->total_cate();
         $this->data['sub_content']['total_cate'] = $total_cate;
         $this->data['sub_content']['data_cate_all'] = $data_cate_all;
         $this->data['title_page'] = 'Danh Mục Sản Phẩm';
         $this->data['content'] = 'admin/categories/index';
-        // $this->data['sub_content'] = [];
         $this->render('layouts/main_admin', $this->data);
     }
     public function handle_add() {
@@ -60,6 +63,62 @@ class Category extends Base {
             header('Location: '._WEB_ROOT_.'/admin/category');
         }
     }
+    public function handle_edit() {
+        if (!isset($_POST['submit_edit'])) {
+            return;
+        }
+    
+        // Lấy dữ liệu từ form
+        $cate_id    = $_POST['cate_id'] ?? null;
+        $name_cate  = $_POST['name_cate'] ?? null;
+        $parent_id  = $_POST['parent_id'] ?? null;
+        $parent_old = $_POST['parent_old'] ?? null;
+    
+        // Kiểm tra dữ liệu hợp lệ
+        if (!$cate_id || !$name_cate || is_null($parent_id) || is_null($parent_old)) {
+            $this->redirect_with_message('Lỗi!', 'Dữ liệu không hợp lệ!', 'error');
+        }
+    
+        //Lấy ảnh của nếu có
+        $img_cate_old = $this->CategoryModel->get_img_by_cate_id($cate_id);
+        $file_name = !empty($_FILES['img_cate']['name']) ? $_FILES['img_cate']['name'] : $img_cate_old['url_image'];
+
+        if(!empty($_FILES['img_cate']['name'])) {
+            $this->handle_upload_img($_FILES['img_cate']);
+            $file_path = dirname(__DIR__, 3) . '/public/assets/img/cate/' . $img_cate_old['url_image'];
+            if(file_exists($file_path)) {
+                unlink($file_path);
+            }
+        }
+    
+        // Xử lý danh mục cha / con
+        if ($parent_old == 0 && $parent_id != 0) {
+            // Chuyển từ danh mục cha thành con
+            $this->CategoryModel->__set('parent_id', $cate_id);
+            if (!empty($this->CategoryModel->get_all_cate_by_parent_id())) {
+                $this->redirect_with_message('Cảnh báo!', 'Danh mục cha có danh mục con, không thể chuyển thành danh mục con!', 'error');
+            }
+        } elseif ($parent_old != 0 && $parent_id == 0) {
+            // Chuyển từ danh mục con thành cha
+            $this->ProductModel->__set('cate_id', $cate_id);
+            if (!empty($this->ProductModel->get_pro_by_cate_id())) {
+                $this->redirect_with_message('Cảnh báo!', 'Danh mục này có sản phẩm, không thể trở thành danh mục cha!', 'error');
+            }
+        }
+    
+        // Cập nhật danh mục
+        $this->CategoryModel->__sets([$name_cate, $parent_id, $file_name, $cate_id]);
+        $this->CategoryModel->update_cate();
+    
+        $this->redirect_with_message('Thành công!', 'Cập nhật danh mục thành công.', 'success');
+    }
+    private function redirect_with_message($title, $message, $type) {
+        $_SESSION['messager'] = ['title' => $title, 'mess' => $message, 'type' => $type];
+        header('Location: ' . _WEB_ROOT_ . '/admin/category');
+        exit;
+    }
+    
+    
     private function handle_upload_img($file) {
         $target_dir = dirname(__DIR__, 3) . "/public/assets/img/cate/";
         $tmp_name = $file['tmp_name'];
@@ -90,7 +149,7 @@ class Category extends Base {
             
             $check_del = $this->CategoryModel->delete_cate();
             if($check_del) {
-                $_SESSION['messager'] = ['title' => 'Thành công!', 'mess' => 'Xóa danh mục thành công!', 'type' => 'error'];
+                $_SESSION['messager'] = ['title' => 'Thành công!', 'mess' => 'Xóa danh mục thành công!', 'type' => 'success'];
                 header('Location: '._WEB_ROOT_.'/admin/category');
             }
         }
