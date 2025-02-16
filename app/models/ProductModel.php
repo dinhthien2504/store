@@ -1,11 +1,12 @@
 <?php
 namespace app\models;
-use app\core\Database;
+use app\core\Model;
 use app\models\ModelSetup;
 
-class ProductModel extends Database
+class ProductModel extends Model
 {
     use ModelSetup;
+    protected $table = 'products';
     public function get_all_home($key = 'id', $method = 'DESC')
     {
         $sql = "SELECT pro.id, pro.name, pro.cate_id, ";

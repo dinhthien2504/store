@@ -19,59 +19,80 @@ const valid_login = () => {
     }
     return true;
 }
-
-const valid_register = () => {
-    //Kiểm tra name
+const valid_register = async () => {
+    // Kiểm tra name
     const name = $('#name_register');
-    if (name.val() === '') {
+    if (name.val().trim() === '') {
         name.focus();
         messager({ title: 'Cảnh báo!', mess: 'Vui lòng nhập tên', type: 'error' });
         return false;
     }
-    //Kiểm tra email
+
+    // Kiểm tra email
     const email = $('#email_register');
-    if (email.val() === '') {
+    const emailVal = email.val().trim();
+    if (emailVal === '') {
         email.focus();
         messager({ title: 'Cảnh báo!', mess: 'Vui lòng nhập email!', type: 'error' });
         return false;
     }
-    if (!validate_email(email.val())) {
+    if (!validate_email(emailVal)) {
         email.focus();
+        messager({ title: 'Cảnh báo!', mess: 'Email không hợp lệ!', type: 'error' });
         return false;
     }
-    check_exist_email('email_register', (exists) => {
-        if (exists) {
-            email.focus();
-            messager({ title: 'Cảnh báo!', mess: 'Email đã tồn tại!', type: 'error' });
-            return false;
-        }
-        return true;
-    });
-    //Kiểm tra mật khẩu
+
+    const emailExists = await check_exist_email(emailVal);
+    if (emailExists) {
+        return false;
+    }
+
+    // Kiểm tra mật khẩu
     const pwd = $('#pwd_register');
-    if (pwd.val() === '') {
+    const pwdVal = pwd.val().trim();
+    if (pwdVal === '') {
         pwd.focus();
         messager({ title: 'Cảnh báo!', mess: 'Vui lòng nhập mật khẩu!', type: 'error' });
         return false;
     }
-    if (!validate_pwd(pwd.val())) {
+    if (!validate_pwd(pwdVal)) {
         pwd.focus();
-        messager({ title: 'Cảnh báo!', mess: 'Mật khẩu phải có ít nhất 8 ký tự, chứa ít nhất một chữ cái viết hoa và một ký tự đặc biệt!', type: 'error' });
+        messager({
+            title: 'Cảnh báo!',
+            mess: 'Mật khẩu phải có ít nhất 8 ký tự, chứa ít nhất một chữ cái viết hoa và một ký tự đặc biệt!',
+            type: 'error'
+        });
         return false;
     }
+
     return true;
-}
-const check_exist_email = (name_check, callback) => {
-    $.ajax({
-        url: 'check_email',
-        type: 'POST',
-        data: { email: $(`#${name_check}`).val() },
-        success: (data) => {
-            callback(data);
-        },
-        error: () => {
-            callback(false);
-            console.log($(`#${name_check}`).val());
-        }
+};
+
+const check_exist_email = (email) => {
+    return new Promise((resolve) => {
+        $.ajax({
+            url: 'check_email',
+            type: 'POST',
+            data: { email: email },
+            success: (data) => {
+                if (data) {
+                    messager({ title: 'Cảnh báo!', mess: 'Email đã tồn tại!', type: 'error' });
+                    resolve(true);
+                } else {
+                    resolve(false);
+                }
+            },
+            error: () => {
+                console.log("Không gửi lên được");
+                resolve(false);
+            }
+        });
     });
 };
+
+$('#submit_register').click(async () => {
+    const isValid = await valid_register();
+    if (isValid) {
+        $('#form-register').submit(); // Nếu hợp lệ, gửi form
+    }
+});

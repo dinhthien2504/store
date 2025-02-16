@@ -2,16 +2,11 @@
 namespace app\core;
 use PDO;
 use PDOException;
-abstract class Database
-{
-  private $servername = 'localhost';
-  private $database = 'store';
-  private $username = 'root';
-  private $password = '';
-  private $charset = "utf8mb4";
-  private $pdo;
 
-  public function __construct()
+class Database
+{
+  private $pdo;
+  public function __construct(private $servername, private $database, private $username, private $password, private $charset)
   {
     try {
       $dsn = "mysql:host=$this->servername;dbname=$this->database;charset=$this->charset";

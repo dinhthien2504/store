@@ -1,8 +1,8 @@
 <?php 
 namespace app\models;
-use app\core\Database;
+use app\core\Model;
 use app\models\ModelSetup;
-class ProvinceModel extends Database{
+class ProvinceModel extends Model{
     use ModelSetup;
 
     public function get_all_province() {

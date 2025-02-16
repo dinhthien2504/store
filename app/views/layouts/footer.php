@@ -68,7 +68,7 @@
     <div class="footer__bottom">
         <div class="grid wide">
             <p class="footer__text">
-                © 2025 STORE
+                © 2025 Shop
             </p>
         </div>
     </div>

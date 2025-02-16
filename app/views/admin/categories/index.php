@@ -6,7 +6,7 @@
         <div class="col-4">
             <div class="custom-content_add-cate p-2">
                 <h2 class="fs-20">Thêm danh mục</h2>
-                <form action="<?=_WEB_ROOT_?>/admin/category/handle_add" method="post" onsubmit="return valid_add_cate()"
+                <form action="<?=_WEB_ROOT_?>/admin/category/handle_new" method="post" onsubmit="return valid_add_cate()"
                 class="mt-3" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label class="fs-15" for="name_cate">Tên danh mục <span class="star">*</span></label>

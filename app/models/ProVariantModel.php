@@ -1,8 +1,8 @@
 <?php
 namespace app\models;
-use app\core\Database;
+use app\core\Model;
 use app\models\ModelSetup;
-class ProVariantModel extends Database{
+class ProVariantModel extends Model{
     use ModelSetup;
     public function get_cor_size_by_pro_id() {
         $sql = 'SELECT p_v.url_image, a_v.name, p_v.cor_id, p_v.pro_id ';

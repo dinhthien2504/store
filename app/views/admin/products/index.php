@@ -3,7 +3,7 @@
         <h3>Quản Lý Sản Phẩm</h3>
     </div>
     <div class="custom-content__add custom-btn__hover">
-        <a href="<?= _WEB_ROOT_ ?>/admin/add-product"><i class="ph ph-plus"></i>Thêm 1 sản phẩm</a>
+        <a href="<?= _WEB_ROOT_ ?>/admin/product-new"><i class="ph ph-plus"></i>Thêm 1 sản phẩm</a>
     </div>
     <?php if (!empty($data_all_pro)): ?>
         <div class="custom-content__show p-3">

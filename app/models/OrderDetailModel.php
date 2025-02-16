@@ -1,9 +1,9 @@
 <?php
 namespace app\models;
-use app\core\Database;
+use app\core\Model;
 use app\models\ModelSetup;
 
-class OrderDetailModel extends Database {
+class OrderDetailModel extends Model {
     use ModelSetup;
 
     

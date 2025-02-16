@@ -16,7 +16,7 @@
             <p class="custom-title">Chính</p>
             <ul>
                 <li>
-                    <a href="<?=_WEB_ROOT_?>/admin/dashboard">
+                    <a href="<?= _WEB_ROOT_ ?>/admin/dashboard">
                         <i class="custom-icon ph-bold ph-house-simple"></i>
                         <span class="custom-text">Dashboard</span>
                     </a>
@@ -29,17 +29,17 @@
                     </a>
                     <ul class="custom-sub-menu">
                         <li>
-                            <a href="<?=_WEB_ROOT_?>/admin/product">
+                            <a href="<?= _WEB_ROOT_ ?>/admin/products">
                                 <span class="custom-text">Tất cả sản phẩm</span>
                             </a>
                         </li>
                         <li>
-                            <a href="<?=_WEB_ROOT_?>/admin/add-product">
+                            <a href="<?= _WEB_ROOT_ ?>/admin/product-new">
                                 <span class="custom-text">Thêm sản phẩm</span>
                             </a>
                         </li>
                         <li>
-                            <a href="<?=_WEB_ROOT_?>/admin/category">
+                            <a href="<?= _WEB_ROOT_ ?>/admin/categories">
                                 <span class="custom-text">Danh mục</span>
                             </a>
                         </li>
@@ -52,13 +52,13 @@
                     </a>
                 </li> -->
                 <!-- <li>
-                    <a href="<?=_WEB_ROOT_?>/admin/category">
+                    <a href="<?= _WEB_ROOT_ ?>/admin/category">
                         <i class="custom-icon ph-bold ph-browsers"></i>
                         <span class="custom-text">Danh Mục</span>
                     </a>
                 </li> -->
                 <!-- <li>
-                    <a href="<?=_WEB_ROOT_?>/admin/product">
+                    <a href="<?= _WEB_ROOT_ ?>/admin/product">
                         <i class="custom-icon ph-bold ph-calendar-blank"></i>
                         <span class="custom-text">Sản Phẩm</span>
                     </a>
@@ -110,7 +110,13 @@
         <p class="custom-title">Tài khoản</p>
         <ul>
             <li>
-                <a href="<?=_WEB_ROOT_?>/logout">
+                <a href="<?= _WEB_ROOT_ ?>/admin/users">
+                    <i class="custom-icon ph-bold ph-user"></i>
+                    <span class="custom-text">Thành Viên</span>
+                </a>
+            </li>
+            <li>
+                <a href="<?= _WEB_ROOT_ ?>/logout">
                     <i class="custom-icon ph-bold ph-sign-out"></i>
                     <span class="custom-text">Đăng xuất</span>
                 </a>

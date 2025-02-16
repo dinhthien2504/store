@@ -16,7 +16,7 @@ class User extends Base
         if (isset($_POST['submit__login'])) {
             $this->user_model->__set('email', trim($_POST['login_email']));
             $user = $this->user_model->get_user_login();
-            if ($user && password_verify( trim($_POST['login_pwd']), $user['password'])) {
+            if ($user && password_verify(trim($_POST['login_pwd']), $user['password'])) {
                 $_SESSION['user'] = $user;
                 $_SESSION['messager'] = ['title' => 'Thành công!', 'mess' => 'Đăng nhập thành công!', 'type' => 'success'];
                 if ($user['role'] == 2) {
@@ -30,27 +30,30 @@ class User extends Base
             }
         }
     }
-    public function handle_register() {
-        if(isset($_POST['submit_register'])) {
+    public function handle_register()
+    {
+        if (isset($_POST)) {
             $hashed_pwd = password_hash(trim($_POST['register_pwd']), PASSWORD_DEFAULT);
             $this->user_model->__sets([trim($_POST['register_name']), trim($_POST['register_email']), $hashed_pwd]);
             $check_register = $this->user_model->insert_register();
-            if($check_register > 0) {
+            if ($check_register > 0) {
                 $_SESSION['messager'] = ['title' => 'Thành công!', 'mess' => 'Tạo tài khoản thành công!', 'type' => 'success'];
                 header("Location: " . $_SERVER['HTTP_REFERER']);
             }
         }
     }
-    public function profile() {
+    public function profile()
+    {
         $this->data['sub_content'] = [];
-        
+
         $this->data['title_page'] = 'Tài Khoản';
         $this->data['content'] = 'auth/profile';
         $this->render('layouts/main', $this->data);
     }
-    public function purchase() {
+    public function purchase()
+    {
         $this->data['sub_content'] = [];
-        
+
         $this->data['title_page'] = 'Tài Khoản';
         $this->data['content'] = 'auth/purchase';
         $this->render('layouts/main', $this->data);

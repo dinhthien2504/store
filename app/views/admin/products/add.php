@@ -2,7 +2,7 @@
     <div class="custom-content__title">
         <h3>Thêm Sản Phẩm</h3>
     </div>
-    <form class="custom-content__show p-3" action="<?= _WEB_ROOT_ ?>/admin/product/handle_add" method="POST"
+    <form class="custom-content__show p-3" action="<?= _WEB_ROOT_ ?>/admin/product/handle_new" method="POST"
         enctype="multipart/form-data" onsubmit="return validation_form_add__pro()">
         <div class="custom-content__show--main">
             <div class="custom-content__show--main--top bg-light">

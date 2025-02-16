@@ -1,9 +1,9 @@
 <?php 
 namespace app\models;
 
-use app\core\Database;
+use app\core\Model;
 use app\models\ModelSetup;
-class AttriValueModel extends Database{
+class AttriValueModel extends Model{
     use ModelSetup;
 
     public function get_all_attri_val_by_attri_id() {

@@ -1,8 +1,8 @@
 <?php 
 namespace app\models;
-use app\core\Database;
+use app\core\Model;
 use app\models\ModelSetup;
-class CartModel extends Database{
+class CartModel extends Model{
     use ModelSetup;
     public function get_all_cart_by_user_id() {
         $sql = 'SELECT pro_v.pro_id, pro.name as name_pro, pro.price, pro.discount_percent, ';

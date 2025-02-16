@@ -57,7 +57,7 @@ class Product extends Base
 
         //Gán giá trị tổng số page vào model để xử lý
         $this->product_model->__set('total_page', $total_page);
-        
+
         //Lấy dữ liệu nếu có filter
         $data_pro_cate_id = $this->product_model->get_all_pro_by_cate_id();
         $this->data['sub_content']['pro_cate_id'] = $data_pro_cate_id;
@@ -89,7 +89,7 @@ class Product extends Base
         $this->category_model->__set('cate_id', $data_pro_id['cate_id']);
         $data_cate_parent_id = $this->category_model->get_one_cate_parent();
         $this->data['sub_content']['data_cate'] = $data_cate_parent_id;
-        
+
         //Lấy ảnh sản phẩm theo id
         $this->pro_image_model->__set('pro_id', $id);
         $data_imgs_pro = $this->pro_image_model->get_all_img_by_pro_id();
@@ -138,15 +138,15 @@ class Product extends Base
 
         //Đếm tất cả sản phẩm lấy được để tính số lượng trang
         $count_pro_keyword = $this->product_model->count_all_pro_by_keyword();
-        
+
         //Lấy page hiện tại để tính vị trí lấy sản phẩm
         $page = $_GET['page'] ?? 1;
         $this->product_model->__set('current_page', $page);
         $total_page = ceil($count_pro_keyword['total_pro'] / self::$item_page);
-        
+
         //Gán giá trị tổng số page vào model để xử lý
         $this->product_model->__set('total_page', $total_page);
-        
+
         //Xử lý đường dẫn cho phân trang
         if ($total_page > 1) {
             $links = $this->handle_url_page($total_page, $page);
@@ -162,7 +162,7 @@ class Product extends Base
 
         //Truyền total_page vào view
         $this->data['sub_content']['total_page'] = $total_page;
-        
+
         //Lấy dữ liệu cuối cùng nếu có filter
         $data_pro_filter = $this->product_model->get_all_pro_by_keyword();
         $this->data['sub_content']['pro_filter'] = $data_pro_filter;
@@ -174,7 +174,7 @@ class Product extends Base
         // $this->data['sub_content']['cate_by_parent_id'] = $data_cate_parent_id;=
 
         $this->data['title_page'] = 'Danh Sách Sản Phẩm';
-        
+
         $this->data['content'] = 'products/search';
         $this->render('layouts/main', $this->data);
     }
@@ -195,5 +195,5 @@ class Product extends Base
             $filters[] = ' ORDER BY pro.' . $sortBy . ' ' . $order . ' ';
         }
         return $filters;
-    }               
+    }
 }

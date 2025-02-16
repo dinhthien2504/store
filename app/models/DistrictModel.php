@@ -1,10 +1,10 @@
 <?php 
 namespace app\models;
 
-use app\core\Database;
+use app\core\Model;
 use app\models\ModelSetup;
 
-class DistrictModel extends Database {
+class DistrictModel extends Model {
     use ModelSetup;
 
     public function get_all_district_by_province_id() {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th1 21, 2025 lúc 05:46 AM
+-- Thời gian đã tạo: Th2 16, 2025 lúc 11:59 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `da`
+-- Cơ sở dữ liệu: `shop`
 --
 
 -- --------------------------------------------------------
@@ -144,6 +144,14 @@ CREATE TABLE `carts` (
   `user_id` int(11) NOT NULL,
   `quantity` int(10) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `carts`
+--
+
+INSERT INTO `carts` (`id`, `pro_variant_id`, `user_id`, `quantity`) VALUES
+(54, 383, 2, 2),
+(55, 183, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -1606,8 +1614,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `phone`, `email`, `url_image`, `password`, `address`, `address_detail`, `role`, `status`) VALUES
-(1, 'Admin', NULL, 'laptrinh05.net@gmail.com', NULL, '123', NULL, NULL, 2, 0),
-(2, 'Đình Thiên', '0376373272', 'dinhthien2504@gmail.com', NULL, '123', 'Cao Bằng, Huyện Bảo Lâm, Xã Đức Hạnh', 'Thôn 6, Kênh 234\n', 0, 0);
+(1, 'Admin', NULL, 'laptrinh05.net@gmail.com', NULL, '$2y$10$cASxA3oAMBPskO6aC4CqnOJFdbzLCECRY6NnmL6/OBNZOx0OiIDw.', NULL, NULL, 2, 0),
+(2, 'Đình Thiên', '0376373272', 'dinhthien2504@gmail.com', NULL, '$2y$10$cASxA3oAMBPskO6aC4CqnOJFdbzLCECRY6NnmL6/OBNZOx0OiIDw.', 'Cao Bằng, Huyện Bảo Lâm, Xã Đức Hạnh', 'Thôn 6, Kênh 234\n', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -12332,13 +12340,13 @@ ALTER TABLE `attri_values`
 -- AUTO_INCREMENT cho bảng `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT cho bảng `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT cho bảng `districts`
@@ -12350,13 +12358,13 @@ ALTER TABLE `districts`
 -- AUTO_INCREMENT cho bảng `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT cho bảng `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT cho bảng `products`
@@ -12386,7 +12394,7 @@ ALTER TABLE `pro_variants`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `wards`
@@ -12461,4 +12469,3 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-storestorestore

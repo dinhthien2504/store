@@ -1,9 +1,9 @@
 <?php
 namespace app\models;
-use app\core\Database;
+use app\core\Model;
 use app\models\ModelSetup;
 
-class ProImageModel extends Database{
+class ProImageModel extends Model{
     use ModelSetup;
     
     public function get_all_img_by_pro_id() {
