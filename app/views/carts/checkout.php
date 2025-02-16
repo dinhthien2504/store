@@ -31,17 +31,10 @@
                         <p class="my-3 ms-4 text-danger">Vui lòng cập nhật địa chỉ để mua hàng</p>
                     <?php endif ?>
                 </div>
-                <button type="button" class="custom-checkout__change--address" data-bs-toggle="modal"
+                <button type="button" style="width: 100px; height: 40px;"
+                    class="btn btn-primary text-black custom-checkout__change--address" data-bs-toggle="modal"
                     data-bs-target="#myModalAddress">
                     Cập nhật
-                    <div id="clip">
-                        <div id="leftTop" class="corner"></div>
-                        <div id="rightBottom" class="corner"></div>
-                        <div id="rightTop" class="corner"></div>
-                        <div id="leftBottom" class="corner"></div>
-                    </div>
-                    <span id="rightArrow" class="arrow"></span>
-                    <span id="leftArrow" class="arrow"></span>
                 </button>
             </div>
             <?php $total = 0;
@@ -109,7 +102,8 @@
                                             </div>
                                             <div class="col-lg-2 col-sm-2 col-3">
                                                 <p class="m-0 text-center custom-cart__price--total---item  fs-4">
-                                                    <?= number_format($price_sales * $pro_variant['quantity']) ?> đ</p>
+                                                    <?= number_format($price_sales * $pro_variant['quantity']) ?> đ
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
