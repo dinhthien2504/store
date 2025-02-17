@@ -14,6 +14,7 @@ use app\controllers\admin\Dashboard;
 use app\controllers\admin\Product as ProductAdmin;
 use app\controllers\admin\Category as CategoryAdmin;
 use app\controllers\admin\User as UserAdmin;
+use app\controllers\admin\Order as OrderAdmin;
 class Routes
 {
     public static function setupRoutes(Router $router): void
@@ -55,6 +56,7 @@ class Routes
         $router->create(path: '/admin/get_attri_val_select_2', params: [Ajax::class, 'get_attri_val_select_2']);
         $router->create(path: '/admin/get_cate_by_cate_id', params: [Ajax::class, 'get_cate_by_cate_id']);
         $router->create(path: '/admin/get_user_by_id', params: [Ajax::class, 'get_user_by_id']);
+        $router->create(path: '/admin/update_status_order', params: [Ajax::class, 'update_status_order']);
 
 
         //Admin
@@ -83,6 +85,7 @@ class Routes
         $router->create(path: '/admin/user/handle_del-{/+d}', params: [UserAdmin::class, 'handle_del']);
         $router->create(path: '/admin/user/handle-del-groups', params: [UserAdmin::class, 'handle_del_groups']);
 
-
+        //Admin Order
+        $router->create(path: '/admin/orders', params: [OrderAdmin::class, 'index']);
     }
 }

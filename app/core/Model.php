@@ -25,7 +25,9 @@ abstract class Model extends Database
     }
     protected function saveUpdate($assignments, $data)
     {
-        return $this->update("UPDATE {$this->table} SET $assignments WHERE id = ?", $data);
+        $sql = "UPDATE {$this->table} SET $assignments WHERE id = ?";
+        echo $sql;
+        return $this->update($sql, $data);
     }
     protected function remove($id)
     {

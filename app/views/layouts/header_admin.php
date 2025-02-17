@@ -16,7 +16,7 @@
             <p class="custom-title">Chính</p>
             <ul>
                 <li>
-                    <a href="<?= _WEB_ROOT_ ?>/admin/dashboard">
+                    <a href="<?= _WEB_ROOT_ ?>/admin/">
                         <i class="custom-icon ph-bold ph-house-simple"></i>
                         <span class="custom-text">Dashboard</span>
                     </a>
@@ -44,6 +44,12 @@
                             </a>
                         </li>
                     </ul>
+                </li>
+                <li>
+                    <a href="<?= _WEB_ROOT_ ?>/admin/orders">
+                        <i class="custom-icon ph-bold ph-package"></i>
+                        <span class="custom-text">Đơn Hàng</span>
+                    </a>
                 </li>
                 <!-- <li class="active">
                     <a href="#">

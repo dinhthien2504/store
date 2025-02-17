@@ -5,13 +5,14 @@ use app\controllers\Base;
 class Ajax extends Base
 {
     public $data;
-    private $ProVariantModel, $CategoryModel, $AttriValueModel, $CartModel, $ProvinceModel, $DistrictModel, $WardModel, $UserModel;
+    private $ProVariantModel, $CategoryModel, $AttriValueModel, $OrderModel, $CartModel, $ProvinceModel, $DistrictModel, $WardModel, $UserModel;
     public function __construct()
     {
         $this->ProVariantModel = $this->model('ProVariantModel');
         $this->CategoryModel = $this->model('CategoryModel');
         $this->AttriValueModel = $this->model('AttriValueModel');
         $this->CartModel = $this->model('CartModel');
+        $this->OrderModel = $this->model('OrderModel');
         $this->ProvinceModel = $this->model('ProvinceModel');
         $this->DistrictModel = $this->model('DistrictModel');
         $this->WardModel = $this->model('WardModel');
@@ -319,6 +320,21 @@ class Ajax extends Base
                 <input type="hidden" name="id_edit" value="' . $data['id'] . '">
                 <button type="submit" id="submit_new_user" class="button-submit">Cập Nhật</button>';
                 echo $output;
+            }
+        }
+    }
+
+    //Các hàm xử lý đơn hàng Admin
+    public function update_status_order()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $id = $_POST['id'];
+            $status = $_POST['status'];
+            $this->OrderModel->__sets(['status' => $status, 'id' => $id]);
+            $check_update = $this->OrderModel->update_order();
+            echo $check_update;
+            if ($check_update) {
+                echo '1';
             }
         }
     }

@@ -41,6 +41,8 @@
   <script src="<?= _WEB_ROOT_ ?>/public/assets/js/admin/cate.js"></script>
   <!-- Custom User -->
   <script src="<?= _WEB_ROOT_ ?>/public/assets/js/admin/user.js"></script>
+  <!-- Custom Order -->
+  <script src="<?= _WEB_ROOT_ ?>/public/assets/js/admin/order.js"></script>
 </body>
 
 </html>
