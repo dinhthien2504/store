@@ -37,9 +37,28 @@ class Order extends Base
         }
         //Lấy thông tin đơn hàng
         $orders = $this->OrderModel->get_order_admin();
+        //Lấy tổng số đơn hàng
+        $total = $this->OrderModel->total();
+        $this->data['sub_content']['total_order'] = $total;
         $this->data['title_page'] = 'Quản Lý Đơn Hàng';
         $this->data['content'] = 'admin/orders/index';
         $this->data['sub_content']['orders'] = $orders;
         $this->render('layouts/main_admin', $this->data);
+    }
+    public function handle_update_groups()
+    {
+        $groups = isset($_POST['order_groups']) ? $_POST['order_groups'] : [];
+        $status = isset($_POST['status_current']) ? $_POST['status_current'] : false;
+        if (!empty($groups) && $status) {
+            //Xử lý nếu có đơn muốn duyệt
+            $this->OrderModel->__sets(['status' => $status + 1, 'groups' => $groups]);
+            $check_update = $this->OrderModel->update_order_groups();
+            if ($check_update > 0) {
+                $_SESSION['messager'] = ['title' => 'Thành công!', 'mess' => 'Duyệt danh sách đơn hàng thành công!', 'type' => 'success'];
+            }
+        } else {
+            $_SESSION['messager'] = ['title' => 'Cảnh báo!', 'mess' => 'Không có đơn nào được chọn!', 'type' => 'warning'];
+        }
+        header('Location: ' . _WEB_ROOT_ . '/admin/orders?status=' . $status);
     }
 }

@@ -6,20 +6,20 @@
         <button data-bs-toggle="modal" data-bs-target="#myModelNewUser"><i class="ph ph-plus"></i>Thêm 1 thành
             viên</button>
     </div>
-    <?php if (!empty($users)): ?>
-        <div class="custom-content__show p-3">
-            <div class="custom-content__show--top">
-                <p>
-                    <?= $total_user['total'] ?>
-                    thành viên
-                </p>
-                <form method="GET">
-                    <input type="hidden" name="page" value="1">
-                    <input type="text" name="keyword" value="<?= isset($_GET['keyword']) ? $_GET['keyword'] : ''; ?>"
-                        placeholder="Tìm kiếm...">
-                    <button type="submit">Tìm</button>
-                </form>
-            </div>
+    <div class="custom-content__show p-3">
+        <div class="custom-content__show--top">
+            <p>
+                <?= $total_user['total'] ?>
+                thành viên
+            </p>
+            <form method="GET">
+                <input type="hidden" name="page" value="1">
+                <input type="text" name="keyword" value="<?= isset($_GET['keyword']) ? $_GET['keyword'] : ''; ?>"
+                    placeholder="Tìm kiếm...">
+                <button type="submit">Tìm</button>
+            </form>
+        </div>
+        <?php if (!empty($users)): ?>
             <form action="<?= _WEB_ROOT_ ?>/admin/user/handle-del-groups" method="POST"
                 onsubmit="return confirm('Bạn có chắc muốn xóa danh sách người dùng!')">
                 <div class="custom-content__show--main">
@@ -143,12 +143,12 @@
                     </div>
                 </div>
             </form>
-        </div>
-    <?php else: ?>
-        <div class="d-flex align-items-center justify-content-center mt-5">
-            <p class="alert alert-warning w-100 text-center">Hiện tại không có thành viên nào!</h3>
-        </div>
-    <?php endif; ?>
+        <?php else: ?>
+            <div class="d-flex align-items-center justify-content-center mt-5">
+                <p class="alert alert-warning w-100 text-center">Hiện tại không có thành viên nào!</h3>
+            </div>
+        <?php endif; ?>
+    </div>
 </div>
 
 <!-- Model new -->

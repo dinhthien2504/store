@@ -57,6 +57,7 @@ class Routes
         $router->create(path: '/admin/get_cate_by_cate_id', params: [Ajax::class, 'get_cate_by_cate_id']);
         $router->create(path: '/admin/get_user_by_id', params: [Ajax::class, 'get_user_by_id']);
         $router->create(path: '/admin/update_status_order', params: [Ajax::class, 'update_status_order']);
+        $router->create(path: '/admin/get_order_detail', params: [Ajax::class, 'get_order_detail']);
 
 
         //Admin
@@ -87,5 +88,6 @@ class Routes
 
         //Admin Order
         $router->create(path: '/admin/orders', params: [OrderAdmin::class, 'index']);
+        $router->create(path: '/admin/order/handle_update_groups', params: [OrderAdmin::class, 'handle_update_groups']);
     }
 }

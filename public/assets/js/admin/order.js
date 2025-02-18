@@ -44,3 +44,23 @@ const update_status_order_server = (status, id) => {
         }
     })
 }
+
+const get_order_by_id = (el) => {
+    // Gửi yêu cầu AJAX để lấy thông tin danh mục
+    const order_id = $(el).data('id');
+    $('#show_order_detail').html('');
+    $.ajax({
+        url: 'get_order_detail',
+        type: 'POST',
+        data: {
+            id: order_id
+        },
+        success: function (data) {
+            $('#show_order_detail').html(data);
+        },
+        error: function () {
+            alert('Có lỗi xảy ra khi tải thông tin thành viên');
+        }
+    });
+}
+

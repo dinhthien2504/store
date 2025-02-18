@@ -2,7 +2,7 @@
     <div class="row g-1 my-2">
         <div class="col-xxl-2 col-md-3 col-sm-4 col-0">
             <div class="category">
-                <h3 class="category__heading"><i class="fas fa-list-ul me-2"></i>Theo Danh mục</h3>
+                <!-- <h3 class="category__heading"><i class="fas fa-list-ul me-2"></i>Theo Danh mục</h3> -->
                 <!-- category-item--active -->
                 <ul class="category-list">
                     <?php if (!empty($cate_by_keyword)): ?>
@@ -20,7 +20,7 @@
                 <div class="p-4">
                     <h5 class="mb-4">Khoảng Giá</h5>
                     <form method="GET" onsubmit="return valid_filter()">
-                    <input type="hidden" name="keyword" value="<?= htmlspecialchars($_GET['keyword'] ?? '') ?>">
+                        <input type="hidden" name="keyword" value="<?= htmlspecialchars($_GET['keyword'] ?? '') ?>">
                         <div class="row g-2 align-items-center mb-3">
                             <div class="col category-filter__price">
                                 <input type="number" id="min_price" name="minPrice"
@@ -48,11 +48,11 @@
         <div class="col-xxl-10 col-md-9 col-sm-8 col-12">
             <p class="filter-keyword_pro">
                 <i class="fas fa-lightbulb"></i>
-                    Bộ lọc tìm kiếm cho kết quả 
-                    <span>'<?=isset($_GET['keyword']) ? trim($_GET['keyword']) : ''?>'</span>
+                Bộ lọc tìm kiếm cho kết quả
+                <span>'<?= isset($_GET['keyword']) ? trim($_GET['keyword']) : '' ?>'</span>
             </p>
             <div class="category-filter ">
-                
+
                 <div class="row g-2 align-items-center">
                     <?php
                     $keyword = isset($_GET["keyword"]) ? 'keyword=' . trim($_GET['keyword']) . '&' : '';
@@ -124,7 +124,8 @@
                                         </div>
                                         <h4 class="custom-pro__item__name"><?= $pro_search['name'] ?></h4>
                                         <div class="custom-pro__item__price">
-                                            <span class="custom-pro__item__price-old"><?= number_format($pro_search['price']) ?> đ</span>
+                                            <span class="custom-pro__item__price-old"><?= number_format($pro_search['price']) ?>
+                                                đ</span>
                                             <span
                                                 class="custom-pro__item__price-current"><?= number_format($pro_search['price'] - ($pro_search['price'] * ($pro_search['discount_percent'] / 100))) ?>đ</span>
                                         </div>

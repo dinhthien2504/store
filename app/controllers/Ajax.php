@@ -5,7 +5,7 @@ use app\controllers\Base;
 class Ajax extends Base
 {
     public $data;
-    private $ProVariantModel, $CategoryModel, $AttriValueModel, $OrderModel, $CartModel, $ProvinceModel, $DistrictModel, $WardModel, $UserModel;
+    private $ProVariantModel, $CategoryModel, $AttriValueModel, $OrderModel, $OrderDetailModel, $CartModel, $ProvinceModel, $DistrictModel, $WardModel, $UserModel;
     public function __construct()
     {
         $this->ProVariantModel = $this->model('ProVariantModel');
@@ -13,6 +13,7 @@ class Ajax extends Base
         $this->AttriValueModel = $this->model('AttriValueModel');
         $this->CartModel = $this->model('CartModel');
         $this->OrderModel = $this->model('OrderModel');
+        $this->OrderDetailModel = $this->model('OrderDetailModel');
         $this->ProvinceModel = $this->model('ProvinceModel');
         $this->DistrictModel = $this->model('DistrictModel');
         $this->WardModel = $this->model('WardModel');
@@ -115,7 +116,7 @@ class Ajax extends Base
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $user_id = $_SESSION['user']['id'] ?? 0;
             $this->UserModel->__sets([trim($_POST['name']), trim($_POST['phone']), trim($_POST['address']), trim($_POST['address_detail']), $user_id]);
-            $check = $this->UserModel->update_order_user($this->usemodel);
+            $check = $this->UserModel->update_order_user();
             if ($check > 0) {
                 $_SESSION['user']['name'] = $_POST['name'];
                 $_SESSION['user']['phone'] = $_POST['phone'];
@@ -338,5 +339,57 @@ class Ajax extends Base
             }
         }
     }
+    public function get_order_detail()
+    {
+        $status = [
+            1 => 'Chờ xác nhận',
+            2 => 'Đã xác nhận',
+            3 => 'Đang giao',
+            4 => 'Đã giao',
+            5 => 'Đã hủy',
+        ];
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $id = $_POST['id'];
+            $this->OrderModel->__set('id', $id);
+            $this->OrderDetailModel->__set('order_id', $id);
+            //Lấy thông tin người đặt hàng
+            $order = $this->OrderModel->get_order_by_id();
+            //Lấy thông tin sản phẩm đơn Hàng
+            $order_detais = $this->OrderDetailModel->get_order_detail_by_order_id();
+            if (!empty($order) && !empty($order_detais)) {
+                $output = '
+                <div class="row">
+                    <div class="col-sm-6">
+                        <p>Trạng thái: <span class="fw-bold">' . $status[$order['status']] . '</span></p>';
+                foreach ($order_detais as $Dorder) {
+                    $output .= '<div v-for="Dorder in dataDorderByOrderId" class="box-pros d-flex my-3">
+                            <img src="' . _WEB_ROOT_ . '/public/assets/img/pro/' . $Dorder['url_image'] . '" alt="lỗi" width="70px" height="70px">
+                            <div class="mx-3">
+                                <p class="my-0">' . $Dorder['name'] . '</p>
+                                <p class="my-1 text-danger">Giá: ' . number_format($Dorder['price']) . ' đ<span> x ' . $Dorder['quantity'] . '</span></p>
+                                <p class="my-1 text-danger"><span>Phân loại: ' . $Dorder['name_variant'] . '</span></p>
+                            </div>
+                            <hr class="text-black">
+                        </div>';
+                }
+
+                $output .= '</div>
+                    <div class="col-sm-6 my-3">
+                        <p>Khách hàng: <span class="fw-bold">' . $order['name'] . '</span></p>
+                        <p>Số điện thoại: <span class="fw-bold">' . $order['phone'] . '</span></p>
+                        <p>Địa chỉ giao hàng: <span class="fw-bold">' . $order['address'] . ', ' . $order['address_detail'] . '</span>
+                        </p>
+                        <p>Thời gian: <span class="fw-bold">' . $order['by_date'] . '</span></p>
+                        <p>Phí vận chuyển: <span class="fw-bold">Miễn ship</span></p>
+                        <p>Thanh toán: <span class="fw-bold">Thanh toán khi nhận hàng</span></p>
+                        <p>Tổng tiền: <span class="text-danger fw-bold">' . number_format($order['total']) . ' đ</span></p>
+                    </div>
+                </div>
+                ';
+                echo $output;
+            }
+        }
+    }
 }
+
 

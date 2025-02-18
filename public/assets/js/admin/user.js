@@ -79,7 +79,6 @@ const get_user_by_id = (el) => {
             id: user_id
         },
         success: function (data) {
-            console.log(data);
             $('#form_edit_user').html(data);
         },
         error: function () {

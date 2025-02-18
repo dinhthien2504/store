@@ -206,4 +206,12 @@ class ProductModel extends Model
         $sql = "SELECT COUNT(*) as total FROM products";
         return $this->getOne($sql);
     }
+
+    public function get_pro_by_cate_dashboard()
+    {
+        $sql = "SELECT cate.id as cate_id,  cate.name as cate_name, count(pro.id) as quantity FROM products pro ";
+        $sql .= "LEFT JOIN categories cate ON cate.id = pro.cate_id ";
+        $sql .= "GROUP BY cate.id ORDER BY cate.id DESC";
+        return $this->getAll($sql);
+    }
 }

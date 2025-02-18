@@ -4,14 +4,9 @@
     </div>
     <div class="custom-content__show p-3">
         <div class="custom-content__show--top">
-            <p><?php
-            // $total_pro['total'] 
-            ?> đơn hàng</p>
+            <p><?= $total_order['total'] ?> đơn hàng</p>
             <form method="GET">
                 <input type="hidden" name="page" value="1">
-                <?php if (isset($_GET['status']) && $_GET['status'] != ''): ?>
-                    <input type="hidden" name="status" value="<?= isset($_GET['status']) ? $_GET['status'] : ''; ?>">
-                <?php endif ?>
                 <input type="text" name="code" value="<?= isset($_GET['code']) ? $_GET['code'] : ''; ?>"
                     placeholder="Tìm kiếm theo mã đơn...">
                 <button type="submit">Tìm</button>
@@ -24,7 +19,8 @@
                     </option>
                     <option <?= (isset($_GET['status']) && $_GET['status'] == 1) ? 'selected' : ''; ?> value="1">Chờ xác
                         nhận</option>
-                    <option <?= (isset($_GET['status']) && $_GET['status'] == 2) ? 'selected' : ''; ?> value="2">Đã xác nhận
+                    <option <?= (isset($_GET['status']) && $_GET['status'] == 2) ? 'selected' : ''; ?> value="2">Đã xác
+                        nhận
                     </option>
                     <option <?= (isset($_GET['status']) && $_GET['status'] == 3) ? 'selected' : ''; ?> value="3">Đang giao
                     </option>
@@ -36,8 +32,9 @@
                 <button type="submit" class="btn btn-primary fs-15">Lọc</button>
             </div>
         </form>
-        <form action="<?= _WEB_ROOT_ ?>/admin/product/handle_del_groups" method="POST"
-            onsubmit="return confirm('Bạn có chắc muốn xóa danh sách sản phẩm!')">
+        <?php if(!empty($orders)): ?>
+        <form action="<?= _WEB_ROOT_ ?>/admin/order/handle_update_groups" method="POST"
+            onsubmit="return confirm('Bạn có chắc muốn duyệt tất cả đơn hàng này!')">
             <div class="custom-content__show--main">
                 <div class="custom-content__show--main--top bg-light">
                     <div class="row ">
@@ -71,18 +68,18 @@
                     </div>
                 </div>
                 <!-- Item pro -->
-                <?php foreach ($orders as $order):
+                <?php 
                     $role = [
                         '2' => 'Quản trị',
                         '0' => 'Khách hàng'
-                    ];
-                    ?>
+                    ]; 
+                    foreach ($orders as $order):?>
                     <div class="custom-table__item">
                         <div class="row my-4 g-0">
                             <!-- Checkbox Column -->
                             <div class="col-1">
                                 <div class="text-center">
-                                    <input type="checkbox" value="<?= $order['id'] ?>" name="order_del_groups[]"
+                                    <input type="checkbox" value="<?= $order['id'] ?>" name="order_groups[]"
                                         class="custom-table__check check-item" type="checkbox">
                                 </div>
                             </div>
@@ -117,14 +114,10 @@
                                     </div>
                                     <div class="col-lg-2 col-2 ">
                                         <div class="d-flex justify-content-center gap-2">
-                                            <button type="button" onclick="get_user_by_id(this)" data-bs-toggle="modal"
-                                                data-bs-target="#myModelEditUser" style="width: 50px;"
-                                                data-id="<?= $user['id'] ?>" class="btn btn-outline-warning btn-sm "><i
-                                                    class="ph ph-pen"></i></button>
-                                            <a href="<?= _WEB_ROOT_ ?>/admin/user/handle_del-<?= $user['id'] ?>"
-                                                style="width: 50px;" data-bs-toggle="tooltip" title="Xóa!"
-                                                onclick="return confirm('Bạn có chắc muốn xóa thành viên này không!')"
-                                                class="btn btn-outline-danger btn-sm "><i class="ph ph-trash"></i></a>
+                                            <button type="button" onclick="get_order_by_id(this)" data-bs-toggle="modal"
+                                                data-bs-target="#showOrderModal"
+                                                data-id="<?= $order['id'] ?>" class="btn btn-outline-success btn-sm"><i
+                                                    class="ph ph-eye"></i></button>
                                         </div>
                                     </div>
                                 </div>
@@ -137,7 +130,9 @@
                     <?php if (isset($links))
                         echo $links; ?>
                 </ul>
-                <!-- End item user -->
+                <?php if (isset($_GET['status']) && $_GET['status'] > 0 && $_GET['status'] < 4): ?>
+                <input type="hidden" name="status_current" value="<?=$_GET['status']?>">
+                <!-- End item order -->
                 <div class="custom-content__button bg-light p-4 mt-3">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
@@ -146,12 +141,18 @@
                                 <label class="fs-17 cursor-pointer" for="check_all">Tất cả</label>
                             </div>
                         </div>
-                        <button type="submit" name="submit_del_groups" style="width: 50px;"
-                            class="btn btn-outline-danger btn-sm "><i class="ph ph-trash"></i></button>
+                        <button type="submit" name="submit_update_groups"
+                            class="btn btn-info btn-sm ">Duyệt hàng loạt</button>
                     </div>
                 </div>
+                <?php endif ?>
             </div>
         </form>
+        <?php else: ?>
+            <div class="d-flex align-items-center justify-content-center mt-5">
+                <p class="alert alert-warning w-100 text-center">Hiện tại không có đơn hàng nào!</h3>
+            </div>
+        <?php endif ?>
     </div>
 </div>
 <!-- End Main Content -->
@@ -167,36 +168,7 @@
             </div>
 
             <!-- Modal body -->
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <p>Trạng thái: <span class="fw-bold">{{ status[dataOrderById.status] }}</span></p>
-                        <div v-for="Dorder in dataDorderByOrderId" class="box-pros d-flex my-3">
-                            <img :src="`/img/${Dorder.img}`" alt="lỗi" width="70px" height="70px">
-                            <div class="mx-3">
-                                <p class="my-0"></p>
-                                <p class="my-1 text-danger">{{ (Dorder.priceSale).toLocaleString() }} đ<span> x {{
-                                        Dorder.quantity }}</span></p>
-                                <p class="my-1 text-danger"><span>{{ Dorder.nameColor }} : {{ Dorder.nameSize
-                                        }}</span></p>
-                            </div>
-                            <hr class="text-black">
-                        </div>
-                    </div>
-                    <div class="col-sm-6 my-3">
-                        <p>Khách hàng: <span class="fw-bold">{{ dataOrderById.name }}</span></p>
-                        <p>Số điện thoại: <span class="fw-bold">{{ dataOrderById.phone }}</span></p>
-                        <p>Địa chỉ giao hàng: <span class="fw-bold">{{ dataOrderById.address }}</span>
-                        </p>
-                        <p>Thời gian: <span class="fw-bold">{{ dataOrderById.by_date }}</span></p>
-                        <p>Phí vận chuyển: <span class="fw-bold">Miễn ship</span></p>
-                        <p>Thanh toán: <span class="fw-bold">Thanh toán khi nhận hàng</span></p>
-                        <p>Ghi chú: <span class="fw-bold">{{ dataOrderById.note }}</span></p>
-                        <p>Tổng tiền: <span class="text-danger fw-bold">{{ (dataOrderById.total) }} đ</span></p>
-                    </div>
-                </div>
-            </div>
-
+            <div class="modal-body" id="show_order_detail"></div>
             <!-- Modal footer -->
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Đóng</button>

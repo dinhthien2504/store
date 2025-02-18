@@ -5,7 +5,6 @@
     <div class="custom-content__add custom-btn__hover">
         <a href="<?= _WEB_ROOT_ ?>/admin/product-new"><i class="ph ph-plus"></i>Thêm 1 sản phẩm</a>
     </div>
-    <?php if (!empty($data_all_pro)): ?>
         <div class="custom-content__show p-3">
             <div class="custom-content__show--top">
                 <p><?=$total_pro['total']?> sản phẩm</p>
@@ -15,6 +14,7 @@
                     <button type="submit">Tìm</button>
                 </form>
             </div>
+            <?php if (!empty($data_all_pro)): ?>
             <form action="<?= _WEB_ROOT_ ?>/admin/product/handle_del_groups" method="POST" onsubmit="return confirm('Bạn có chắc muốn xóa danh sách sản phẩm!')">
                 <div class="custom-content__show--main">
                     <div class="custom-content__show--main--top bg-light">
@@ -180,10 +180,10 @@
                     </div>
                 </div>
             </form>
-        </div>
-    <?php else : ?>
-        <div class="d-flex align-items-center justify-content-center mt-5">
-            <p class="alert alert-warning w-100 text-center">Hiện tại không có sản phẩm nào!</h3>
-        </div>
+            <?php else : ?>
+            <div class="d-flex align-items-center justify-content-center mt-5">
+                <p class="alert alert-warning w-100 text-center">Hiện tại không có sản phẩm nào!</h3>
+            </div>
     <?php endif; ?>
+    </div>
 </div>
