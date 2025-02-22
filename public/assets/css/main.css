@@ -326,11 +326,11 @@
 
 /* Authen modal */
 .fs-14 {
-  font-size: 14px;
+  font-size: 14px !important;
 }
 
 .fs-17 {
-  font-size: 17px!important;
+  font-size: 17px !important;
 }
 
 /* Header with search */
@@ -793,9 +793,11 @@
   padding: 15px 10px;
   background-color: rgba(0, 0, 0, 0.04);
 }
+
 .category-filter__lable {
   font-size: 17.5px
 }
+
 .category-filter__label {
   font-size: 1.4rem;
   color: #555555;
@@ -817,11 +819,13 @@
   font-weight: 500;
   transition: all 0.5s ease;
 }
-.category-filter__btn:hover, 
-.category-filter__active  {
+
+.category-filter__btn:hover,
+.category-filter__active {
   background-color: var(--primary-color);
   color: var(--white-color);
 }
+
 /* Selection input */
 .select-input {
   min-width: 200px;
@@ -832,15 +836,17 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: relative; /* Đảm bảo menu con căn chỉnh theo cha */
-  z-index: 1; /* Đưa phần tử này lên trên nếu cần */
+  position: relative;
+  /* Đảm bảo menu con căn chỉnh theo cha */
+  z-index: 1;
+  /* Đưa phần tử này lên trên nếu cần */
 }
 
 .select-input__list {
   position: absolute;
   right: 0;
   top: calc(100%);
-  min-width: 200px; 
+  min-width: 200px;
   background-color: var(--white-color);
   padding: 10px 16px;
   border-radius: 4px;
@@ -848,7 +854,7 @@
   display: none;
   z-index: 999;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  overflow: visible; 
+  overflow: visible;
 }
 
 .select-input:hover .select-input__list {
@@ -878,7 +884,7 @@
   padding: 8px 0;
 }
 
-.select-input__link:hover, 
+.select-input__link:hover,
 .select-input__link--active {
   color: var(--primary-color);
 }
@@ -939,9 +945,11 @@
   color: var(--text-color);
   margin: 20px 0;
 }
+
 .filter-keyword_pro i {
   margin-right: 5px;
 }
+
 .filter-keyword_pro span {
   color: var(--primary-color);
   font-weight: 600;
@@ -2168,12 +2176,14 @@ i.custom-pro__item__like-icon-fill {
   height: 35px;
   object-fit: cover;
 }
+
 .custom-profile-img__main-right img {
   width: 150px;
   height: 150px;
   object-fit: cover;
   border-radius: 50%;
 }
+
 .custom-profile__top-nav {
   background-color: var(--white-color);
   padding: 6px;
@@ -2183,17 +2193,20 @@ i.custom-pro__item__like-icon-fill {
   top: var(--header-height);
   z-index: 20;
 }
+
 .custom-profile__top-nav p {
   font-size: 14px;
   font-weight: 400;
   color: #888888;
 }
+
 .custom-profile__btn--footer {
   background-color: var(--white-color);
   padding: 15px;
   /* box-shadow: 0 0 5px #eee; */
   background-color: #00ccff1a;
 }
+
 /* footer */
 .footer {
   padding-top: 20px;

@@ -81,13 +81,13 @@ $cart_user_id_header = $cartModel->get_all_cart_by_user_id_header();
                             <span class="header__navbar-user-name"><?= $_SESSION['user']['name'] ?></span>
                             <ul class="header__navbar-user-menu">
                                 <li class="header__navbar-user-item">
-                                    <a href="">Tài khoản</a>
+                                    <a href="<?=_WEB_ROOT_?>/user/profile">Tài khoản</a>
                                 </li>
                                 <li class="header__navbar-user-item">
                                     <a href="">Địa chỉ của tôi</a>
                                 </li>
                                 <li class="header__navbar-user-item">
-                                    <a href="">Đơn mua</a>
+                                    <a href="<?=_WEB_ROOT_?>/user/purchase">Đơn mua</a>
                                 </li>
                                 <li class="header__navbar-user-item header__navbar-user-item--separate">
                                     <a href="<?=_WEB_ROOT_?>/logout">Đăng xuất</a>
@@ -145,13 +145,13 @@ $cart_user_id_header = $cartModel->get_all_cart_by_user_id_header();
                     <img src="https://i.pinimg.com/736x/b7/91/44/b79144e03dc4996ce319ff59118caf65.jpg" alt="" class="header__navbar-user-img"/>
                             <ul class="header__navbar-user-menu">
                                 <li class="header__navbar-user-item">
-                                    <a href="">Tài khoản</a>
+                                    <a href="<?=_WEB_ROOT_?>/user/profile">Tài khoản</a>
                                 </li>
                                 <li class="header__navbar-user-item">
                                     <a href="">Địa chỉ của tôi</a>
                                 </li>
                                 <li class="header__navbar-user-item">
-                                    <a href="">Đơn mua</a>
+                                    <a href="<?=_WEB_ROOT_?>/user/purchase">Đơn mua</a>
                                 </li>
                                 <li class="header__navbar-user-item header__navbar-user-item--separate">
                                     <a href="<?=_WEB_ROOT_?>/logout">Đăng xuất</a>

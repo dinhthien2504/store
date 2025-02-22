@@ -96,3 +96,36 @@ $('#submit_register').click(async () => {
         $('#form-register').submit(); // Nếu hợp lệ, gửi form
     }
 });
+const get_order_by_status_and_user_id = (user_id, status) => {
+    $.ajax({
+        url: 'get_order_by_status_and_user_id',
+        type: 'POST',
+        data: { user_id: user_id, status: status },
+        success: (data) => {
+            console.log(data);
+        },
+        error: () => {
+            console.log("Không gửi lên được");
+        }
+    });
+}
+const get_order_by_id = (el) => {
+    // Gửi yêu cầu AJAX để lấy thông tin danh mục
+    const order_id = $(el).data('id');
+    $('#show_order_detail').html('');
+    $.ajax({
+        url: 'get_order_detail_by_id',
+        type: 'POST',
+        data: {
+            id: order_id
+        },
+        success: function (data) {
+            console.log(">>>", data);
+
+            $('#show_order_detail').html(data);
+        },
+        error: function () {
+            alert('Có lỗi xảy ra khi tải thông tin thành viên');
+        }
+    });
+}

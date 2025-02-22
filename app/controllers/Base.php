@@ -113,4 +113,11 @@ abstract class Base extends Viewer
         }
         return $link_prev;
     }
+    protected function render_error($name = 404)
+    {
+        $file_path = 'app/errors/' . $name . '.php';
+        if (file_exists($file_path)) {
+            require_once $file_path;
+        }
+    }
 }

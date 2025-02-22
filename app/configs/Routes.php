@@ -32,6 +32,7 @@ class Routes
         $router->create(path: '/logout', params: [User::class, 'logout']);
         $router->create(path: '/user/profile', params: [User::class, 'profile']);
         $router->create(path: '/user/purchase', params: [User::class, 'purchase']);
+        $router->create(path: '/user/cancel_order-{/+d}', params: [User::class, 'cancel_order']);
 
         //Cart
         $router->create(path: '/cart', params: [Cart::class, 'cart']);
@@ -49,9 +50,10 @@ class Routes
         $router->create(path: '/get_district_province_id', params: [Ajax::class, 'get_district_province_id']);
         $router->create(path: '/get_ward_district_id', params: [Ajax::class, 'get_ward_district_id']);
         $router->create(path: '/update_address', params: [Ajax::class, 'update_address']);
-        $router->create(path: '/admin/get_attri_val_by_attri_id', params: [Ajax::class, 'get_attri_val_by_attri_id']);
+        $router->create(path: '/user/get_order_detail_by_id', params: [Ajax::class, 'get_order_detail_by_id']);
 
         //Ajax Admin
+        $router->create(path: '/admin/get_attri_val_by_attri_id', params: [Ajax::class, 'get_attri_val_by_attri_id']);
         $router->create(path: '/admin/get_cate_chirld_by_parent', params: [Ajax::class, 'get_cate_chirld_by_parent']);
         $router->create(path: '/admin/get_attri_val_select_2', params: [Ajax::class, 'get_attri_val_select_2']);
         $router->create(path: '/admin/get_cate_by_cate_id', params: [Ajax::class, 'get_cate_by_cate_id']);

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th2 18, 2025 lúc 04:25 AM
+-- Thời gian đã tạo: Th2 18, 2025 lúc 11:38 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -964,6 +964,15 @@ CREATE TABLE `orders` (
   `status` tinyint(4) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `orders`
+--
+
+INSERT INTO `orders` (`id`, `user_id`, `voucher_id`, `staff_id`, `code_order`, `total`, `by_date`, `status`) VALUES
+(1, 3, NULL, NULL, 'ORD-67B4402E1774A', 516200, '2024-08-18 15:09:18', 4),
+(2, 3, NULL, NULL, 'ORD-67B4434C7CCB8', 283020, '2024-12-18 15:22:36', 4),
+(3, 3, NULL, NULL, 'ORD-67B4435B56C01', 285000, '2025-02-18 15:22:51', 4);
+
 -- --------------------------------------------------------
 
 --
@@ -979,6 +988,17 @@ CREATE TABLE `order_details` (
   `price` double(10,0) NOT NULL,
   `is_reviewed` tinyint(4) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `order_details`
+--
+
+INSERT INTO `order_details` (`id`, `pro_id`, `order_id`, `name_variant`, `quantity`, `price`, `is_reviewed`) VALUES
+(1, 37, 1, 'Xanh rêu - S', 1, 258100, 0),
+(2, 37, 1, 'Xanh navy - S', 1, 258100, 0),
+(3, 30, 2, 'Đỏ - XS', 1, 141510, 0),
+(4, 30, 2, 'Nâu - S', 1, 141510, 0),
+(5, 8, 3, '36', 1, 285000, 0);
 
 -- --------------------------------------------------------
 
@@ -1295,7 +1315,12 @@ INSERT INTO `pro_images` (`id`, `pro_id`, `url_image`) VALUES
 (155, 36, 'quan-da-ong-suong-cao-cap-phoi-ly-ton-dang-cao-cap-xam.jpg'),
 (156, 37, 'quan-jean-nu-ong-suong-cao-cap-main.jpg'),
 (157, 37, 'quan-jean-nu-ong-suong-cao-cap-main.1jpg.webp'),
-(158, 37, 'quan-jean-nu-ong-suong-cao-cap-xanh-dam.jpg');
+(158, 37, 'quan-jean-nu-ong-suong-cao-cap-xanh-dam.jpg'),
+(159, 27, 'ao-khoac-nu-biggsize-ao-khoac-ni-co-tron-dang-crop-main1.jpg'),
+(160, 27, 'ao-khoac-nu-biggsize-ao-khoac-ni-co-tron-dang-crop-main2.jpg'),
+(161, 27, 'ao-khoac-nu-biggsize-ao-khoac-ni-co-tron-dang-crop-main3.jpg'),
+(162, 27, 'ao-khoac-nu-biggsize-ao-khoac-ni-co-tron-dang-crop-main4.jpg'),
+(163, 27, 'ao-khoac-nu-biggsize-ao-khoac-ni-co-tron-dang-crop-main5.jpg');
 
 -- --------------------------------------------------------
 
@@ -1607,7 +1632,9 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `phone`, `email`, `url_image`, `password`, `address`, `address_detail`, `role`, `status`) VALUES
 (1, 'Admin', NULL, 'laptrinh05.net@gmail.com', NULL, '$2y$10$cASxA3oAMBPskO6aC4CqnOJFdbzLCECRY6NnmL6/OBNZOx0OiIDw.', NULL, NULL, 2, 0),
-(2, 'Đình Thiên', '0376373272', 'dinhthien2504@gmail.com', NULL, '$2y$10$cASxA3oAMBPskO6aC4CqnOJFdbzLCECRY6NnmL6/OBNZOx0OiIDw.', 'Cao Bằng, Huyện Bảo Lâm, Xã Đức Hạnh', 'Thôn 6, Kênh 234\n', 0, 0);
+(2, 'Đình Thiên', '0376373272', 'dinhthien2504@gmail.com', NULL, '$2y$10$OfN58BUJy2MP4iQluNHfe.ywlFdUVrpfQ9C/sQx6VMkb0UbhebWYG', 'Cao Bằng, Huyện Bảo Lâm, Xã Đức Hạnh', 'Thôn 6, Kênh 234\n', 0, 0),
+(3, 'Đình Thiên', '0376373272', 'hackker3272@gmail.com', NULL, '$2y$10$OfN58BUJy2MP4iQluNHfe.ywlFdUVrpfQ9C/sQx6VMkb0UbhebWYG', 'Bình Thuận, Huyện Hàm Thuận Bắc, Xã Hàm Chính', 'kênh 23', 0, 0),
+(4, 'Đình Thiên', NULL, 'dinhthien2545@gmail.com', NULL, '$2y$10$OfN58BUJy2MP4iQluNHfe.ywlFdUVrpfQ9C/sQx6VMkb0UbhebWYG', NULL, NULL, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -12287,13 +12314,17 @@ ALTER TABLE `provinces`
 -- Chỉ mục cho bảng `pro_images`
 --
 ALTER TABLE `pro_images`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_pro_images_products` (`pro_id`);
 
 --
 -- Chỉ mục cho bảng `pro_variants`
 --
 ALTER TABLE `pro_variants`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_provariant_products` (`pro_id`),
+  ADD KEY `fk_provariant_attrivalue_color` (`cor_id`),
+  ADD KEY `fk_provariant_attrivalue_size` (`size_id`);
 
 --
 -- Chỉ mục cho bảng `users`
@@ -12328,7 +12359,7 @@ ALTER TABLE `attri_values`
 -- AUTO_INCREMENT cho bảng `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `categories`
@@ -12346,13 +12377,13 @@ ALTER TABLE `districts`
 -- AUTO_INCREMENT cho bảng `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `products`
@@ -12370,7 +12401,7 @@ ALTER TABLE `provinces`
 -- AUTO_INCREMENT cho bảng `pro_images`
 --
 ALTER TABLE `pro_images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=159;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=164;
 
 --
 -- AUTO_INCREMENT cho bảng `pro_variants`
@@ -12382,13 +12413,31 @@ ALTER TABLE `pro_variants`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `wards`
 --
 ALTER TABLE `wards`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10585;
+
+--
+-- Các ràng buộc cho các bảng đã đổ
+--
+
+--
+-- Các ràng buộc cho bảng `pro_images`
+--
+ALTER TABLE `pro_images`
+  ADD CONSTRAINT `fk_pro_images_products` FOREIGN KEY (`pro_id`) REFERENCES `products` (`id`);
+
+--
+-- Các ràng buộc cho bảng `pro_variants`
+--
+ALTER TABLE `pro_variants`
+  ADD CONSTRAINT `fk_provariant_attrivalue_color` FOREIGN KEY (`cor_id`) REFERENCES `attri_values` (`id`),
+  ADD CONSTRAINT `fk_provariant_attrivalue_size` FOREIGN KEY (`size_id`) REFERENCES `attri_values` (`id`),
+  ADD CONSTRAINT `fk_provariant_products` FOREIGN KEY (`pro_id`) REFERENCES `products` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -14,7 +14,7 @@
                 <ul class="nav flex-column">
                     <li class="nav-item d-flex align-items-center fs-17 ">
                         <i class="far fa-user"></i>
-                        <a class="nav-link active text-black" href="<?= $base_url ?>/profile">Tài Khoản Của
+                        <a class="nav-link active text-black" href="<?= _WEB_ROOT_ ?>/user/profile">Tài Khoản Của
                             Tôi</a>
                     </li>
                     <li class="nav-item d-flex align-items-center fs-17">

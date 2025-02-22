@@ -166,7 +166,6 @@
                 <h4 class="modal-title">Thông Tin Đơn Hàng</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-
             <!-- Modal body -->
             <div class="modal-body" id="show_order_detail"></div>
             <!-- Modal footer -->

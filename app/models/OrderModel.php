@@ -12,6 +12,38 @@ class OrderModel extends Model
         $sql = "INSERT INTO orders(user_id, voucher_id, staff_id, code_order, total) VALUES (?, ?, ?, ?, ?)";
         return $this->insert($sql, $this->__gets());
     }
+    public function get_order_by_user_id_and_status()
+    {
+        $params = [];
+        $params[] = $this->__get('user_id');
+        $status = $this->__get('status');
+
+        $sql = "SELECT o.id as order_id, o.code_order, o.status, o.total, ";
+        $sql .= "(SELECT CONCAT('[', GROUP_CONCAT(
+                JSON_OBJECT(
+                    'name_variant', D_o.name_variant, 
+                    'name_pro', p.name,
+                    'price', D_o.price,
+                    'quantity', D_o.quantity,
+                    'url_image', (SELECT img.url_image FROM pro_images img WHERE img.pro_id = p.id LIMIT 1)
+                )
+            ), ']')) as order_detail ";
+        $sql .= "FROM orders o ";
+        $sql .= "LEFT JOIN order_details D_o ON D_o.order_id = o.id ";
+        $sql .= "LEFT JOIN products p ON p.id = D_o.pro_id ";
+        $sql .= "WHERE o.user_id = ? ";
+
+        if (!empty($status)) {
+            $sql .= "AND o.status = ? ";
+            $params[] = $status;
+        }
+
+        $sql .= "GROUP BY o.id ";
+        $sql .= "ORDER BY o.id DESC ";
+
+        return $this->getAll($sql, $params);
+    }
+
 
     //Admin
     public function get_order_admin()

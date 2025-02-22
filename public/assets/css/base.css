@@ -52,17 +52,25 @@ html {
 .cursor-pointer {
   cursor: pointer;
 }
+
 .no-wrap {
   white-space: nowrap;
 }
+
 .ellipsis {
   white-space: nowrap;
-  overflow: hidden;  
+  overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.active {
+  color: var(--primary-color) !important;
+  font-weight: bold;
+}
+
 .custom-btn {
   min-width: 150px;
-  height: 45px;
+  height: 40px;
   text-decoration: none;
   border: none;
   border-radius: 0.5rem;
@@ -114,7 +122,7 @@ html {
   --radii: 0.5em;
   cursor: pointer;
   /* min-width: 120px; */
-  min-height: 44px;
+  min-height: 35px;
   font-size: 15px;
   font-weight: 500;
   transition: 0.8s;
@@ -132,9 +140,23 @@ html {
     inset 4px 4px 8px rgba(175, 230, 255, 0.5),
     inset -4px -4px 8px rgba(19, 95, 216, 0.35);
 }
+
+.custom-btn__danger {
+  --radii: 0.5em;
+  cursor: pointer;
+  /* min-width: 120px; */
+  min-height: 35px;
+  font-size: 15px;
+  font-weight: 500;
+  transition: 0.8s;
+  background-color: red;
+  color: var(--white-color);
+}
+
 .custom-text-primary {
   color: var(--primary-color);
 }
+
 .custom-btn__primary:hover {
   background-position: right top;
 }
@@ -169,7 +191,7 @@ html {
   margin: 0 12px;
 }
 
-.pagination-item--active .pagination-item__link, 
+.pagination-item--active .pagination-item__link,
 .pagination-item__link:hover {
   color: var(--white-color);
   background-color: var(--primary-color);

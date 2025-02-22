@@ -2,6 +2,7 @@
 namespace app\controllers;
 
 use app\controllers\Base;
+use app\mail\Mailer;
 class Cart extends Base
 {
     public $data = [];
@@ -10,6 +11,7 @@ class Cart extends Base
     private $province_model;
     private $order_model;
     private $order_detail_model;
+    private $mail;
     public function __construct()
     {
         $this->cart_model = $this->model('CartModel');
@@ -17,6 +19,7 @@ class Cart extends Base
         $this->province_model = $this->model('ProvinceModel');
         $this->order_model = $this->model('OrderModel');
         $this->order_detail_model = $this->model('OrderDetailModel');
+        $this->mail = new Mailer();
     }
 
     public function cart()
@@ -81,7 +84,7 @@ class Cart extends Base
         if (isset($_POST['submit_handle__del'])) {
             if (!empty($data_check)) {
                 $this->handle_del($data_check);
-                header('Location: ' . _WEB_ROOT . '/gio-hang');
+                header('Location: ' . _WEB_ROOT_ . '/cart');
             }
         }
         //Xử lý thanh toán danh sách sản phẩm
@@ -122,6 +125,8 @@ class Cart extends Base
                     }
                     $this->handle_del($cart_ids);
                     $_SESSION['messager'] = ['title' => 'Thành công!', 'mess' => 'Tạo đơn hàng thành công!', 'type' => 'success'];
+                    //Thực hiện thao tác gửi mail
+                    $this->sendMailOrder($order_id);
                     header('Location: ' . _WEB_ROOT_ . '/cart');
                 } else {
                     echo 'Lỗi khi thêm chi tiết đơn hàng.<br>';
@@ -141,21 +146,107 @@ class Cart extends Base
             $data_post['total'] ?? 0
         ]);
     }
-    private function handle_order_detail__data($__data_post, $__order_id)
+    private function handle_order_detail__data($data_post, $order_id)
     {
-        if (isset($__data_post['pro_id']) && is_array($__data_post['pro_id'])) {
+        if (isset($data_post['pro_id']) && is_array($data_post['pro_id'])) {
             $order_details = [];
-            foreach ($__data_post['pro_id'] as $index => $pro_id) {
+            foreach ($data_post['pro_id'] as $index => $pro_id) {
                 $order_details[] = [
                     $pro_id,
-                    $__order_id,
-                    $__data_post['name_variant'][$index] ?? null,
-                    $__data_post['quantity'][$index] ?? 0,
-                    $__data_post['price'][$index] ?? 0
+                    $order_id,
+                    $data_post['name_variant'][$index] ?? null,
+                    $data_post['quantity'][$index] ?? 0,
+                    $data_post['price'][$index] ?? 0
                 ];
             }
         }
 
         return $order_details;
+    }
+    private function sendMailOrder($order_id)
+    {
+        //Lấy thông tin đơn hàng vừa đặt
+        $this->order_detail_model->__set('order_id', $order_id);
+        $data_Dorder = $this->order_detail_model->get_order_detail_by_order_id();
+        //Lấy mã đơn hàng vừa đặt
+        $this->order_model->__set('id', $order_id);
+        $data_order = $this->order_model->get_order_by_id();
+        $email = $_SESSION['user']['email'] ?? null;
+        $name = $_SESSION['user']['name'] ?? null;
+        $subject = 'Thong bao dat hang';
+        $body = "Xin chào " . $name . "<br>";
+        $body .= "Đơn hàng #" . $data_order['code_order'] . " của bạn sẽ được chuẩn bị và giao trong thời gian sớm nhất<br>";
+        $body .= '<div style="
+            height: auto;
+            padding: 10px;
+            margin: 10px;
+            background-color: #eee;">
+                <h1 style="color: #0051ffe8; text-align: center; font-size: 27px;">Đặt Hàng Thành Công</h1>
+                <div style="padding: 0 20px;
+                background-color: #fff;" class="sendmail_row">
+                    <div style="display: grid;
+                    grid-template-columns: auto 1fr;
+                    align-items: center;
+                    grid-column-gap: 10px;" class="name_madh">
+                        <p style="color: #444444;
+                        font: 100;" class="title_madh">Mã Đơn Hàng: <span style="color: #444444;
+                        font-weight: bold;">#' . $data_order['code_order'] . '</span></p>
+                    </div>
+                    <div>
+                        <h2 style="font-weight: bold;">Bạn vừa mua:</h2>
+                        <div style="display: grid;
+                        grid-template-columns: auto 1fr;
+                        align-items: center;" class="products_item_">';
+
+        foreach ($data_Dorder as $item) {
+            $body .= '<div style="display: grid;
+                    grid-template-columns: auto 1fr;
+                    grid-column-gap: 10px;" class="name">
+                    <p style="color: #444444;">' . $item['name'] . '</p>
+                    <p style="color: #444444;">Giá: <span style="font-weight: bold;">' . number_format($item['price']) . ' đ</span></p>
+                    <p style="color: #444444; font-weight: bold; font-style: italic;" class="quantity_name">Phân loại: ' . $item['name_variant'] . ' x ' . $item['quantity'] . '</p>
+                </div>';
+        }
+
+        $body .= '</div>
+                        <div class="sendmail_total">
+                            <div style="display: grid;
+                            grid-template-columns: auto 1fr;
+                            grid-column-gap: 10px;
+                            align-items: center;" class="item_total">
+                                <h4>Giá trị đơn hàng:</h4>
+                                <p>' . number_format($data_order['total']) . ' đ</p>
+                            </div>
+                            <div style="display: grid;
+                            grid-template-columns: auto 1fr;
+                            grid-column-gap: 10px;
+                            align-items: center;" class="item_total">
+                                <h4>Phí vận chuyển:</h4>
+                                <p>0 VND</p>
+                            </div>
+                            <div style="display: grid;
+                            grid-template-columns: auto 1fr;
+                            grid-column-gap: 10px;
+                            align-items: center;" class="item_total">
+                                <h4>Tổng cộng:</h4>
+                                <p style="color: #0051ffe8;
+                                font-size: 20px;
+                                font-weight: bold;" class="price_total">' . number_format($data_order['total']) . ' đ</p>
+                            </div>
+                            <div style="display: grid;
+                            grid-template-columns: auto 1fr;
+                            grid-column-gap: 10px;
+                            align-items: center;" class="item_total">
+                                <h4>Phương thức thanh toán:</h4>
+                                <p>Thanh toán khi nhận hàng (COD)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p>Cảm ơn bạn đã đặt hàng tại: <span style="color: #0051ffe8;
+                font-weight: bold;
+                font-size: 24px;" class="sendMail_logo"><a href="">Shop</a></span></p>
+            </div>';
+        $this->mail->sendMail($email, $name, $subject, $body);
     }
 }
