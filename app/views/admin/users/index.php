@@ -9,7 +9,7 @@
     <div class="custom-content__show p-3">
         <div class="custom-content__show--top">
             <p>
-                <?= $total_user['total'] ?>
+                <?= $total_user['total'] - 1 ?>
                 thành viên
             </p>
             <form method="GET">

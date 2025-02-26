@@ -2,13 +2,14 @@
     <div class="p-2">
         <!-- Main Detail -->
         <div class="d-flex align-items-center justify-content-start pb-4 gap-2 flex-nowrap">
-            <a href="<?=_WEB_ROOT_?>" class="text-decoration-none text-secondary fs-14 no-wrap cursor-pointer">Trang chủ</a>
+            <a href="<?= _WEB_ROOT_ ?>" class="text-decoration-none text-secondary fs-14 no-wrap cursor-pointer">Trang
+                chủ</a>
             <i class="fas fa-chevron-right"></i>
             <a onclick="handle__url_link(this, '<?= _WEB_ROOT_ ?>','<?= $data_cate['parent_name'] ?>', 'cat<?= $data_cate['parent_id'] ?>-cidnull')"
-            class="text-decoration-none text-secondary fs-14 no-wrap cursor-pointer"><?=$data_cate['parent_name']?></a>
+                class="text-decoration-none text-secondary fs-14 no-wrap cursor-pointer"><?= $data_cate['parent_name'] ?></a>
             <i class="fas fa-chevron-right"></i>
-            <a onclick="handle__url_link(this, '<?= _WEB_ROOT_ ?>','<?= $data_cate['chirld_name'] ?>', 'cat<?= $data_cate['parent_id'] ?>-cid<?=$data_cate['cate_id']?>')"
-            class="text-decoration-none text-secondary fs-14 no-wrap cursor-pointer"><?=$data_cate['chirld_name']?></a>
+            <a onclick="handle__url_link(this, '<?= _WEB_ROOT_ ?>','<?= $data_cate['chirld_name'] ?>', 'cat<?= $data_cate['parent_id'] ?>-cid<?= $data_cate['cate_id'] ?>')"
+                class="text-decoration-none text-secondary fs-14 no-wrap cursor-pointer"><?= $data_cate['chirld_name'] ?></a>
             <i class="fas fa-chevron-right"></i>
             <span class="fs-14 fw-normal ellipsis"><?= $pro_id['name'] ?></span>
         </div>
@@ -295,7 +296,7 @@
             </div>
             <div class="col-md-3 col-lg-2">
                 <div class="bg-white p-2">
-                    <h3 class="fw-normal text-secondary fs-5 mb-3">TOP SẢN PHẨM LIÊN QUAN</h3>
+                    <h3 class="fw-normal text-secondary fs-5 mb-3">TOP LIÊN QUAN</h3>
                     <div class="row">
                         <?php if (!empty($pro_cate_id)): ?>
                             <?php foreach ($pro_cate_id as $pro_cate): ?>

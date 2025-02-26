@@ -5,7 +5,7 @@
         </div>
     </div>
     <?php if (!empty($data_carts)): ?>
-        <form action="<?=_WEB_ROOT_?>/handle_cart" method="POST" onsubmit="return valid_cart()">
+        <form action="<?=_WEB_ROOT_?>/handle-cart" method="POST" onsubmit="return valid_cart()">
             <!-- header cart -->
             <div class="custom-cart__top-nav my-3">
                 <div class="px-2 py-3 bg-while">

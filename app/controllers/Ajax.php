@@ -172,13 +172,14 @@ class Ajax extends Base
 
                 $output .= '</div>
                     <div class="col-sm-6 my-3 fs-17">
+                        <p>Trạng thái thanh toán: <span class="fw-bold">' . $order['status_payment'] . '</span></p>
                         <p>Khách hàng: <span class="fw-bold">' . $order['name'] . '</span></p>
                         <p>Số điện thoại: <span class="fw-bold">' . $order['phone'] . '</span></p>
                         <p>Địa chỉ giao hàng: <span class="fw-bold">' . $order['address'] . ', ' . $order['address_detail'] . '</span>
                         </p>
                         <p>Thời gian: <span class="fw-bold">' . $order['by_date'] . '</span></p>
                         <p>Phí vận chuyển: <span class="fw-bold">Miễn ship</span></p>
-                        <p>Thanh toán: <span class="fw-bold">Thanh toán khi nhận hàng</span></p>
+                        <p>Thanh toán: <span class="fw-bold">' . $order['order_info'] . '</span></p>
                         <p>Tổng tiền: <span class="text-danger fw-bold">' . number_format($order['total']) . ' đ</span></p>
                     </div>
                 </div>
@@ -425,13 +426,14 @@ class Ajax extends Base
 
                 $output .= '</div>
                     <div class="col-sm-6 my-3">
+                        <p>Trạnh thái thanh toán: <span class="fw-bold">' . $order['status_payment'] . '</span></p>
                         <p>Khách hàng: <span class="fw-bold">' . $order['name'] . '</span></p>
                         <p>Số điện thoại: <span class="fw-bold">' . $order['phone'] . '</span></p>
                         <p>Địa chỉ giao hàng: <span class="fw-bold">' . $order['address'] . ', ' . $order['address_detail'] . '</span>
                         </p>
                         <p>Thời gian: <span class="fw-bold">' . $order['by_date'] . '</span></p>
                         <p>Phí vận chuyển: <span class="fw-bold">Miễn ship</span></p>
-                        <p>Thanh toán: <span class="fw-bold">Thanh toán khi nhận hàng</span></p>
+                        <p>Thanh toán: <span class="fw-bold">'.$order['order_info'].'</span></p>
                         <p>Tổng tiền: <span class="text-danger fw-bold">' . number_format($order['total']) . ' đ</span></p>
                     </div>
                 </div>

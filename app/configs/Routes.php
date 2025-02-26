@@ -38,8 +38,10 @@ class Routes
         $router->create(path: '/cart', params: [Cart::class, 'cart']);
         $router->create(path: '/save_cart', params: [Cart::class, 'save_cart']);
         $router->create(path: '/handle_del/{/+d}', params: [Cart::class, 'handle_del']);
-        $router->create(path: '/handle_cart', params: [Cart::class, 'handle_cart']);
+        $router->create(path: '/handle-cart', params: [Cart::class, 'handle_cart']);
         $router->create(path: '/handle_checkout', params: [Cart::class, 'handle_checkout']);
+        $router->create(path: '/handle-payment', params: [Cart::class, 'handle_payment']);
+        $router->create(path: '/order-success', params: [Cart::class, 'order_success']);
 
         // Ajax
         $router->create(path: '/get_size', params: [Ajax::class, 'get_size']);

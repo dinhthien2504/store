@@ -98,10 +98,11 @@ class OrderModel extends Model
     public function get_order_by_id()
     {
         $id = $this->__get('id');
-        $sql = "SELECT o.id, o.code_order, o.total, o.by_date, o.status, ";
-        $sql .= "u.name, u.phone, u.address, u.address_detail ";
+        $sql = "SELECT o.id, o.code_order, o.total, o.by_date, o.status, p_m.status as status_payment, ";
+        $sql .= "u.name, u.phone, u.address, u.address_detail, p_m.order_info ";
         $sql .= "FROM orders o ";
         $sql .= "LEFT JOIN users u ON u.id = o.user_id ";
+        $sql .= "INNER JOIN payment p_m ON p_m.order_id = o.id ";
         $sql .= "WHERE o.id =? ";
         return $this->getOne($sql, [$id]);
     }
@@ -125,9 +126,11 @@ class OrderModel extends Model
 
     public function get_revenue()
     {
-        $sql = "SELECT DATE_FORMAT(by_date, '%Y-%m') AS month, SUM(total) AS monthly_total ";
-        $sql .= "FROM orders ";
-        $sql .= "WHERE by_date >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR) AND status = 4 ";
+        $sql = "SELECT DATE_FORMAT(o.by_date, '%Y-%m') AS month, SUM(o.total) AS monthly_total ";
+        $sql .= "FROM orders o ";
+        $sql .= "LEFT JOIN payment p_m ON p_m.order_id = o.id ";
+        $sql .= "WHERE by_date >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR) AND o.status = 4 ";
+        // $sql .= "AND p_m.status = 0 ";
         $sql .= "GROUP BY month ORDER BY month";
         return $this->getAll($sql);
     }

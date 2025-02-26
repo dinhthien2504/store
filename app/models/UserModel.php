@@ -31,12 +31,14 @@ class UserModel extends Model
         $item_page = $this->__get('item_page');
         $offset = ($this->__get('current_page') - 1) * $item_page;
         $keyword = "'%" . $this->__get('keyword') . "%' ";
+        $user_id = $this->__get('id');
         $sql = "SELECT * FROM users ";
         $sql .= "WHERE 1 ";
-        $sql .= "AND name LIKE {$keyword}";
+        $sql .= "AND name LIKE {$keyword} ";
+        $sql .= "AND id != ? ";
         $sql .= "ORDER BY id DESC ";
         $sql .= "LIMIT {$item_page} OFFSET {$offset}";
-        return $this->getAll($sql);
+        return $this->getAll($sql, [$user_id]);
     }
     public function insert_user_admin()
     {
@@ -80,9 +82,11 @@ class UserModel extends Model
     public function total_user_handle_page()
     {
         $keyword = '%' . $this->__get('keyword') . '%';
+        $user_id = $this->__get('id');
         $sql = "SELECT COUNT(*) as total FROM users ";
         $sql .= "WHERE 1 ";
         $sql .= "AND name LIKE ?";
-        return $this->getOne($sql, [$keyword]);
+        $sql .= "AND id != ? ";
+        return $this->getOne($sql, [$keyword, $user_id]);
     }
 }

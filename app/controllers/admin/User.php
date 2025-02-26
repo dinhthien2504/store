@@ -31,6 +31,8 @@ class User extends Base
             $links = $this->handle_url_page($total_page, $current_page);
             $this->data['sub_content']['links'] = $links;
         }
+        $user_id = $_SESSION['user']['id'] ?? 0;
+        $this->UserModel->__set('id', $user_id);
         $users = $this->UserModel->get_all_user_admin();
         //Tổng số thành viên
         $total_user = $this->UserModel->total();

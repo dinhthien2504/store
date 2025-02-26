@@ -89,7 +89,7 @@
                                         </div>
                                         <div class="col-lg-2 col-2 ">
                                             <div class="d-flex justify-content-center gap-2">
-                                                <a href="<?= _WEB_ROOT_ ?>/admin/edit-product-<?= $pro['id'] ?>" style="width: 50px;" data-bs-toggle="tooltip" title="Chỉnh sửa"
+                                                <a href="<?= _WEB_ROOT_ ?>/admin/product-edit-<?= $pro['id'] ?>" style="width: 50px;" data-bs-toggle="tooltip" title="Chỉnh sửa"
                                                     class="btn btn-outline-warning btn-sm "><i class="ph ph-pen"></i></a>
                                                 <a href="<?= _WEB_ROOT_ ?>/admin/product/handle-del-<?= $pro['id'] ?>" style="width: 50px;" data-bs-toggle="tooltip" title="Xóa!"
                                                 onclick="return confirm('Bạn có chắc muốn xóa sản phẩm!')" class="btn btn-outline-danger btn-sm "><i

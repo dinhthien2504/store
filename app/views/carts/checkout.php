@@ -137,9 +137,30 @@
             <!-- btn bottom-->
             <div class="custom-cart__btn--footer">
                 <div class="d-flex justify-content-between align-items-center">
-                    <p class="m-0 custom-cart__total">Tổng cộng: <?= number_format($total) ?> đ</p>
-                    <button type="submit" name="submit__checkout" class="custom-btn custom-btn__primary">Hoàn Tất Đặt
-                        Hàng</button>
+                    <?php if (!empty($data_payment_method)): ?>
+                        <div>
+                            <h3 class=" fw-bold mb-3">Phương thức thanh toán</h3>
+                            <?php foreach ($data_payment_method as $value): ?>
+                                <div class="checkbox-payment-checkout my-2">
+                                    <input style="display: none;" type="radio" name="payment" id="cbx<?= $value['id'] ?>" value="<?= $value['id'] ?>"
+                                        class="inp-cbx" />
+                                    <label for="cbx<?= $value['id'] ?>" class="cbx">
+                                        <span>
+                                            <svg viewBox="0 0 12 9" height="9px" width="12px">
+                                                <polyline points="1 5 4 8 11 1"></polyline>
+                                            </svg>
+                                        </span>
+                                        <span class="fs-17"><?= $value['name'] ?></span>
+                                    </label>
+                                </div>
+                            <?php endforeach ?>
+                        </div>
+                    <?php endif ?>
+                    <div class="d-flex flex-column">
+                        <p class="m-0 custom-cart__total mb-3">Tổng cộng: <?= number_format($total) ?> đ</p>
+                        <button type="submit" name="submit__checkout" class="custom-btn custom-btn__primary">Hoàn Tất Đặt
+                            Hàng</button>
+                    </div>
                 </div>
             </div>
         </form>
