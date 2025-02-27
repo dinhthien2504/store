@@ -182,6 +182,7 @@ class Cart extends Base
             foreach ($data_post['pro_id'] as $index => $pro_id) {
                 $order_details[] = [
                     $pro_id,
+                    $data_post['pro_variant_id'][$index],
                     $order_id,
                     $data_post['name_variant'][$index] ?? null,
                     $data_post['quantity'][$index] ?? 0,
@@ -313,7 +314,7 @@ class Cart extends Base
             'payment_method_id' => $payment,
             'response_time' => $data_get['responseTime'] ?? time(),
             'signature' => $data_get['signature'] ?? NULL,
-            'status' => $payment > 1 ? 'Đã thanh toán' : 'Chờ thanh toán',
+            'status' => $payment > 1 ? 'Đã thanh toán' : 'Chưa thanh toán',
         ]);
         $this->PaymentModel->insertPayment();
     }
@@ -442,6 +443,4 @@ class Cart extends Base
         }
     }
 }
-
-
 

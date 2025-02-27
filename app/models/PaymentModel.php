@@ -15,4 +15,11 @@ class PaymentModel extends Model
         $data_insert = array_values($data);
         return $this->save($columns, $placeholders, $data_insert);
     }
+
+    public function confirm_update_payment_success() {
+        $data = $this->__gets();
+        
+        $sql = "UPDATE payment SET status =? WHERE order_id =?";
+        return $this->update($sql, $data);
+    }
 }

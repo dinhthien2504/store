@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th2 18, 2025 lúc 11:38 AM
+-- Thời gian đã tạo: Th2 27, 2025 lúc 05:55 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -222,7 +222,9 @@ INSERT INTO `categories` (`id`, `parent`, `name`, `url_image`, `status`) VALUES
 (56, 9, 'Chăm Sóc Tóc', NULL, 0),
 (57, 9, 'Nước Hoa', NULL, 0),
 (58, 10, 'Vật Tư Y Tế', NULL, 0),
-(59, 2, 'Áo Khoác & Áo Choàng', NULL, 0);
+(59, 2, 'Áo Khoác & Áo Choàng', NULL, 0),
+(60, 0, 'Danh mục đề mô', '', 0),
+(61, 60, 'Danh mục đề mô con', 'BLAZE.png', 0);
 
 -- --------------------------------------------------------
 
@@ -964,15 +966,6 @@ CREATE TABLE `orders` (
   `status` tinyint(4) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Đang đổ dữ liệu cho bảng `orders`
---
-
-INSERT INTO `orders` (`id`, `user_id`, `voucher_id`, `staff_id`, `code_order`, `total`, `by_date`, `status`) VALUES
-(1, 3, NULL, NULL, 'ORD-67B4402E1774A', 516200, '2024-08-18 15:09:18', 4),
-(2, 3, NULL, NULL, 'ORD-67B4434C7CCB8', 283020, '2024-12-18 15:22:36', 4),
-(3, 3, NULL, NULL, 'ORD-67B4435B56C01', 285000, '2025-02-18 15:22:51', 4);
-
 -- --------------------------------------------------------
 
 --
@@ -989,16 +982,47 @@ CREATE TABLE `order_details` (
   `is_reviewed` tinyint(4) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
 --
--- Đang đổ dữ liệu cho bảng `order_details`
+-- Cấu trúc bảng cho bảng `payment`
 --
 
-INSERT INTO `order_details` (`id`, `pro_id`, `order_id`, `name_variant`, `quantity`, `price`, `is_reviewed`) VALUES
-(1, 37, 1, 'Xanh rêu - S', 1, 258100, 0),
-(2, 37, 1, 'Xanh navy - S', 1, 258100, 0),
-(3, 30, 2, 'Đỏ - XS', 1, 141510, 0),
-(4, 30, 2, 'Nâu - S', 1, 141510, 0),
-(5, 8, 3, '36', 1, 285000, 0);
+CREATE TABLE `payment` (
+  `id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `request_id` varchar(50) NOT NULL,
+  `amount` decimal(10,0) NOT NULL,
+  `order_info` text DEFAULT NULL,
+  `trans_id` varchar(50) DEFAULT NULL,
+  `result_code` int(11) NOT NULL,
+  `message` text DEFAULT NULL,
+  `payment_method_id` int(11) NOT NULL,
+  `response_time` bigint(20) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `signature` varchar(255) DEFAULT NULL,
+  `status` enum('Chờ thanh toán','Đã thanh toán') DEFAULT 'Chờ thanh toán'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `payment_method`
+--
+
+CREATE TABLE `payment_method` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `payment_method`
+--
+
+INSERT INTO `payment_method` (`id`, `name`) VALUES
+(1, 'Thanh toán khi nhận hàng(COD)'),
+(2, 'Quét mã QR MoMo'),
+(3, 'Chuyển khoản ngân hàng MoMo');
 
 -- --------------------------------------------------------
 
@@ -1632,7 +1656,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `phone`, `email`, `url_image`, `password`, `address`, `address_detail`, `role`, `status`) VALUES
 (1, 'Admin', NULL, 'laptrinh05.net@gmail.com', NULL, '$2y$10$cASxA3oAMBPskO6aC4CqnOJFdbzLCECRY6NnmL6/OBNZOx0OiIDw.', NULL, NULL, 2, 0),
-(2, 'Đình Thiên', '0376373272', 'dinhthien2504@gmail.com', NULL, '$2y$10$OfN58BUJy2MP4iQluNHfe.ywlFdUVrpfQ9C/sQx6VMkb0UbhebWYG', 'Cao Bằng, Huyện Bảo Lâm, Xã Đức Hạnh', 'Thôn 6, Kênh 234\n', 0, 0),
+(2, 'Đình Thiên', '0376373272', 'dinhthien2504@gmail.com', NULL, '$2y$10$OfN58BUJy2MP4iQluNHfe.ywlFdUVrpfQ9C/sQx6VMkb0UbhebWYG', 'Bình Thuận, Huyện Hàm Thuận Bắc, Xã Hàm Chính', 'Thôn 6, Kênh 23', 0, 0),
 (3, 'Đình Thiên', '0376373272', 'hackker3272@gmail.com', NULL, '$2y$10$OfN58BUJy2MP4iQluNHfe.ywlFdUVrpfQ9C/sQx6VMkb0UbhebWYG', 'Bình Thuận, Huyện Hàm Thuận Bắc, Xã Hàm Chính', 'kênh 23', 0, 0),
 (4, 'Đình Thiên', NULL, 'dinhthien2545@gmail.com', NULL, '$2y$10$OfN58BUJy2MP4iQluNHfe.ywlFdUVrpfQ9C/sQx6VMkb0UbhebWYG', NULL, NULL, 0, 0);
 
@@ -12298,6 +12322,20 @@ ALTER TABLE `order_details`
   ADD KEY `fk_orders_details_orders` (`order_id`);
 
 --
+-- Chỉ mục cho bảng `payment`
+--
+ALTER TABLE `payment`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `payment_method_id` (`payment_method_id`),
+  ADD KEY `payment_fk_order` (`order_id`);
+
+--
+-- Chỉ mục cho bảng `payment_method`
+--
+ALTER TABLE `payment_method`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Chỉ mục cho bảng `products`
 --
 ALTER TABLE `products`
@@ -12359,13 +12397,13 @@ ALTER TABLE `attri_values`
 -- AUTO_INCREMENT cho bảng `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT cho bảng `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT cho bảng `districts`
@@ -12377,13 +12415,25 @@ ALTER TABLE `districts`
 -- AUTO_INCREMENT cho bảng `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT cho bảng `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+--
+-- AUTO_INCREMENT cho bảng `payment`
+--
+ALTER TABLE `payment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+--
+-- AUTO_INCREMENT cho bảng `payment_method`
+--
+ALTER TABLE `payment_method`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `products`
@@ -12401,13 +12451,13 @@ ALTER TABLE `provinces`
 -- AUTO_INCREMENT cho bảng `pro_images`
 --
 ALTER TABLE `pro_images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=164;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=165;
 
 --
 -- AUTO_INCREMENT cho bảng `pro_variants`
 --
 ALTER TABLE `pro_variants`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=265;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=267;
 
 --
 -- AUTO_INCREMENT cho bảng `users`
@@ -12424,6 +12474,13 @@ ALTER TABLE `wards`
 --
 -- Các ràng buộc cho các bảng đã đổ
 --
+
+--
+-- Các ràng buộc cho bảng `payment`
+--
+ALTER TABLE `payment`
+  ADD CONSTRAINT `payment_fk_order` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`),
+  ADD CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`payment_method_id`) REFERENCES `payment_method` (`id`);
 
 --
 -- Các ràng buộc cho bảng `pro_images`

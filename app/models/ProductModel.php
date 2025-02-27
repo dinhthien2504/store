@@ -144,7 +144,8 @@ class ProductModel extends Model
                         "cor_name", a_v_c.name, 
                         "size_name", a_v_s.name,
                         "url_image", p_v.url_image,
-                        "quantity", p_v.quantity
+                        "quantity", p_v.quantity,
+                        "sell", p_v.sell
                     )
                 ), "]")
                 ) as variants ';

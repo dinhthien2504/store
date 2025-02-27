@@ -29,8 +29,13 @@ class Ajax extends Base
             if (!empty($data)) {
                 $out_put = '';
                 foreach ($data as $item) {
-                    $out_put .= '<button onclick="get_quantity(this, \'.size\', \'' . $item['pro_id'] . '\', \'' . $item['cor_id'] . '\', \'' . $item['size_id'] . '\')"
-                class="size ">' . $item['name'] . '</button>';
+                    if ($item['quantity'] > 0) {
+                        $out_put .= '<button onclick="get_quantity(this, \'.size\', \'' . $item['pro_id'] . '\', \'' . $item['cor_id'] . '\', \'' . $item['size_id'] . '\')"
+                        class="size ">' . $item['name'] . '</button>';
+                    } else {
+                        $out_put .= '<button onclick="get_quantity(this, \'.size\', \'' . $item['pro_id'] . '\', \'' . $item['cor_id'] . '\', \'' . $item['size_id'] . '\')"
+                        class="size custom-disabled-quantity">' . $item['name'] . '</button>';
+                    }
                 }
                 echo $out_put;
             }
@@ -144,6 +149,7 @@ class Ajax extends Base
             3 => 'Đang giao',
             4 => 'Đã giao',
             5 => 'Đã hủy',
+            6 => 'Hoàn thành',
         ];
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $id = $_POST['id'];
@@ -398,6 +404,7 @@ class Ajax extends Base
             3 => 'Đang giao',
             4 => 'Đã giao',
             5 => 'Đã hủy',
+            6 => 'Hoàn thành',
         ];
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $id = $_POST['id'];
@@ -426,14 +433,14 @@ class Ajax extends Base
 
                 $output .= '</div>
                     <div class="col-sm-6 my-3">
-                        <p>Trạnh thái thanh toán: <span class="fw-bold">' . $order['status_payment'] . '</span></p>
+                        <p>Trạng thái thanh toán: <span class="fw-bold">' . $order['status_payment'] . '</span></p>
                         <p>Khách hàng: <span class="fw-bold">' . $order['name'] . '</span></p>
                         <p>Số điện thoại: <span class="fw-bold">' . $order['phone'] . '</span></p>
                         <p>Địa chỉ giao hàng: <span class="fw-bold">' . $order['address'] . ', ' . $order['address_detail'] . '</span>
                         </p>
                         <p>Thời gian: <span class="fw-bold">' . $order['by_date'] . '</span></p>
                         <p>Phí vận chuyển: <span class="fw-bold">Miễn ship</span></p>
-                        <p>Thanh toán: <span class="fw-bold">'.$order['order_info'].'</span></p>
+                        <p>Thanh toán: <span class="fw-bold">' . $order['order_info'] . '</span></p>
                         <p>Tổng tiền: <span class="text-danger fw-bold">' . number_format($order['total']) . ' đ</span></p>
                     </div>
                 </div>

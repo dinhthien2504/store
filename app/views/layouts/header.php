@@ -81,7 +81,7 @@ $cart_user_id_header = $cartModel->get_all_cart_by_user_id_header();
                             <span class="header__navbar-user-name"><?= $_SESSION['user']['name'] ?></span>
                             <ul class="header__navbar-user-menu">
                                 <li class="header__navbar-user-item">
-                                    <a href="<?=_WEB_ROOT_?>/user/profile">Tài khoản</a>
+                                    <a href="#">Tài khoản</a>
                                 </li>
                                 <li class="header__navbar-user-item">
                                     <a href="">Địa chỉ của tôi</a>

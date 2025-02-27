@@ -152,6 +152,7 @@ html {
   background-color: red;
   color: var(--white-color);
 }
+
 .custom-btn__secondary {
   --radii: 0.5em;
   cursor: pointer;
@@ -161,6 +162,18 @@ html {
   font-weight: 500;
   transition: 0.8s;
   background-color: rgb(105, 103, 103);
+  color: var(--white-color);
+}
+
+.custom-btn__success {
+  --radii: 0.5em;
+  cursor: pointer;
+  /* min-width: 120px; */
+  min-height: 35px;
+  font-size: 15px;
+  font-weight: 500;
+  transition: 0.8s;
+  background-color: rgb(70, 207, 93);
   color: var(--white-color);
 }
 

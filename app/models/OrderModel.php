@@ -44,7 +44,6 @@ class OrderModel extends Model
         return $this->getAll($sql, $params);
     }
 
-
     //Admin
     public function get_order_admin()
     {
@@ -52,9 +51,10 @@ class OrderModel extends Model
         $offset = ($this->__get('current_page') - 1) * $item_page;
         $code = "'" . $this->__get('code') . "' ";
         $status = $this->__get('status');
-        $sql = "SELECT o.id, o.code_order, u.name, o.by_date, o.total, o.status ";
+        $sql = "SELECT o.id, o.code_order, u.name, o.by_date, o.total, o.status, p_m.status as payment_status ";
         $sql .= "FROM orders o ";
         $sql .= "LEFT JOIN users u ON o.user_id = u.id ";
+        $sql .= "LEFT JOIN payment p_m ON o.id = p_m.order_id ";
         $sql .= "WHERE 1 ";
         if ($status > 0) {
             $sql .= "AND o.status = {$status} ";
@@ -70,6 +70,9 @@ class OrderModel extends Model
     public function update_order()
     {
         $data = $this->__gets();
+        if ($data['status'] == 4) {
+            $data = array_merge(['delivery_date' => date('Y-m-d H:i:s')], $data);
+        }
         $data_update = array_values($data);
         unset($data['id']);
         $assignments = array_keys($data);
@@ -102,7 +105,7 @@ class OrderModel extends Model
         $sql .= "u.name, u.phone, u.address, u.address_detail, p_m.order_info ";
         $sql .= "FROM orders o ";
         $sql .= "LEFT JOIN users u ON u.id = o.user_id ";
-        $sql .= "INNER JOIN payment p_m ON p_m.order_id = o.id ";
+        $sql .= "LEFT JOIN payment p_m ON p_m.order_id = o.id ";
         $sql .= "WHERE o.id =? ";
         return $this->getOne($sql, [$id]);
     }
@@ -129,8 +132,8 @@ class OrderModel extends Model
         $sql = "SELECT DATE_FORMAT(o.by_date, '%Y-%m') AS month, SUM(o.total) AS monthly_total ";
         $sql .= "FROM orders o ";
         $sql .= "LEFT JOIN payment p_m ON p_m.order_id = o.id ";
-        $sql .= "WHERE by_date >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR) AND o.status = 4 ";
-        // $sql .= "AND p_m.status = 0 ";
+        $sql .= "WHERE by_date >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR) AND o.status = 6 ";
+        $sql .= "AND (p_m.status = 'Đã thanh toán' OR p_m.status IS NULL) ";
         $sql .= "GROUP BY month ORDER BY month";
         return $this->getAll($sql);
     }

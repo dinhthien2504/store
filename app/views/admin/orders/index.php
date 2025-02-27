@@ -26,6 +26,8 @@
                     </option>
                     <option <?= (isset($_GET['status']) && $_GET['status'] == 4) ? 'selected' : ''; ?> value="4">Đã giao
                     </option>
+                    <option <?= (isset($_GET['status']) && $_GET['status'] == 6) ? 'selected' : ''; ?> value="6">Hoàn thành
+                    </option>
                     <option <?= (isset($_GET['status']) && $_GET['status'] == 5) ? 'selected' : ''; ?> value="5">Đã hủy
                     </option>
                 </select>
@@ -48,7 +50,7 @@
                                 <div class="col-2">
                                     <p class="m-0 text-center no-drop">Mã Đơn</p>
                                 </div>
-                                <div class="col-2">
+                                <div class="col-1">
                                     <p class="m-0 text-center">Tên</p>
                                 </div>
                                 <div class="col-2 p-0">
@@ -58,9 +60,12 @@
                                     <p class="m-0 text-center">Tổng</p>
                                 </div>
                                 <div class="col-2">
-                                    <p class="m-0 text-center">Trạng Thái</p>
+                                    <p class="m-0 text-center">TT Đơn Hàng</p>
                                 </div>
                                 <div class="col-2">
+                                    <p class="m-0 text-center">TT Thanh Toán</p>
+                                </div>
+                                <div class="col-1">
                                     <p class="m-0 text-center">Thao tác</p>
                                 </div>
                             </div>
@@ -89,7 +94,7 @@
                                     <div class="col-lg-2 col-3">
                                         <p class="m-0 fs-12 text-center"><?= $order['code_order'] ?></p>
                                     </div>
-                                    <div class="col-lg-2 col-3">
+                                    <div class="col-lg-1 col-3">
                                         <p class="m-0 fs-12 text-center"><?= $order['name'] ?></p>
                                     </div>
                                     <div class="col-lg-2 col-4">
@@ -108,11 +113,14 @@
                                             <option <?= ($order['status'] == 2 ? 'selected' : ($order['status'] == 1 ? '' : 'disabled')) ?> value="2">Đã xác nhận</option>
                                             <option <?= ($order['status'] == 3 ? 'selected' : ($order['status'] == 2 ? '' : 'disabled')) ?> value="3">Đang giao</option>
                                             <option <?= ($order['status'] == 4 ? 'selected' : ($order['status'] == 3 ? '' : 'disabled')) ?> value="4">Đã giao</option>
+                                            <option  <?= $order['status'] == 6 ? 'selected' : ''?> disabled>Hoàn thành</option>
                                             <option <?= ($order['status'] == 5 ? 'selected' : ($order['status'] == 1 ? '' : 'disabled')) ?> value="5">Đã hủy</option>
                                         </select>
-
                                     </div>
-                                    <div class="col-lg-2 col-2 ">
+                                    <div class="col-lg-2 col-3">
+                                        <p class="m-0 text-black fs-12 text-center fw-bold"><?=$order['payment_status']?></p>
+                                    </div>
+                                    <div class="col-lg-1 col-1 ">
                                         <div class="d-flex justify-content-center gap-2">
                                             <button type="button" onclick="get_order_by_id(this)" data-bs-toggle="modal"
                                                 data-bs-target="#showOrderModal"

@@ -12,11 +12,6 @@
                 </div>
                 <hr>
                 <ul class="nav flex-column">
-                    <li class="nav-item d-flex align-items-center fs-17 ">
-                        <i class="far fa-user"></i>
-                        <a class="nav-link text-black" href="<?= _WEB_ROOT_ ?>/user/profile">Tài Khoản Của
-                            Tôi</a>
-                    </li>
                     <li class="nav-item d-flex align-items-center fs-17">
                         <i class="fas fa-clipboard-list"></i>
                         <a class="nav-link text-black" href="<?= _WEB_ROOT_ ?>/user/purchase">Đơn Mua</a>
@@ -33,37 +28,42 @@
                         <div class="row scroll flex-nowrap">
                             <div class="col-md-2 col-sm-3 col-4">
                                 <a href="<?= _WEB_ROOT_ ?>/user/purchase?status=0"
-                                    class="m-0 text-decoration-none d-block text-center no-wrap cursor-pointer <?= !isset($_GET['status']) || $_GET['status'] == 0 ? 'active' : '' ?>">Tất
+                                    class="mb-3 m-0 text-decoration-none d-block text-center no-wrap cursor-pointer <?= !isset($_GET['status']) || $_GET['status'] == 0 ? 'active' : '' ?>">Tất
                                     cả
                                 </a>
                             </div>
                             <div class="col-md-2 col-sm-3 col-4">
                                 <a href="<?= _WEB_ROOT_ ?>/user/purchase?status=1"
-                                    class="m-0 text-decoration-none d-block text-center no-wrap cursor-pointer <?= isset($_GET['status']) && $_GET['status'] == 1 ? 'active' : '' ?>">Chờ
+                                    class="mb-3 m-0 text-decoration-none d-block text-center no-wrap cursor-pointer <?= isset($_GET['status']) && $_GET['status'] == 1 ? 'active' : '' ?>">Chờ
                                     xác
                                     nhận</a>
                             </div>
                             <div class="col-md-2 col-sm-3 col-4">
                                 <a href="<?= _WEB_ROOT_ ?>/user/purchase?status=2"
-                                    class="m-0 text-decoration-none d-block text-center no-wrap cursor-pointer <?= isset($_GET['status']) && $_GET['status'] == 2 ? 'active' : '' ?>">Đã
+                                    class="mb-3 m-0 text-decoration-none d-block text-center no-wrap cursor-pointer <?= isset($_GET['status']) && $_GET['status'] == 2 ? 'active' : '' ?>">Đã
                                     xác
                                     nhận</a>
                             </div>
                             <div class="col-md-2 col-sm-3 col-4">
                                 <a href="<?= _WEB_ROOT_ ?>/user/purchase?status=3"
-                                    class="m-0 text-decoration-none d-block text-center no-wrap cursor-pointer <?= isset($_GET['status']) && $_GET['status'] == 3 ? 'active' : '' ?>">Đang
+                                    class="mb-3 m-0 text-decoration-none d-block text-center no-wrap cursor-pointer <?= isset($_GET['status']) && $_GET['status'] == 3 ? 'active' : '' ?>">Đang
                                     giao
                                     hàng</a>
                             </div>
                             <div class="col-md-2 col-sm-3 col-4">
                                 <a href="<?= _WEB_ROOT_ ?>/user/purchase?status=4"
-                                    class="m-0 text-decoration-none d-block text-center no-wrap cursor-pointer <?= isset($_GET['status']) && $_GET['status'] == 4 ? 'active' : '' ?>">Đã
+                                    class="mb-3 m-0 text-decoration-none d-block text-center no-wrap cursor-pointer <?= isset($_GET['status']) && $_GET['status'] == 4 ? 'active' : '' ?>">Đã
                                     giao
                                     hàng</a>
                             </div>
                             <div class="col-md-2 col-sm-3 col-4">
+                                <a href="<?= _WEB_ROOT_ ?>/user/purchase?status=6"
+                                    class="mb-3 m-0 text-decoration-none d-block text-center no-wrap cursor-pointer <?= isset($_GET['status']) && $_GET['status'] == 6 ? 'active' : '' ?>">Hoàn thành
+                                </a>
+                            </div>
+                            <div class="col-md-2 col-sm-3 col-4">
                                 <a href="<?= _WEB_ROOT_ ?>/user/purchase?status=5"
-                                    class="m-0 text-decoration-none d-block text-center no-wrap cursor-pointer <?= isset($_GET['status']) && $_GET['status'] == 5 ? 'active' : '' ?>">Đã
+                                    class="mb-3 m-0 text-decoration-none d-block text-center no-wrap cursor-pointer <?= isset($_GET['status']) && $_GET['status'] == 5 ? 'active' : '' ?>">Đã
                                     hủy
                                 </a>
                             </div>
@@ -77,6 +77,7 @@
                         '3' => 'Đang giao hàng',
                         '4' => 'Đã giao hàng',
                         '5' => 'Đã hủy',
+                        '6' => 'Hoàn thành',
                     ];
                     foreach ($data_order_by_user_id as $order):
                         $order_detail = json_decode($order['order_detail'], true);
@@ -127,6 +128,7 @@
                                 <div class="custom-profile__btn--footer">
                                     <div class="d-flex align-items-center justify-content-between gap-4">
                                         <p class="m-0 custom-cart__total">Tổng: <?= number_format($order['total']) ?> đ</p>
+                                        <div>
                                         <?php if ($order['status'] >= 4): ?>
                                             <button type="submit" name="submit_handle__buy" class="custom-btn custom-btn__primary "
                                                 style="padding: 0 10px;">Mua
@@ -137,6 +139,11 @@
                                                 onclick="return confirm('Bạn có chắc muốn hủy đơn hàng này?')"
                                                 class="custom-btn custom-btn__danger " style="padding: 0 10px;">Hủy đơn</a>
                                         <?php endif; ?>
+                                        <?php if ($order['status'] == 4): ?>
+                                            <a href="<?= _WEB_ROOT_ ?>/user/confirm-order-success-<?= $order['order_id'] ?>"
+                                                class="custom-btn custom-btn__success " style="padding: 0 10px;">Đã nhận được hàng</a>
+                                        <?php endif; ?>
+                                        </div>
                                     </div>
                                 </div>
                             <?php endif; ?>

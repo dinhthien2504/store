@@ -126,6 +126,7 @@
                             <input type="hidden" name="quantity[]" value="<?= $pro_variant['quantity'] ?>">
                             <input type="hidden" name="price[]" value="<?= $price_sales ?>">
                             <input type="hidden" name="pro_id[]" value="<?= $cart['pro_id'] ?>">
+                            <input type="hidden" name="pro_variant_id[]" value="<?= $pro_variant['pro_variant_id'] ?>">
                             <input type="hidden" name="name_variant[]" value="<?= $__name_variant ?>">
                         <?php endforeach ?>
                     <?php endif ?>
@@ -143,7 +144,7 @@
                             <?php foreach ($data_payment_method as $value): ?>
                                 <div class="checkbox-payment-checkout my-2">
                                     <input style="display: none;" type="radio" name="payment" id="cbx<?= $value['id'] ?>" value="<?= $value['id'] ?>"
-                                        class="inp-cbx" />
+                                        class="inp-cbx" <?=$value['id'] == 1 ? 'checked' : ''?>/>
                                     <label for="cbx<?= $value['id'] ?>" class="cbx">
                                         <span>
                                             <svg viewBox="0 0 12 9" height="9px" width="12px">

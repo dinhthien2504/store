@@ -27,19 +27,19 @@
                             <div class="col-11">
                                 <div class="row">
                                     <div class="col-5">
-                                        <p class="m-0">Sản phẩm</p>
+                                        <p class="m-0">Sản Phẩm</p>
                                     </div>
                                     <div class="col-1 p-0">
-                                        <p class="m-0 text-center">Doanh số</p>
+                                        <p class="m-0 text-center">Lượt Bán</p>
                                     </div>
                                     <div class="col-2 p-0">
-                                        <p class="m-0 text-center">Kho hàng</p>
+                                        <p class="m-0 text-center">Kho Hàng</p>
                                     </div>
                                     <div class="col-2">
                                         <p class="m-0 text-center">Giá</p>
                                     </div>
                                     <div class="col-2">
-                                        <p class="m-0 text-center">Thao tác</p>
+                                        <p class="m-0 text-center">Thao Tác</p>
                                     </div>
                                 </div>
                             </div>
@@ -140,7 +140,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-1 col-3 bg-light">
-                                                            <p class="m-0 fs-12 text-center">0</p>
+                                                            <p class="m-0 fs-12 text-center"><?=$pro_variant['sell']?></p>
                                                         </div>
                                                         <div class="col-lg-2 col-3 bg-light">
                                                             <p class="m-0 text-center fs-12"><?= $pro_variant['quantity'] ?></p>

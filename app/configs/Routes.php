@@ -30,9 +30,9 @@ class Routes
         $router->create(path: '/handle_login', params: [User::class, 'handle_login']);
         $router->create(path: '/handle_register', params: [User::class, 'handle_register']);
         $router->create(path: '/logout', params: [User::class, 'logout']);
-        $router->create(path: '/user/profile', params: [User::class, 'profile']);
         $router->create(path: '/user/purchase', params: [User::class, 'purchase']);
         $router->create(path: '/user/cancel_order-{/+d}', params: [User::class, 'cancel_order']);
+        $router->create(path: '/user/confirm-order-success-{/+d}', params: [User::class, 'confirm_order_success']);
 
         //Cart
         $router->create(path: '/cart', params: [Cart::class, 'cart']);

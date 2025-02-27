@@ -6,10 +6,12 @@ class User extends Base
     public $data;
     private $UserModel;
     private $OrderModel;
+    private $PaymentModel;
     public function __construct()
     {
         $this->UserModel = $this->model('UserModel');
         $this->OrderModel = $this->model('OrderModel');
+        $this->PaymentModel = $this->model('PaymentModel');
     }
 
     public function handle_login()
@@ -43,18 +45,6 @@ class User extends Base
             }
         }
     }
-    public function profile()
-    {
-        $user_id = $_SESSION['user']['id'] ?? null;
-        if (!$user_id) {
-            $this->render_error(403);
-            exit;
-        }
-        $this->data['sub_content'] = [];
-        $this->data['title_page'] = 'Tài Khoản';
-        $this->data['content'] = 'auth/profile';
-        $this->render('layouts/main', $this->data);
-    }
     public function purchase()
     {
         $user_id = $_SESSION['user']['id'] ?? null;
@@ -82,6 +72,22 @@ class User extends Base
         $this->OrderModel->__sets(['status' => 5, 'id' => $order_id]);
         $this->OrderModel->update_order();
         $_SESSION['messager'] = ['title' => 'Thành công!', 'mess' => 'Hủy đơn hàng thành công!', 'type' => 'success'];
+        header('Location: ' . _WEB_ROOT_ . '/user/purchase');
+    }
+    public function confirm_order_success($order_id)
+    {
+        if (!$order_id) {
+            $this->render_error(404);
+            exit;
+        }
+        //Cập nhật bảng orders
+        $this->OrderModel->__sets(['status' => 6, 'id' => $order_id]);
+        $this->OrderModel->update_order();
+
+        //Cập nhật bảng payment
+        $this->PaymentModel->__sets(['Đã thanh toán', $order_id]);
+        $this->PaymentModel->confirm_update_payment_success();
+        $_SESSION['messager'] = ['title' => 'Thành công!', 'mess' => 'Xác nhận đơn hàng thành công!', 'type' => 'success'];
         header('Location: ' . _WEB_ROOT_ . '/user/purchase');
     }
     public function logout()
