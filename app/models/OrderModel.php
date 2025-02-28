@@ -21,6 +21,7 @@ class OrderModel extends Model
         $sql = "SELECT o.id as order_id, o.code_order, o.status, o.total, ";
         $sql .= "(SELECT CONCAT('[', GROUP_CONCAT(
                 JSON_OBJECT(
+                    'pro_id', p.id, 
                     'name_variant', D_o.name_variant, 
                     'name_pro', p.name,
                     'price', D_o.price,

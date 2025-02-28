@@ -26,7 +26,7 @@ $cart_user_id_header = $cartModel->get_all_cart_by_user_id_header();
                         <i class="header__navbar-icon far fa-bell"></i>
                         Thông báo
                     </a>
-                    <div class="header__notify">
+                    <!-- <div class="header__notify">
                         <header class="header__notify-header">
                             <h3>Thông báo mới nhận</h3>
                         </header>
@@ -65,7 +65,7 @@ $cart_user_id_header = $cartModel->get_all_cart_by_user_id_header();
                         <div class="header__notify-footer">
                             <a href="" class="header__notify-footer-btn">Xem tất cả</a>
                         </div>
-                    </div>
+                    </div> -->
                 </li>
                 <li class="header__navbar-item">
                     <a href="" class="header__navbar-item-link">

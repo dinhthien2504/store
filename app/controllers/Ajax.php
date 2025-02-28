@@ -168,10 +168,13 @@ class Ajax extends Base
                     $output .= '<div v-for="Dorder in dataDorderByOrderId" class="box-pros d-flex my-3">
                             <img src="' . _WEB_ROOT_ . '/public/assets/img/pro/' . $Dorder['url_image'] . '" alt="lỗi" width="70px" height="70px">
                             <div class="mx-3">
-                                <p class="my-0">' . $Dorder['name'] . '</p>
+                                <a onclick="handle__url_link(this, \'' . _WEB_ROOT_ . '\', \'' . addslashes($Dorder['name']) . '\', \'i' . $Dorder['pro_id'] . '\')" class="text-decoration-none text-black my-0 cursor-pointer">
+                                    ' . $Dorder['name'] . '
+                                </a>
                                 <p class="my-1 text-danger">Giá: ' . number_format($Dorder['price']) . ' đ<span> x ' . $Dorder['quantity'] . '</span></p>
                                 <p class="my-1 text-danger"><span>Phân loại: ' . $Dorder['name_variant'] . '</span></p>
-                            </div>
+                                <button class="custom_btn_rating">Đánh giá</button>
+                                </div>
                             <hr class="text-black">
                         </div>';
                 }

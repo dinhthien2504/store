@@ -107,7 +107,9 @@
                                                     src="<?= _WEB_ROOT_ ?>/public/assets/img/pro/<?= $Dorder['url_image'] ?>">
                                             </div>
                                             <div class="col-xl-9 col-md-8 col-sm-8 col-6">
-                                                <p class="m-0 text-black custom-cart__name"><?= $Dorder['name_pro'] ?></p>
+                                            <a onclick="handle__url_link(this, '<?=_WEB_ROOT_ ?>',  '<?= $Dorder['name_pro'] ?>', 'i<?=$Dorder['pro_id']?>')" class="text-decoration-none text-black my-0 cursor-pointer">
+                                                <?=$Dorder['name_pro'] ?>
+                                            </a>
                                                 <div class="d-flex gap-1">
                                                     <p class="m-0">Phân loại hàng:</p>
                                                     <p class="m-0"><?= $Dorder['name_variant'] ?></p>
@@ -158,7 +160,7 @@
         </div>
     </div>
 </section>
-<!-- The Modal -->
+<!-- The Modal Show Order -->
 <div class="modal" id="showOrderModal">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -170,6 +172,66 @@
             </div>
             <!-- Modal body -->
             <div class="modal-body" id="show_order_detail"></div>
+        </div>
+    </div>
+</div>
+
+<!-- The Modal Show Rating -->
+<div class="modal" id="rateModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h5 class="modal-title">Đánh giá sản phẩm</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form action="<?= _WEB_ROOT_ ?>/rate/addRate" method="POST" enctype="multipart/form-data">
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <div class="d-flex gap-2 col-12 " id="showRate"></div>
+                        <div class="col-12">
+                            <div class="d-flex align-items-center justify-content-start gap-1">
+                                <p class="m-0">Chất lượng sản phẩm:</p>
+                                <div class="d-flex text-warning fs-15 justify-content-center align-items-center"
+                                    id="starRating">
+                                    <i class="fa-solid fa-star selected" data-star="1"></i>
+                                    <i class="fa-solid fa-star selected" data-star="2"></i>
+                                    <i class="fa-solid fa-star selected" data-star="3"></i>
+                                    <i class="fa-solid fa-star selected" data-star="4"></i>
+                                    <i class="fa-solid fa-star selected" data-star="5"></i>
+                                </div>
+                                <p class="m-0" id="ratingText">Tuyệt vời</p>
+                            </div>
+                        </div>
+                        <input type="hidden" id="ratingValue" name="rating" value="5">
+                        <input type="hidden" name="user_id"
+                            value="<?= isset($_SESSION['user']) ? $_SESSION['user']['id'] : 1; ?>">
+                        <div class="col-12 p-3" style="background-color: #f5f5f5;">
+                            <div class="p-2 border " style="background-color: #fff;">
+                                <div class="my-1">
+                                    <label for="text" class="form-label">Cảm nhận của bạn về sản phẩm:</label>
+                                    <input type="text" class="form-control border border-0" id="text"
+                                        placeholder="để lại đánh giá." name="review">
+                                </div>
+                                <div class="container my-1">
+                                    <label for="fileInput" id="createImg" class="label-file">
+                                        <i class="bi bi-camera-fill"></i>
+                                        Thêm Hình Ảnh:
+                                    </label>
+                                    <div class="file-preview" id="filePreview"></div>
+                                    <div id="remainingImages" class="text-muted">5/5 ảnh.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="submit" name="submitRate" class="btn btn-danger">Hoàn thành</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

@@ -1360,6 +1360,23 @@ i.custom-pro__item__like-icon-fill {
   background-color: #fffbf8;
 }
 
+.custom_btn_rating {
+  outline: none;
+  border-radius: 3px;
+  background-color: var(--primary-color);
+  padding: 3px 7px;
+  border: 1px solid var(--border-color);
+  color: var(--white-color);
+}
+
+.custom_btn_rating_warning {
+  outline: none;
+  border-radius: 3px;
+  background-color: #ffc107;
+  padding: 3px 7px;
+  border: 1px solid var(--border-color);
+}
+
 /* Cart */
 .custom-cart__check {
   position: relative;
@@ -1715,8 +1732,8 @@ i.custom-pro__item__like-icon-fill {
 
 .checkbox-payment-checkout .cbx span:first-child {
   position: relative;
-  width: 24px;
-  height: 24px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   transform: scale(1);
   vertical-align: middle;
@@ -1727,15 +1744,15 @@ i.custom-pro__item__like-icon-fill {
 .checkbox-payment-checkout .cbx span:first-child svg {
   position: absolute;
   z-index: 1;
-  top: 8px;
-  left: 6px;
+  top: 5px;
+  left: 2px;
   fill: none;
   stroke: white;
   stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke-dasharray: 16px;
-  stroke-dashoffset: 16px;
+  stroke-dasharray: 14px;
+  stroke-dashoffset: 12px;
   transition: all 0.3s ease;
   transition-delay: 0.1s;
   transform: translate3d(0, 0, 0);

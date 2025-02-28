@@ -23,7 +23,7 @@ class OrderDetailModel extends Model
     }
     public function get_order_detail_by_order_id()
     {
-        $sql = "SELECT D_o.id, D_o.name_variant, D_o.quantity, D_o.price, p.name, ";
+        $sql = "SELECT D_o.id, D_o.name_variant, D_o.quantity, D_o.price, p.name, D_o.pro_id,  ";
         $sql .= "(SELECT url_image FROM pro_images WHERE pro_id = p.id LIMIT 1) as url_image ";
         $sql .= "FROM order_details D_o ";
         $sql .= "LEFT JOIN products p ON p.id = D_o.pro_id ";
