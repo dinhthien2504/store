@@ -199,16 +199,36 @@
                             <div class="row align-items-center mt-3 py-5 px-1 g-3 custom-detail__rating--box">
                                 <div class="col-12 col-md-3 text-center">
                                     <div class="d-flex justify-content-center gap-2 align-items-center">
-                                        <h1 class="m-0 fs-2 text-warning">5</h1>
+                                        <h1 class="m-0 fs-2 text-warning">
+                                            <?php
+                                            if (isset($data_avg_rate) && !empty($data_avg_rate['totalStars'])) {
+                                                $avgRate = $data_avg_rate['totalStars'] / $data_avg_rate['totalReviews'];
+                                                echo round($avgRate, 1);
+                                            } else {
+                                                echo 0;
+                                            }
+                                            ?>
+                                        </h1>
                                         <p class="m-0 text-warning fs-4">trên 5</p>
                                     </div>
                                     <div
                                         class="d-flex text-warning mt-1 fs-4 justify-content-center align-items-center">
-                                        <i class="fa-solid fa-star"></i>
+                                        <!-- <i class="fa-solid fa-star"></i>
                                         <i class="fa-solid fa-star-half-alt"></i>
                                         <i class="far fa-star"></i>
                                         <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i> -->
+                                        <?php if (isset($avgRate) && $avgRate > 0) {
+                                            for ($i = 0; $i < 5; $i++) {
+                                                if ($i < floor($avgRate)) {
+                                                    echo '<i class="fa-solid fa-star"></i>';
+                                                } elseif ($i < $avgRate) {
+                                                    echo '<i class="fa-solid fa-star-half-alt"></i>';
+                                                } else {
+                                                    echo '<i class="far fa-star"></i>';
+                                                }
+                                            }
+                                        } ?>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-9">
@@ -226,37 +246,50 @@
                             </div>
                             <hr>
                             <!-- Item rate -->
-                            <div class="row mb-3">
-                                <div class="col-lg-1 col-md-2 col-2">
-                                    <img src="https://sm.ign.com/ign_nordic/cover/a/avatar-gen/avatar-generations_prsz.jpg"
-                                        alt="Avatar" class="rounded-circle w-100">
-                                </div>
-                                <div class="col-lg-11 col-md-10 col-10">
-                                    <h5 class="mb-1 fs-14">Đình Thiên</h5>
-                                    <p class="text-muted mb-2 fs-14"> 22-12-2022 | Phân loại hàng: Đỏ, S </p>
-                                    <div class="text-warning mb-2 fs-14">
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
+                            <?php if (isset($data_rates)): ?>
+                                <?php foreach ($data_rates as $rate): ?>
+                                    <div class="row mb-3">
+                                        <div class="col-lg-1 col-md-2 col-2">
+                                            <img src="https://i.pinimg.com/236x/5e/e0/82/5ee082781b8c41406a2a50a0f32d6aa6.jpg"
+                                                alt="Avatar" class="rounded-circle w-100">
+                                        </div>
+                                        <div class="col-lg-11 col-md-10 col-10">
+                                            <h5 class="mb-1 fs-14"><?= $rate['name_user'] ?></h5>
+                                            <p class="text-muted mb-2 fs-14"> <?= $rate['date_rate'] ?> | Phân loại hàng:
+                                                <?= $rate['name_variant'] ?>
+                                            </p>
+                                            <div class="text-warning mb-2 fs-14">
+                                                <?php
+                                                for ($i = 0; $i < 5; $i++) {
+                                                    if ($i < $rate['rating']) {
+                                                        echo '<i class="fa-solid fa-star"></i>';
+                                                    } else {
+                                                        echo '<i class="far fa-star"></i>';
+                                                    }
+                                                }
+                                                ?>
+                                            </div>
+                                            <p class="fs-14"><?= $rate['review_text'] ?></p>
+                                            <div class="d-flex gap-1 flex-wrap custom-detail__img--rate scroll">
+                                                <?php
+                                                $rate['url_images'] = !empty($rate['url_images']) ? explode(',', $rate['url_images']) : [];
+                                                if (!empty($rate['url_images'])) {
+                                                    foreach ($rate['url_images'] as $key => $img) {
+                                                        echo ' <img src="' . _WEB_ROOT_ . '/public/assets/img/rate/' . $img . '" alt="Image 1" style="width: 75px; height: 75px;"
+                                                class="img-thumbnail">';
+                                                    }
+                                                }
+                                                ?>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <p class="fs-14">Sản phẩm đúng mô tả</p>
-                                    <div class="d-flex gap-1 flex-wrap custom-detail__img--rate scroll">
-                                        <img src="https://down-vn.img.susercontent.com/file/72db7c09a208bd3d60f1b0d67657df03@resize_w450_nl.webp"
-                                            alt="">
-                                        <img src="https://down-vn.img.susercontent.com/file/72db7c09a208bd3d60f1b0d67657df03@resize_w450_nl.webp"
-                                            alt="">
-                                        <img src="https://down-vn.img.susercontent.com/file/72db7c09a208bd3d60f1b0d67657df03@resize_w450_nl.webp"
-                                            alt="">
-                                        <img src="https://down-vn.img.susercontent.com/file/72db7c09a208bd3d60f1b0d67657df03@resize_w450_nl.webp"
-                                            alt="">
-                                        <img src="https://down-vn.img.susercontent.com/file/72db7c09a208bd3d60f1b0d67657df03@resize_w450_nl.webp"
-                                            alt="">
-                                    </div>
+                                    <hr class="my-3">
+                                <?php endforeach ?>
+                            <?php else: ?>
+                                <div class="d-flex align-items-center justify-content-center mt-5">
+                                    <p class="alert alert-warning w-100 text-center">Không có đánh giá!</h3>
                                 </div>
-                            </div>
-                            <hr class="my-3">
+                            <?php endif ?>
                         </div>
                         <ul class="pagination home-product__pagination">
                             <li class="pagination-item">

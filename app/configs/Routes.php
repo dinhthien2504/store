@@ -8,6 +8,7 @@ use app\controllers\Product;
 use app\controllers\Ajax;
 use app\controllers\User;
 use app\controllers\Cart;
+use app\controllers\Rate;
 
 //Admin
 use app\controllers\admin\Dashboard;
@@ -34,6 +35,8 @@ class Routes
         $router->create(path: '/user/cancel_order-{/+d}', params: [User::class, 'cancel_order']);
         $router->create(path: '/user/confirm-order-success-{/+d}', params: [User::class, 'confirm_order_success']);
 
+        //Rate
+        $router->create(path: '/create-rating', params: [Rate::class, 'create_rating']);
         //Cart
         $router->create(path: '/cart', params: [Cart::class, 'cart']);
         $router->create(path: '/save_cart', params: [Cart::class, 'save_cart']);
@@ -53,6 +56,7 @@ class Routes
         $router->create(path: '/get_ward_district_id', params: [Ajax::class, 'get_ward_district_id']);
         $router->create(path: '/update_address', params: [Ajax::class, 'update_address']);
         $router->create(path: '/user/get_order_detail_by_id', params: [Ajax::class, 'get_order_detail_by_id']);
+        $router->create(path: '/user/show-add-rating', params: [Ajax::class, 'show_add_rating']);
 
         //Ajax Admin
         $router->create(path: '/admin/get_attri_val_by_attri_id', params: [Ajax::class, 'get_attri_val_by_attri_id']);

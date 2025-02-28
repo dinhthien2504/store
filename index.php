@@ -10,7 +10,7 @@ if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') {
     $web_root = 'http://' . $_SERVER['HTTP_HOST'];
 }
 $web_root .= str_replace(strtolower($_SERVER['DOCUMENT_ROOT']), '', strtolower(_DIR_ROOT));
-$url = 'http://localhost:3000';
+$url = 'http://localhost:3000/shop';
 define('_WEB_ROOT_', $url);
 
 spl_autoload_register(function ($class) {

@@ -120,8 +120,6 @@ const get_order_by_id = (el) => {
             id: order_id
         },
         success: function (data) {
-            console.log(">>>", data);
-
             $('#show_order_detail').html(data);
         },
         error: function () {

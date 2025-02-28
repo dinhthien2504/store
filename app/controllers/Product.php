@@ -8,6 +8,7 @@ class Product extends Base
     private $product_model;
     private $pro_image_model;
     private $pro_variant_model;
+    private $rate_model;
 
     private static $item_page = 10;
     public function __construct()
@@ -16,6 +17,7 @@ class Product extends Base
         $this->product_model = $this->model('ProductModel');
         $this->pro_image_model = $this->model('ProImageModel');
         $this->pro_variant_model = $this->model('ProVariantModel');
+        $this->rate_model = $this->model('RateModel');
     }
     public function list($parent_id, $cate_id = null)
     {
@@ -118,6 +120,15 @@ class Product extends Base
         //Lấy sản phẩm theo danh mục
         $this->product_model->__set('cate_id', $data_pro_id['cate_id']);
         $data_pro_cate_id = $this->product_model->get_pro_relate_by_cate_id();
+
+        //Lấy đánh giá sản phẩm theo pro id
+        $this->rate_model->__set('pro_id', $id);
+        $data_rates = $this->rate_model->get_rate_by_pro_id();
+        $data_avg_rate = $this->rate_model->get_avg_rate_by_pro_id();
+        if (!empty($data_rates) && !empty($data_avg_rate)) {
+            $this->data['sub_content']['data_rates'] = $data_rates;
+            $this->data['sub_content']['data_avg_rate'] = $data_avg_rate;
+        }
         $this->data['sub_content']['pro_cate_id'] = $data_pro_cate_id;
         $this->data['title_page'] = $data_pro_id['name'];
         $this->data['content'] = 'products/detail';

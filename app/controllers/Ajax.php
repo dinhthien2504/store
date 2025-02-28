@@ -172,9 +172,13 @@ class Ajax extends Base
                                     ' . $Dorder['name'] . '
                                 </a>
                                 <p class="my-1 text-danger">Giá: ' . number_format($Dorder['price']) . ' đ<span> x ' . $Dorder['quantity'] . '</span></p>
-                                <p class="my-1 text-danger"><span>Phân loại: ' . $Dorder['name_variant'] . '</span></p>
-                                <button class="custom_btn_rating">Đánh giá</button>
-                                </div>
+                                <p class="my-1 text-danger"><span>Phân loại: ' . $Dorder['name_variant'] . '</span></p>';
+                    if ($order['status'] == 6 && $Dorder['is_reviewed'] == 0) {
+                        $output .= '<button onclick="show_add_rating(\'' . $Dorder['id'] . '\')" class="custom_btn_rating">Đánh giá</button>';
+                    } else if ($order['status'] == 6 && $Dorder['is_reviewed'] == 1) {
+                        $output .= '<button class="custom_btn_rating_warning">Đã đánh giá</button>';
+                    }
+                    $output .= '</div>
                             <hr class="text-black">
                         </div>';
                 }
@@ -196,6 +200,26 @@ class Ajax extends Base
                 echo $output;
             }
         }
+    }
+
+    //Rate
+    public function show_add_rating()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['Dorder_id'])) {
+            $this->OrderDetailModel->__set('id', $_POST['Dorder_id']);
+            $data = $this->OrderDetailModel->get_order_detail_by_id();
+            if ($data) {
+                echo '<img src="' . _WEB_ROOT_ . '/public/assets/img/pro/' . $data['url_image'] . '" style="width: 80px;"alt="' . $data['name'] . '">
+                <div>
+                    <p class="m-0 fs-17">' . $data['name'] . '</p>
+                    <p class="m-0 fs-17">Phân loại: ' . $data['name_variant'] . '</p>
+                </div>  
+                <input type="hidden" name="pro_id" value="' . $data['pro_id'] . '">
+                <input type="hidden" name="Dorder_id" value="' . $_POST['Dorder_id'] . '">
+                <input type="hidden" name="name_variant" value="' . $data['name_variant'] . '">';
+            }
+        }
+
     }
     //Các hàm trang thêm sản phẩm admin
     public function get_cate_chirld_by_parent()
