@@ -168,12 +168,12 @@
                                     <i class="fa-solid fa-cart-shopping me-2"></i> Thêm vào giỏ
                                 </button>
                             </form>
-                            <form action="">
+                            <form>
                                 <input type="hidden" name="pro_quantity" class="quantity__handle">
                                 <input type="hidden" name="pro_variant_id" class="variant__handle">
                                 <input type="hidden" name="user_id" value="<?= $_SESSION['user']['id'] ?? '' ?>"
                                     class="user__id">
-                                <button type="submit" class="custom-btn btn-by__cart custom-btn__primary">Mua
+                                <button type="button" class="custom-btn btn-by__cart custom-btn__primary">Mua
                                     hàng</button>
                             </form>
                         </div>
@@ -192,7 +192,7 @@
                     <div class="m-0 fs-4 mt-3 p-2"><?= $pro_id['description'] ?></div>
                 </div>
                 <!-- Đánh giá -->
-                <div class="bg-white p-5 my-4">
+                <div class="bg-white p-5 my-4" id="session_rating">
                     <div class="p-2">
                         <h3 class="text-secondary fw-normal">ĐÁNH GIÁ SẢN PHẨM</h3>
                         <div class="custom-detail__rating ">
@@ -213,11 +213,6 @@
                                     </div>
                                     <div
                                         class="d-flex text-warning mt-1 fs-4 justify-content-center align-items-center">
-                                        <!-- <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star-half-alt"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i> -->
                                         <?php if (isset($avgRate) && $avgRate > 0) {
                                             for ($i = 0; $i < 5; $i++) {
                                                 if ($i < floor($avgRate)) {
@@ -234,19 +229,32 @@
                                 <div class="col-12 col-md-9">
                                     <form class="m-0 p-0" action="" method="POST">
                                         <div class="gap-1 d-flex flex-wrap custom-detail__btn--rate">
-                                            <button type="submit" class="custom-btn">Tất Cả</button>
-                                            <button type="submit" class="custom-btn">5 sao</button>
-                                            <button type="submit" class="custom-btn">4 sao</button>
-                                            <button type="submit" class="custom-btn">3 sao</button>
-                                            <button type="submit" class="custom-btn">2 sao</button>
-                                            <button type="submit" class="custom-btn">1 sao</button>
+                                            <button type="button"
+                                                class="<?= isset($_GET['rating']) && $_GET['rating'] == 0 ? 'custom-detail__btn--rate_active' : '' ?>"
+                                                onclick="updateRating(0)">Tất cả</button>
+                                            <button type="button"
+                                                class="<?= isset($_GET['rating']) && $_GET['rating'] == 5 ? 'custom-detail__btn--rate_active' : '' ?>"
+                                                onclick="updateRating(5)">5
+                                                sao</button>
+                                            <button type="button"
+                                                class="<?= isset($_GET['rating']) && $_GET['rating'] == 4 ? 'custom-detail__btn--rate_active' : '' ?>"
+                                                onclick="updateRating(4)">4 sao</button>
+                                            <button type="button"
+                                                class="<?= isset($_GET['rating']) && $_GET['rating'] == 3 ? 'custom-detail__btn--rate_active' : '' ?>"
+                                                onclick="updateRating(3)">3 sao</button>
+                                            <button type="button"
+                                                class="<?= isset($_GET['rating']) && $_GET['rating'] == 2 ? 'custom-detail__btn--rate_active' : '' ?>"
+                                                onclick="updateRating(2)">2 sao</button>
+                                            <button type="button"
+                                                class="<?= isset($_GET['rating']) && $_GET['rating'] == 1 ? 'custom-detail__btn--rate_active' : '' ?>"
+                                                onclick="updateRating(1)">1 sao</button>
                                         </div>
                                     </form>
                                 </div>
                             </div>
                             <hr>
                             <!-- Item rate -->
-                            <?php if (isset($data_rates)): ?>
+                            <?php if (!empty($data_rates)): ?>
                                 <?php foreach ($data_rates as $rate): ?>
                                     <div class="row mb-3">
                                         <div class="col-lg-1 col-md-2 col-2">
@@ -287,42 +295,16 @@
                                 <?php endforeach ?>
                             <?php else: ?>
                                 <div class="d-flex align-items-center justify-content-center mt-5">
-                                    <p class="alert alert-warning w-100 text-center">Không có đánh giá!</h3>
+                                    <p class="alert alert-warning w-100 text-center fs-17">Không có đánh giá!</h3>
                                 </div>
                             <?php endif ?>
                         </div>
                         <ul class="pagination home-product__pagination">
-                            <li class="pagination-item">
-                                <a href="" class="pagination-item__link">
-                                    <i class="pagination-item__icon fas fa-angle-left"></i>
-                                </a>
-                            </li>
-                            <li class="pagination-item pagination-item--active">
-                                <a href="" class="pagination-item__link">1</a>
-                            </li>
-                            <li class="pagination-item">
-                                <a href="" class="pagination-item__link">2</a>
-                            </li>
-                            <li class="pagination-item">
-                                <a href="" class="pagination-item__link">3</a>
-                            </li>
-                            <li class="pagination-item">
-                                <a href="" class="pagination-item__link">4</a>
-                            </li>
-                            <li class="pagination-item">
-                                <a href="" class="pagination-item__link">5</a>
-                            </li>
-                            <li class="pagination-item">
-                                <a href="" class="pagination-item__link">...</a>
-                            </li>
-                            <li class="pagination-item">
-                                <a href="" class="pagination-item__link">14</a>
-                            </li>
-                            <li class="pagination-item">
-                                <a href="" class="pagination-item__link">
-                                    <i class="pagination-item__icon fas fa-angle-right"></i>
-                                </a>
-                            </li>
+                            <?php
+                            if (isset($links)) {
+                                echo $links;
+                            }
+                            ?>
                         </ul>
                     </div>
                 </div>

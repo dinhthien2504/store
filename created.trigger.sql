@@ -1,15 +1,5 @@
-DELIMITER $$
-CREATE TRIGGER `trg_ud_quantity_Dsizes` AFTER UPDATE ON `orders` FOR EACH ROW BEGIN
-    IF NEW.status = 0 AND OLD.status <> 0 THEN
-        UPDATE size_details Dsizes
-        JOIN orderdetails Dod ON Dsizes.product_id = Dod.product_id
-        SET Dsizes.quantity = Dsizes.quantity + Dod.quantity
-        WHERE Dod.order_id = NEW.id
-        AND Dod.size = Dsizes.size_id;
-    END IF;
-END
-$$
-DELIMITER ;
+-- Nội dung  chỉ mang tính chất lưu backup
+
 -- Sau khi insert dữ liệu vào bảnh order_detials thì cập nhật số lượng bên bảng Pvariants
 DELIMITER $$  
 CREATE TRIGGER `after_insert_Dorder`  

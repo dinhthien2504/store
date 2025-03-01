@@ -10,7 +10,7 @@ class Product extends Base
     private $pro_variant_model;
     private $rate_model;
 
-    private static $item_page = 10;
+    private static $item_page = 2;
     public function __construct()
     {
         $this->category_model = $this->model('CategoryModel');
@@ -121,14 +121,34 @@ class Product extends Base
         $this->product_model->__set('cate_id', $data_pro_id['cate_id']);
         $data_pro_cate_id = $this->product_model->get_pro_relate_by_cate_id();
 
-        //Lấy đánh giá sản phẩm theo pro id
+        //Set các thuộc tính để phân trang
+        $this->rate_model->__set('item_page', self::$item_page); //Số lượng phần tử trên Trang
+        if (isset($_GET['rating']) && $_GET['rating'] > 0) {
+            $this->rate_model->__set('rating', $_GET['rating']);
+        }
+        $current_page = $_GET['page'] ?? 1;
+        $this->rate_model->__set('current_page', $current_page);
         $this->rate_model->__set('pro_id', $id);
+        //Lấy tổng danh mục cha để tính số trang
+        $total_pro_handle_page = $this->rate_model->total_rate_handle_page();
+
+        $total_page = ceil($total_pro_handle_page['total'] / self::$item_page);
+        $this->rate_model->__set('total_page', $total_page);
+        //Xử lý đường dẫn cho phân trang
+        if ($total_page > 1) {
+            $links = $this->handle_url_page($total_page, $current_page);
+            $this->data['sub_content']['links'] = $links;
+        }
+
+        //Lấy đánh giá sản phẩm theo pro id
         $data_rates = $this->rate_model->get_rate_by_pro_id();
+
         $data_avg_rate = $this->rate_model->get_avg_rate_by_pro_id();
-        if (!empty($data_rates) && !empty($data_avg_rate)) {
+        if (!empty($data_avg_rate)) {
             $this->data['sub_content']['data_rates'] = $data_rates;
             $this->data['sub_content']['data_avg_rate'] = $data_avg_rate;
         }
+
         $this->data['sub_content']['pro_cate_id'] = $data_pro_cate_id;
         $this->data['title_page'] = $data_pro_id['name'];
         $this->data['content'] = 'products/detail';

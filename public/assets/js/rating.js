@@ -123,3 +123,26 @@ document.addEventListener("click", function () {
         });
     });
 });
+
+const updateRating = (rating) => {
+    let url = new URL(window.location.href);
+    let urlParams = new URLSearchParams(window.location.search);
+
+    // Nếu rating chưa tồn tại hoặc khác giá trị mới, thì mới cập nhật và reload
+    if (urlParams.get("rating") != rating) {
+        url.searchParams.set("rating", rating);
+        window.location.href = url.toString();
+    }
+}
+
+window.onload = function () {
+    let urlParams = new URLSearchParams(window.location.search);
+
+    // Nếu đã có rating hoặc page, thì chỉ scroll mà không reload
+    if (urlParams.has("rating") || urlParams.has("page")) {
+        let reviewSection = document.getElementById("session_rating");
+        if (reviewSection) {
+            reviewSection.scrollIntoView({ behavior: "smooth" });
+        }
+    }
+};

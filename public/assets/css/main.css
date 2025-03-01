@@ -1341,12 +1341,17 @@ i.custom-pro__item__like-icon-fill {
 }
 
 .custom-detail__btn--rate button {
-  height: 30px;
+  height: 35px;
   min-width: 100px;
+  outline: none;
+  border: 1px solid var(--border-color);
+  background-color: #fff;
+  font-size: 17px;
 }
 
-.custom-detail__btn--rate button:hover {
-  border: 1px solid var(--primary-color);
+.custom-detail__btn--rate button:hover,
+.custom-detail__btn--rate_active {
+  border: 1px solid var(--primary-color)!important;
 }
 
 .custom-detail__img--rate img {
