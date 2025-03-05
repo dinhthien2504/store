@@ -4,6 +4,7 @@ use app\controllers\Base;
 
 class User extends Base
 {
+    public $data;
     private static $item_page = 10;
     private $UserModel;
     public function __construct()

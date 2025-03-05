@@ -86,8 +86,9 @@ class CategoryModel extends Model
         $rows = $this->getAll($sql, [$keyword]);
         // Chuyển chuỗi JSON thành mảng PHP
         foreach ($rows as &$row) {
-            $row['children'] = json_decode($row['children'], true) ?? [];
+            $row['children'] = !empty($row['children']) ? json_decode($row['children'], true) : [];
         }
+
         // Trả về dữ liệu JSON
         return $rows;
 

@@ -182,7 +182,7 @@ class Product extends Base
     public function handle_edit()
     {
         if (isset($_POST['submit__pro']) && $this->validate_pro_data($_POST)) {
-            $this->handle_pro_data($_POST);
+            $this->handle_pro_data(post_data: $_POST);
             $this->ProductModel->update_pro();
             //Xử lý ảnh chính xem có bị xóa ảnh nào không
             $target_dir = dirname(__DIR__, 3) . "/public/assets/img/pro/";
@@ -196,7 +196,6 @@ class Product extends Base
             $__data_two = $_POST['pro_two_option'] ?? [];
 
             $this->ProVariantModel->__set('pro_id', $_POST['pro__id']);
-
             //Lấy id variant có sẳn của sản phẩm
             $pro_variant_olds = $_POST['check_variant_olds'] ?? [];
             if (!empty($pro_variant_olds)) {
