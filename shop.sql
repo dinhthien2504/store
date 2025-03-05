@@ -1752,7 +1752,7 @@ INSERT INTO `pro_variants` (`id`, `pro_id`, `cor_id`, `size_id`, `url_image`, `q
 (254, 36, 10, 54, 'quan-da-ong-suong-cao-cap-phoi-ly-ton-dang-cao-cap-xam.jpg', 33, 0, 0),
 (255, 36, 10, 55, 'quan-da-ong-suong-cao-cap-phoi-ly-ton-dang-cao-cap-xam.jpg', 63, 0, 0),
 (256, 37, 5, 52, 'quan-jean-nu-ong-suong-cao-cap-xanh-dam.jpg', 400, 21, 0),
-(257, 37, 5, 53, 'quan-jean-nu-ong-suong-cao-cap-xanh-dam.jpg', -1, 26, 0),
+(257, 37, 5, 53, 'quan-jean-nu-ong-suong-cao-cap-xanh-dam.jpg', 10, 26, 0),
 (258, 37, 5, 54, 'quan-jean-nu-ong-suong-cao-cap-xanh-dam.jpg', 523, 0, 0),
 (259, 37, 14, 52, 'quan-jean-nu-ong-suong-cao-cap-main.jpg', 256, 0, 0),
 (260, 37, 14, 53, 'quan-jean-nu-ong-suong-cao-cap-main.jpg', 621, 0, 0),

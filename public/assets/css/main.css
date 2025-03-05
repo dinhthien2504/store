@@ -368,9 +368,15 @@
   line-height: 0;
 }
 
-.header__logo-img {
-  width: 150px;
+.header__logo img {
   color: var(--white-color);
+  width: 60px;
+}
+
+.header__logo p {
+  font-size: 22px;
+  color: var(--white-color);
+  padding-top: 10px;
 }
 
 /* Header search */
@@ -1168,7 +1174,7 @@ i.custom-pro__item__like-icon-fill {
 }
 
 .scroll::-webkit-scrollbar-thumb {
-  background-color: var(--primary-color);
+  background-color: none;
   border-radius: 10px;
 }
 
@@ -1351,7 +1357,7 @@ i.custom-pro__item__like-icon-fill {
 
 .custom-detail__btn--rate button:hover,
 .custom-detail__btn--rate_active {
-  border: 1px solid var(--primary-color)!important;
+  border: 1px solid var(--primary-color) !important;
 }
 
 .custom-detail__img--rate img {

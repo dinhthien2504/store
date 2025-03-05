@@ -26,44 +26,44 @@
                 <div class="custom-profile__top-nav my-3">
                     <div class="px-2 py-3 bg-while">
                         <div class="row scroll flex-nowrap">
-                            <div class="col-md-2 col-sm-3 col-4">
+                            <div class="col-lg-2 col-md-3 col-sm-4 col-5">
                                 <a href="<?= _WEB_ROOT_ ?>/user/purchase?status=0"
-                                    class="mb-3 m-0 text-decoration-none d-block text-center no-wrap cursor-pointer <?= !isset($_GET['status']) || $_GET['status'] == 0 ? 'active' : '' ?>">Tất
+                                    class="fs-17 mb-1 m-0 text-decoration-none d-block text-center no-wrap cursor-pointer <?= !isset($_GET['status']) || $_GET['status'] == 0 ? 'active' : '' ?>">Tất
                                     cả
                                 </a>
                             </div>
-                            <div class="col-md-2 col-sm-3 col-4">
+                            <div class="col-lg-2 col-md-3 col-sm-4 col-5">
                                 <a href="<?= _WEB_ROOT_ ?>/user/purchase?status=1"
-                                    class="mb-3 m-0 text-decoration-none d-block text-center no-wrap cursor-pointer <?= isset($_GET['status']) && $_GET['status'] == 1 ? 'active' : '' ?>">Chờ
+                                    class="fs-17 mb-1 m-0 text-decoration-none d-block text-center no-wrap cursor-pointer <?= isset($_GET['status']) && $_GET['status'] == 1 ? 'active' : '' ?>">Chờ
                                     xác
                                     nhận</a>
                             </div>
-                            <div class="col-md-2 col-sm-3 col-4">
+                            <div class="col-lg-2 col-md-3 col-sm-4 col-5">
                                 <a href="<?= _WEB_ROOT_ ?>/user/purchase?status=2"
-                                    class="mb-3 m-0 text-decoration-none d-block text-center no-wrap cursor-pointer <?= isset($_GET['status']) && $_GET['status'] == 2 ? 'active' : '' ?>">Đã
+                                    class="fs-17 mb-1 m-0 text-decoration-none d-block text-center no-wrap cursor-pointer <?= isset($_GET['status']) && $_GET['status'] == 2 ? 'active' : '' ?>">Đã
                                     xác
                                     nhận</a>
                             </div>
-                            <div class="col-md-2 col-sm-3 col-4">
+                            <div class="col-lg-2 col-md-3 col-sm-4 col-5">
                                 <a href="<?= _WEB_ROOT_ ?>/user/purchase?status=3"
-                                    class="mb-3 m-0 text-decoration-none d-block text-center no-wrap cursor-pointer <?= isset($_GET['status']) && $_GET['status'] == 3 ? 'active' : '' ?>">Đang
+                                    class="fs-17 mb-1 m-0 text-decoration-none d-block text-center no-wrap cursor-pointer <?= isset($_GET['status']) && $_GET['status'] == 3 ? 'active' : '' ?>">Đang
                                     giao
                                     hàng</a>
                             </div>
-                            <div class="col-md-2 col-sm-3 col-4">
+                            <div class="col-lg-2 col-md-3 col-sm-4 col-5">
                                 <a href="<?= _WEB_ROOT_ ?>/user/purchase?status=4"
-                                    class="mb-3 m-0 text-decoration-none d-block text-center no-wrap cursor-pointer <?= isset($_GET['status']) && $_GET['status'] == 4 ? 'active' : '' ?>">Đã
+                                    class="fs-17 mb-1 m-0 text-decoration-none d-block text-center no-wrap cursor-pointer <?= isset($_GET['status']) && $_GET['status'] == 4 ? 'active' : '' ?>">Đã
                                     giao
                                     hàng</a>
                             </div>
-                            <div class="col-md-2 col-sm-3 col-4">
+                            <div class="col-lg-2 col-md-3 col-sm-4 col-5">
                                 <a href="<?= _WEB_ROOT_ ?>/user/purchase?status=6"
-                                    class="mb-3 m-0 text-decoration-none d-block text-center no-wrap cursor-pointer <?= isset($_GET['status']) && $_GET['status'] == 6 ? 'active' : '' ?>">Hoàn thành
+                                    class="fs-17 mb-1 m-0 text-decoration-none d-block text-center no-wrap cursor-pointer <?= isset($_GET['status']) && $_GET['status'] == 6 ? 'active' : '' ?>">Hoàn thành
                                 </a>
                             </div>
-                            <div class="col-md-2 col-sm-3 col-4">
+                            <div class="col-lg-2 col-md-3 col-sm-4 col-5">
                                 <a href="<?= _WEB_ROOT_ ?>/user/purchase?status=5"
-                                    class="mb-3 m-0 text-decoration-none d-block text-center no-wrap cursor-pointer <?= isset($_GET['status']) && $_GET['status'] == 5 ? 'active' : '' ?>">Đã
+                                    class="fs-17 mb-1 m-0 text-decoration-none d-block text-center no-wrap cursor-pointer <?= isset($_GET['status']) && $_GET['status'] == 5 ? 'active' : '' ?>">Đã
                                     hủy
                                 </a>
                             </div>

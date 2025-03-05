@@ -19,15 +19,15 @@
                     <!-- The slideshow/carousel -->
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="https://cf.shopee.vn/file/vn-11134258-7ras8-m0sil68ehi1b66_xxhdpi"
-                                alt="Los Angeles" class="d-block w-100">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="https://cf.shopee.vn/file/sg-11134258-7rfgs-m3yrkqvbsz6je0_xxhdpi" alt="Chicago"
+                            <img src="<?= _WEB_ROOT_ ?>/public/assets/img/banner1.jpg" alt="Hình Ảnh Banner 1"
                                 class="d-block w-100">
                         </div>
                         <div class="carousel-item">
-                            <img src="https://cf.shopee.vn/file/sg-11134258-7rffi-m3yrks6rvk4if5_xxhdpi" alt="New York"
+                            <img src="<?= _WEB_ROOT_ ?>/public/assets/img/banner2.jpg" alt="Hình Ảnh Banner 2"
+                                class="d-block w-100">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="<?= _WEB_ROOT_ ?>/public/assets/img/banner3.jpg" alt="Hình Ảnh Banner 3"
                                 class="d-block w-100">
                         </div>
                     </div>

@@ -8,6 +8,10 @@ class Product extends Base
     private $ProductModel, $CategoryModel, $AttritubeModel, $AttriValueModel, $ProImageModel, $ProVariantModel;
     public function __construct()
     {
+        if (!$this->isAdmin()) {
+            $this->render_error("403");
+            exit();
+        }
         $this->ProductModel = $this->model('ProductModel');
         $this->CategoryModel = $this->model('CategoryModel');
         $this->AttritubeModel = $this->model('AttritubeModel');
@@ -41,6 +45,7 @@ class Product extends Base
         $total_pro = $this->ProductModel->total();
         $this->data['sub_content']['total_pro'] = $total_pro;
         $this->data['sub_content']['data_all_pro'] = $data_all_pro;
+
         $this->data['title_page'] = 'Quản Lý Sản Phẩm';
         $this->data['content'] = 'admin/products/index';
         $this->render('layouts/main_admin', $this->data);

@@ -8,6 +8,10 @@ class User extends Base
     private $UserModel;
     public function __construct()
     {
+        if (!$this->isAdmin()) {
+            $this->render_error("403");
+            exit();
+        }
         $this->UserModel = $this->model("UserModel");
     }
     public function index()

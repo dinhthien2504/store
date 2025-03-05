@@ -117,7 +117,7 @@ class Cart extends Base
     {
         if (isset($_POST['submit__checkout'])) {
             //Lưu thông tin vào session để chút xử lý
-            $_SESSION['cart'] = $_POST;
+            $_SESSION['carts'] = $_POST;
             // Xử lý dữ liệu đơn hàng
             $payment = $_POST['payment'] ?? 1;
             if ($payment == 2) {
@@ -282,9 +282,9 @@ class Cart extends Base
     public function handle_payment()
     {
         if (isset($_GET)) {
-            $data_post = $_SESSION['cart'];
+            $data_post = $_SESSION['carts'];
             //Xử lý xong thì xóa giỏ hàng trong session
-            unset($_SESSION['cart']);
+            unset($_SESSION['carts']);
             //Xử lý các chức năng khác
 
             if ($_GET['resultCode'] == 0) {
@@ -389,14 +389,21 @@ class Cart extends Base
                 'Content-Length: ' . strlen($data)
             )
         );
-        curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10); // Tăng timeout lên 10 giây
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
-        //execute post
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+
         $result = curl_exec($ch);
-        //close connection
+
+        if ($result === false) {
+            die('cURL error: ' . curl_error($ch));
+        }
+
         curl_close($ch);
         return $result;
     }
+
     //Xử lý thanh toán momo ATM
     private function handle_payment_momoATM($amount)
     {

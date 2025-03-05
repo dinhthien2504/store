@@ -24,6 +24,14 @@
     right: 18px;
   }
 
+  .header__logo img {
+    width: 45px;
+  }
+
+  .header__logo p {
+    padding-top: 5px;
+  }
+
   .app__container {
     margin-top: calc(var(--header-height));
   }
@@ -39,21 +47,26 @@
   .mobile-category {
     display: block;
   }
+
   .header__user-wrap {
     display: block;
   }
 }
+
 @media (min-width: 992px) {
   .custom-col-lg-2-5 {
-    flex: 0 0 20%!important;
+    flex: 0 0 20% !important;
   }
+
   .custom-col-lg-1-2 {
-    flex: 0 0 10%!important;
+    flex: 0 0 10% !important;
   }
+
   .custom-cart__top-nav {
     display: block;
   }
 }
+
 /* Tablet */
 
 @media (min-width: 768px) and (max-width: 992px) {
@@ -85,6 +98,7 @@
       opacity: 0;
       top: calc(var(--header-height) / 2);
     }
+
     to {
       opacity: 1;
       top: var(--header-height);
@@ -94,9 +108,11 @@
   .hide-on-mobile {
     display: none;
   }
+
   .header-with-search {
     justify-content: space-between;
   }
+
   .header__cart,
   .header__logo {
     width: unset;
@@ -132,6 +148,7 @@
     font-size: 1.6rem;
     min-width: 36px;
   }
+
   .header__mobile-search {
     display: block;
   }
@@ -144,18 +161,22 @@
     padding: 0 16px;
   }
 
-  .footer__heading{
-       text-align: center;
+  .footer__heading {
+    text-align: center;
   }
-  .footer__download, .footer-item__link{
-       justify-content: center;
+
+  .footer__download,
+  .footer-item__link {
+    justify-content: center;
   }
-  .footer__download-apps{
-       flex: unset;
+
+  .footer__download-apps {
+    flex: unset;
   }
-  .footer__download-app-link{
-       display: block;
-       padding: 6px 8px;
+
+  .footer__download-app-link {
+    display: block;
+    padding: 6px 8px;
   }
 }
 
@@ -169,14 +190,13 @@
 /* Tablet - PC low resolution */
 @media (min-width: 768px) and (max-width: 992px) {
   .wide {
-      width: 744px;
+    width: 744px;
   }
 }
 
 /* > PC low resolution */
 @media (min-width: 992px) and (max-width: 1239px) {
   .wide {
-      width: 984px;
+    width: 984px;
   }
 }
-

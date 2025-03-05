@@ -17,20 +17,21 @@ class CartModel extends Model
         $sql .= 'LEFT JOIN products pro ON pro.id = pro_v.pro_id ';
         $sql .= 'WHERE user_id = ? ';
         $sql .= 'GROUP BY pro_v.pro_id ';
-        $sql .= 'ORDER BY carts.id DESC';
+        $sql .= 'ORDER BY MAX(carts.id) DESC';
         return $this->getAll($sql, [$this->__get('user_id')]);
     }
     public function get_all_cart_by_user_id_header()
     {
-        $sql = 'SELECT pro_v.pro_id, pro.name as name_pro, pro.price, ';
+        $sql = 'SELECT pro_v.pro_id, MAX(pro.name) as name_pro, MAX(pro.price) as price, ';
         $sql .= '(SELECT url_image FROM pro_images WHERE pro_id = pro_v.pro_id LIMIT 1) as url_image ';
         $sql .= 'FROM carts ';
         $sql .= 'LEFT JOIN pro_variants pro_v ON pro_v.id = carts.pro_variant_id ';
         $sql .= 'LEFT JOIN products pro ON pro.id = pro_v.pro_id ';
         $sql .= 'WHERE user_id = ? ';
         $sql .= 'GROUP BY pro_v.pro_id ';
-        $sql .= 'ORDER BY carts.id DESC';
+        $sql .= 'ORDER BY MAX(carts.id) DESC';
         return $this->getAll($sql, [$this->__get('user_id')]);
+
     }
     public function get_all_cart_by_cart_id()
     {

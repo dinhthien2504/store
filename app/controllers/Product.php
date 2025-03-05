@@ -10,7 +10,7 @@ class Product extends Base
     private $pro_variant_model;
     private $rate_model;
 
-    private static $item_page = 2;
+    private static $item_page = 10;
     public function __construct()
     {
         $this->category_model = $this->model('CategoryModel');
@@ -198,11 +198,12 @@ class Product extends Base
         $data_pro_filter = $this->product_model->get_all_pro_by_keyword();
         $this->data['sub_content']['pro_filter'] = $data_pro_filter;
 
-        //Dữ liệu danh mục 
-        // $this->category_model->__set('parent_id', $parent_id);
-        // $data_cate_parent_id = $this->category_model->get_all_cate_by_parent_id();
+        // $data_cates = array_values(array_unique(array_column($data_pro_filter, 'cate_id')));
+        //Dữ liệu danh mục theo danh sách tìm kiếm
+        // $this->category_model->__set('list_id', $data_cates);
+        // $data_cate_list_id = $this->category_model->get_all_cate_by_list_id();
         // $this->data['sub_content']['cate_id'] = $cate_id;
-        // $this->data['sub_content']['cate_by_parent_id'] = $data_cate_parent_id;=
+        // $this->data['sub_content']['data_cate_list_id'] = $data_cate_list_id;
 
         $this->data['title_page'] = 'Danh Sách Sản Phẩm';
 

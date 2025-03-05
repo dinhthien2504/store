@@ -131,6 +131,7 @@ const updateRating = (rating) => {
     // Nếu rating chưa tồn tại hoặc khác giá trị mới, thì mới cập nhật và reload
     if (urlParams.get("rating") != rating) {
         url.searchParams.set("rating", rating);
+        url.searchParams.set("page", 1);
         window.location.href = url.toString();
     }
 }

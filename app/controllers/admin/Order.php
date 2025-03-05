@@ -8,6 +8,10 @@ class Order extends Base
     public static $item_page = 10;
     public function __construct()
     {
+        if (!$this->isAdmin()) {
+            $this->render_error("403");
+            exit();
+        }
         $this->OrderModel = $this->model('OrderModel');
     }
     public function index()

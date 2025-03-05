@@ -24,9 +24,10 @@ class ProductModel extends Model
     {
         $sql = "SELECT pro.id as id, pro.name as name, pro.cate_id as cate_id, ";
         $sql .= "pro.price as price, pro.discount_percent as discount_percent, ";
-        $sql .= "pro.sell as sell, pro.description as description, ";
+        $sql .= "pro.sell as sell, pro.description as description, SUM(pro_v.quantity) as total_quantity, ";
         $sql .= "(SELECT pro_img.url_image FROM pro_images pro_img WHERE pro_img.pro_id = pro.id LIMIT 1) AS url_image ";
         $sql .= "FROM products pro ";
+        $sql .= "LEFT JOIN pro_variants pro_v ON pro_v.pro_id = pro.id ";
         $sql .= "WHERE pro.id = ? ";
         $sql .= "AND pro.status = 0 ";
         return $this->getOne($sql, [$this->__get('id')]);
@@ -137,18 +138,17 @@ class ProductModel extends Model
         $item_page = $this->__get('item_page');
         $offset = ($this->__get('current_page') - 1) * $item_page;
         $keyword = '%' . $this->__get('keyword') . '%';
-        $sql = 'SELECT pro.id, pro.name, pro.price, pro.discount_percent, pro.sell, SUM(p_v.quantity) as total_quantity, pro.status, ';
+        $sql = 'SELECT pro.id, pro.name, pro.price, pro.discount_percent, pro.sell, IFNULL(SUM(p_v.quantity), 0) as total_quantity, pro.status, ';
         $sql .= '(SELECT pro_img.url_image FROM pro_images pro_img WHERE pro.id = pro_img.pro_id LIMIT 1) as url_image, ';
-        $sql .= '(SELECT CONCAT("[", GROUP_CONCAT(
-                    JSON_OBJECT(
-                        "cor_name", a_v_c.name, 
-                        "size_name", a_v_s.name,
-                        "url_image", p_v.url_image,
-                        "quantity", p_v.quantity,
-                        "sell", p_v.sell
-                    )
-                ), "]")
-                ) as variants ';
+        $sql .= '(SELECT JSON_ARRAYAGG(
+                JSON_OBJECT(
+                    "cor_name", a_v_c.name, 
+                    "size_name", a_v_s.name,
+                    "url_image", p_v.url_image,
+                    "quantity", IFNULL(p_v.quantity, 0),
+                    "sell", p_v.sell
+                )
+            )) as variants ';
         $sql .= 'FROM products pro ';
         $sql .= 'LEFT JOIN pro_variants p_v ON pro.id = p_v.pro_id ';
         $sql .= 'LEFT JOIN attri_values a_v_c ON a_v_c.id = p_v.cor_id ';

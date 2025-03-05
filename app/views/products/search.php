@@ -5,8 +5,8 @@
                 <!-- <h3 class="category__heading"><i class="fas fa-list-ul me-2"></i>Theo Danh mục</h3> -->
                 <!-- category-item--active -->
                 <ul class="category-list">
-                    <?php if (!empty($cate_by_keyword)): ?>
-                        <?php foreach ($cate_by_keyword as $cate): ?>
+                    <?php if (!empty($data_cate_list_id)): ?>
+                        <?php foreach ($data_cate_list_id as $cate): ?>
                             <li class="category-item <?= $cate_id == $cate['id'] ? 'category-item--active' : '' ?>">
                                 <a onclick="handle__url_link(this, '<?= _WEB_ROOT_ ?>','<?= $cate['name'] ?>', 'cat<?= $cate['parent'] ?>-cid<?= $cate['id'] ?>')"
                                     class="category-item__link"><?= $cate['name'] ?></a>

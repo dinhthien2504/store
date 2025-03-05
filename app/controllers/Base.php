@@ -3,6 +3,10 @@ namespace app\controllers;
 use app\views\Viewer;
 abstract class Base extends Viewer
 {
+    protected static function isAdmin()
+    {
+        return isset($_SESSION['user']) && $_SESSION['user']['role'] == 2;
+    }
     protected function model($model)
     {
         $class_model = 'app\\models\\' . $model;

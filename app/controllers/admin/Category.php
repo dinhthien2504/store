@@ -10,6 +10,10 @@ class Category extends Base
     private $CategoryModel, $ProductModel;
     public function __construct()
     {
+        if (!$this->isAdmin()) {
+            $this->render_error("403");
+            exit();
+        }
         $this->CategoryModel = $this->model('CategoryModel');
         $this->ProductModel = $this->model('ProductModel');
     }

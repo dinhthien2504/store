@@ -42,16 +42,37 @@
                     <div class="mt-3 d-flex flex-column h-100 gap-4">
                         <h3 class="m-0"><?= $pro_id['name'] ?></h3>
                         <div class="d-flex align-items-center gap-3 fs-14">
-                            <span class="text-decoration-underline">5</span>
+                            <span class="text-decoration-underline">
+                                <?php
+                                if (isset($data_avg_rate) && !empty($data_avg_rate['totalStars'])) {
+                                    $avgRate = $data_avg_rate['totalStars'] / $data_avg_rate['totalReviews'];
+                                    echo round($avgRate, 1);
+                                } else {
+                                    echo 0;
+                                }
+                                ?>
+                            </span>
                             <div class="d-flex text-warning">
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
+                                <?php if (isset($avgRate) && $avgRate > 0) {
+                                    for ($i = 0; $i < 5; $i++) {
+                                        if ($i < floor($avgRate)) {
+                                            echo '<i class="fa-solid fa-star"></i>';
+                                        } elseif ($i < $avgRate) {
+                                            echo '<i class="fa-solid fa-star-half-alt"></i>';
+                                        } else {
+                                            echo '<i class="far fa-star"></i>';
+                                        }
+                                    }
+                                } else {
+                                    for ($i = 0; $i < 5; $i++) {
+                                        echo '<i class="far fa-star"></i>';
+                                    }
+                                } ?>
                             </div>
                             <i class="fa-solid fa-minus"></i>
-                            <span>0 đánh giá</span>
+                            <span><?= !empty($data_avg_rate['totalReviews']) ? $data_avg_rate['totalReviews'] : 0 ?>
+                                đánh
+                                giá</span>
                         </div>
                         <div class="d-flex align-items-center custom-detail__price gap-2">
                             <p class="m-0">
@@ -61,7 +82,8 @@
                             <del class=" ms-1 text-sale"><?= number_format($pro_id['price']) ?> đ</del>
                         </div>
                         <div class="d-flex align-items-center fs-14 gap-1">
-                            <p class="my-0">Còn <span class="fw-bold">10</span> sản phẩm trong
+                            <p class="my-0">Còn <span class="fw-bold"><?= $pro_id['total_quantity'] ?></span> sản phẩm
+                                trong
                                 kho!</p>
                         </div>
                         <!-- Nếu có cả màu và size -->
@@ -230,7 +252,7 @@
                                     <form class="m-0 p-0" action="" method="POST">
                                         <div class="gap-1 d-flex flex-wrap custom-detail__btn--rate">
                                             <button type="button"
-                                                class="<?= isset($_GET['rating']) && $_GET['rating'] == 0 ? 'custom-detail__btn--rate_active' : '' ?>"
+                                                class="<?= !isset($_GET['rating']) || $_GET['rating'] == 0 ? 'custom-detail__btn--rate_active' : '' ?>"
                                                 onclick="updateRating(0)">Tất cả</button>
                                             <button type="button"
                                                 class="<?= isset($_GET['rating']) && $_GET['rating'] == 5 ? 'custom-detail__btn--rate_active' : '' ?>"
@@ -309,11 +331,11 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 col-lg-2">
-                <div class="bg-white p-2">
-                    <h3 class="fw-normal text-secondary fs-5 mb-3">TOP LIÊN QUAN</h3>
-                    <div class="row">
-                        <?php if (!empty($pro_cate_id)): ?>
+            <?php if (!empty($pro_cate_id)): ?>
+                <div class="col-md-3 col-lg-2">
+                    <div class="bg-white p-2">
+                        <h3 class="fw-normal text-secondary fs-5 mb-3">TOP LIÊN QUAN</h3>
+                        <div class="row">
                             <?php foreach ($pro_cate_id as $pro_cate): ?>
                                 <div class="col-md-12 col-sm-3 col-4">
                                     <a onclick="handle__url_link(this, '<?= _WEB_ROOT_ ?>','<?= $pro_cate['name'] ?>', 'i<?= $pro_cate['id'] ?>')"
@@ -338,10 +360,10 @@
                                     </a>
                                 </div>
                             <?php endforeach ?>
-                        <?php endif; ?>
+                        </div>
                     </div>
                 </div>
-            </div>
+            <?php endif; ?>
         </div>
     </div>
 </div>

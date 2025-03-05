@@ -101,7 +101,6 @@
                             </div>
                             <!-- Variants Section -->
                             <?php if (!empty($pro['variants'])):
-                                // Chuyển chuỗi JSON thành mảng
                                 $data = json_decode($pro['variants'], true); ?>
                                 <div class="container-variants">
                                     <?php foreach ($data as $pro_variant): ?>
